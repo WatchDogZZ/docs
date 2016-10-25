@@ -4,6 +4,8 @@
 Nous avons choisis de traiter l'architecture du projet en trois parties. La première est la partie serveur, celle-ci sera faite en nodeJS soutenu par une base de données MongoDB. La seconde L'application android sera développé en Java et compatible pour les frameworks Android version 3.0 et supérieurs. L'interface d'administration du serveur quant à elle sera développée en AngularJS.
 Le serveur d'applications sera un serveur d'application compatible NodeJS sur AWS.
 
+![Image de l'infrastructure](https://github.com/WatchDogZZ/docs/raw/master/infrastructure.png)
+
 ##Partie serveur
 La partie centrale est celle du web service.
 Le serveur doit etre capable de répondre aux différentes connexions et requêtes des utilisateurs (se se connectant sur l'application Android ou tout autre...).

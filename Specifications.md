@@ -21,6 +21,9 @@ Le serveur pourra aussi en option faire :
 * calcul d'itinéraire
 * partage de position
 
+Le serveur comportera une base de données dans laquelle les informations des utilisateurs seront stockées (login / mot de passe). Les dernières positions des utilisateurs seront également stockées.
+Il y aura une table permettant d'identifier quels utilisateurs sont actuellement actifs.
+
 Il a été convenu d'utiliser NodeJS du coté serveur pour plusieurs raisons :
 * rapidité de mise en place
 * faible nombre d'utilisateurs
@@ -42,6 +45,7 @@ Les requêtes possibles sont les suivantes :
     * /me:\<long>:\<lat> : envoie la position courrante de l'utilisateur
 
 L'utilisateur doit être authentifié pour avoir accès aux positions des utilisateurs ou envoyer sa propre position.
+Cette authentification sera rendue possible par la génération d'un token unique à chaque connexion d'un utilisateur. Ce token sera par la suite utilisé dans chacun de ses requêtes.
 
 ## Partie administration
 Les fonctionnalités minimales pour l'application d'administration sont :

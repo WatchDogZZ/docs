@@ -1,0 +1,131 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% RAPPORT DE STAGE zz3 2015-2016
+% projet : Développement du code de simulation dynamique du parc
+%           électronucléaire CLASS
+% tuteur : Nicolas Thiolliere (nicolas.thiolliere@subatech.in2p3.fr)
+% auteur : Josselin Massot (josselin.massot@poste.isima.fr)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[a4paper, 11pt]{article}
+
+\input{input/preambule}
+\input{input/config}
+
+\title{Carte de Marauder}
+\author{Benjamin \textsc{Barbesange}, Benoît \textsc{Garçon}}
+\def\subject{Web service et application android}
+
+% métadonnées
+\input{|"model/metadata.sh input/resume.tex"}
+
+\begin{document}
+
+
+%%% TITLE PAGE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\thepage}{}
+\thispagestyle{plain}
+
+\maketitle
+
+
+%%% THANKS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\thispagestyle{plain}
+\pagenumbering{roman}
+
+\ 
+\vfill
+\section*{Remerciements}
+\addcontentsline{toc}{section}{Remerciements}
+
+\input{input/thanks}
+
+\vfill
+\ 
+
+%%% ABSRACT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\thispagestyle{plain}
+
+\section*{Résumé -- Abstract}
+\addcontentsline{toc}{section}{Résumé -- Abstract}
+	\input{|"model/resume.sh input/resume.tex"}
+
+%%% TABLE OF CONTENTS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\thispagestyle{plain}
+
+\tableofcontents{}
+\addcontentsline{toc}{section}{Table des matières}
+
+%%% LIST OF FIGURES AND TABLES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\thispagestyle{plain}
+
+\section*{Liste des figures, tableaux, algorithmes et extraits de code}
+\addcontentsline{toc}{section}{Liste des figures, tableaux, algorithmes et extraits de code}
+\listoffigures
+\listoftables
+\listofalgorithms
+\lstlistoflistings
+
+%%% GLOSSARY %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\thispagestyle{plain}
+
+\section*{Glossaire}
+\addcontentsline{toc}{section}{Glossaire}
+	\input{|"model/gloss.sh"}
+
+%%% INTRODUCTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\renewcommand{\thepage}{\arabic{page}}
+\setcounter{page}{1}
+
+\section{Introduction}
+\input{part/intro}
+
+\newpage
+
+
+%%% TEXT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% ----------------------------------------------------------------------
+% Corps du rapport
+% ----------------------------------------------------------------------
+% \part{Introduction de l'étude}
+\input{part/body}
+
+
+%%% CONCLUSION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bookmarksetup{startatroot}
+\addtocontents{toc}{\bigskip}
+\newpage
+
+\section{Conclusion}
+\input{part/conclu}
+
+%%% BIBLIOGRAPHY %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\thispagestyle{plain}
+\pagenumbering{roman}
+
+\section*{Références bibliographiques}
+
+\addcontentsline{toc}{section}{Références bibliographiques}
+
+\nocite{*}
+\printbibliography
+
+
+%%% ANNEXES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\appendix
+\newpage
+\pagenumbering{roman}
+% \part{Annexe}
+
+
+
+% make sections for each document
+
+\end{document}

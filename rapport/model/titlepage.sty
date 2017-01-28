@@ -1,0 +1,77 @@
+%%%% debut macro %%%%
+\newenvironment{changemargin}[2]{\begin{list}{}{%
+\setlength{\topsep}{-10pt}%
+\setlength{\leftmargin}{0pt}%
+\setlength{\rightmargin}{0pt}%
+\setlength{\listparindent}{\parindent}%
+\setlength{\itemindent}{\parindent}%
+\setlength{\parsep}{0pt plus 1pt}%
+\addtolength{\leftmargin}{#1}%
+\addtolength{\rightmargin}{#2}%
+}\item }{\end{list}}
+%%%% fin macro %%%%
+
+\def\thickhrulefill{\leavevmode \leaders \hrule height 1pt\hfill \kern \z@}
+\renewcommand{\maketitle}{\begin{titlepage}%
+% Heading
+\
+\vspace{-2cm}
+\begin{changemargin}{-1cm}{-1cm}
+\begin{minipage}{0.4\textwidth}
+	\begin{flushleft} \large
+	\begin{singlespace}
+	\includegraphics[height=1cm]{\schoolLogo} \\
+	{\large \schoolName} \\[0.2cm]
+	{\normalsize \schoolAdress}
+	\end{singlespace}
+	\end{flushleft}
+\end{minipage}
+\hspace{0.25\textwidth}
+% \begin{minipage}{0.4\textwidth}
+% 	\vspace{0.2cm}
+% 	\begin{flushright}
+% 	\begin{singlespace}
+% 	\includegraphics[height=1cm]{\enterpriseLogo} \\
+% 	{\large \enterpriseName}\\[0.2cm]
+% 	{\normalsize \enterpriseAdress}
+% 	\end{singlespace}
+% 	\end{flushright}
+% \end{minipage}\\[1cm]
+\end{changemargin}
+
+\center
+{\LARGE \rapportType\\[-0.25cm]
+\rapportProject\\[0.5cm]
+\filliere}\\[0.5cm]
+
+%\textsc{\large Minor Heading}\\[0.5cm]
+% Title
+\HRule \\[0.4cm]
+{ \huge \bfseries \@title}\\
+\HRule \\[1.4cm]
+%\vfill
+% Author
+\begin{minipage}{0.48\textwidth}
+	\begin{flushleft} \large
+		\vspace{-1.4cm}
+		\ \, \emph{Étudiant} :\\
+			\Large\@author
+	\end{flushleft}
+\end{minipage}
+~
+\begin{minipage}{0.48\textwidth}
+	\begin{flushright} \large
+		\emph{Tuteur} : \, \\
+			\enterpriseTutor\\
+		\emph{Tuteur ISIMA} : \, \\
+			\schoolTutor
+	\end{flushright}
+\end{minipage}\\[2.0cm]
+~
+
+\end{titlepage}%
+	\setcounter{footnote}{0}%
+
+\newpage
+
+}

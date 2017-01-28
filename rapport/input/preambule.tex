@@ -1,0 +1,294 @@
+% -------------------------------------------------------------------- %
+%                                                                      %
+% fichier de préambule                                                 %
+%                                                                      %
+% Importantion de nombreux packages, plus francisation                 %
+%                                                                      %
+% -------------------------------------------------------------------- %
+
+% ----------------------------------------------------------------------
+% gestion du français, et des accents
+\usepackage{cmap}
+\usepackage[T1]{fontenc}
+\usepackage[english,frenchb]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{helvet}
+\usepackage{courier}
+%\renewcommand{\familydefault}{\sfdefault}
+%\pdfcompresslevel=3
+%\usepackage{fourier}
+
+\usepackage{datetime} % pour avoir l'heure de compilation avec \currenttime
+
+\usepackage{color}
+\usepackage[table]{xcolor}
+
+\usepackage{sectsty}
+\allsectionsfont{\bfseries\sffamily\color{black!90}\hspace{-1em}}
+\partfont{\sffamily}
+\usepackage[font={small,it}]{caption}
+\makeatletter
+\def\@seccntformat#1{\llap{\csname the#1\endcsname\quad}}
+\makeatletter\pdfcompresslevel=9
+\def\@seccntformat#1{\llap{\csname the#1\endcsname\quad}}
+\makeatother
+
+% ----------------------------------------------------------------------
+% bibliography
+\usepackage[backend=biber, bibencoding=utf8 , sorting=none,hyperref=true,url=false,backref=true,backrefstyle=three]{biblatex}
+\bibliography{input/biblio}
+
+% ----------------------------------------------------------------------
+% packages pour les figures
+\usepackage{graphicx}
+\usepackage{subfig}
+\usepackage{tikz}
+
+% change la numéroration des figures
+%%%% debut macro %%%%
+\makeatletter
+\renewcommand{\thefigure}{\ifnum \c@section>\z@ \thesection.\fi
+ \@arabic\c@figure}
+\@addtoreset{figure}{section}
+\makeatother
+%%%% fin macro %%%%
+
+% change la numéroration des tableaux
+%%%% debut macro %%%%
+\makeatletter
+\renewcommand{\thetable}{\ifnum \c@section>\z@ \thesection.\fi
+ \@arabic\c@table}
+\@addtoreset{table}{section}
+\makeatother
+%%%% fin macro %%%%
+
+% ----------------------------------------------------------------------
+% diagramme de Gantt
+%\usepackage{model/pgfgantt}
+
+% ----------------------------------------------------------------------
+% pour mettre une page en mode paysage
+\usepackage{lscape}
+
+% ----------------------------------------------------------------------
+% Miscelianous
+\usepackage[pdfborder={0 0 0 [3 3]},pdftex,unicode=true]{hyperref}
+\usepackage{bookmark}
+
+%\usepackage{tablefootnote}
+
+% ----------------------------------------------------------------------
+%packages pour les maths
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathabx} %   \ldbrack et \rdbrack
+%\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{wasysym}
+\usepackage{textcomp}
+%\usepackage{bbm}
+\DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it} % \mathpzc{ABCdef}
+\usepackage{eufrak}                             % \mathfrak{ABCdef}
+
+% change la numéroration des équations
+\numberwithin{equation}{section}
+
+% ----------------------------------------------------------------------
+% pour les unités
+%\usepackage[load=physical]{siunitx}
+\newcommand{\eV}{\mathrm{eV}}
+\newcommand{\s}{\mathrm{s}}
+\newcommand{\m}{\mathrm{m}}
+\newcommand{\g}{\mathrm{g}}
+\newcommand{\V}{\mathrm{V}}
+\newcommand{\sample}{\mathrm{s}}
+\newcommand{\Hz}{\mathrm{Hz}}
+\newcommand{\pc}{\mathrm{pc}}
+
+\newcommand{\nano}{\mathrm{n}}
+\newcommand{\micro}{\mathrm{\mu}}
+\newcommand{\milli}{\mathrm{m}}
+\newcommand{\centi}{\mathrm{c}}
+\newcommand{\kilo}{\mathrm{k}}
+\newcommand{\mega}{\mathrm{M}}
+\newcommand{\giga}{\mathrm{G}}
+\newcommand{\tera}{\mathrm{T}}
+\newcommand{\exa}{\mathrm{E}}
+\newcommand{\zetta}{\mathrm{Z}}
+
+
+% ----------------------------------------------------------------------
+% packages pour les algorithmes
+\usepackage[section]{algorithm}
+\usepackage[noend]{algpseudocode}
+
+\renewcommand{\algorithmiccomment}[1]{{\hfill$\vartriangleright$\scriptsize\sffamily~ #1}}
+
+% francisation des algorithmes
+\floatname{algorithm}{\sffamily Algorithme}
+
+\renewcommand{\algorithmicprocedure} {{\footnotesize \textbf{\textsf{Proc\'edure}} }}
+\renewcommand{\algorithmicwhile}     {{\footnotesize \textbf{\textsf{Tant que}}    }}
+\renewcommand{\algorithmicdo}        {{\footnotesize \textbf{\textsf{Faire}}       }}
+\renewcommand{\algorithmicend}       {{\footnotesize \textbf{\textsf{Fin}}         }}
+\renewcommand{\algorithmicif}        {{\footnotesize \textbf{\textsf{Si}}          }}
+\renewcommand{\algorithmicelse}      {{\footnotesize \textbf{\textsf{Sinon}}       }}
+\renewcommand{\algorithmicthen}      {{\footnotesize \textbf{\textsf{Alors}}       }}
+\renewcommand{\algorithmicfor}       {{\footnotesize \textbf{\textsf{Pour}}        }}
+\renewcommand{\algorithmicforall}    {{\footnotesize \textbf{\textsf{Pour tout}}   }}
+\renewcommand{\algorithmicdo}        {{\footnotesize \textbf{\textsf{Faire}}       }}
+\renewcommand{\algorithmicrepeat}    {{\footnotesize \textbf{\textsf{Répéter}}     }}
+\renewcommand{\algorithmicuntil}     {{\footnotesize \textbf{\textsf{Jusqu'à}}     }}
+\renewcommand{\algorithmicfunction}  {{\footnotesize \textbf{\textsf{Fonction}}    }}
+\renewcommand{\algorithmicreturn}    {{\footnotesize \textbf{\textsf{Retourner}}   }}
+\let\mylistof\listof
+\renewcommand\listof[2]{\mylistof{algorithm}{Liste des algorithmes}}
+\makeatletter
+\providecommand*{\toclevel@algorithm}{0}
+\makeatother
+% Lister les algorithmes :
+%\listofalgorithms % même principe que toc
+\addto\captionsfrench{%
+  \renewcommand{\listfigurename}{Liste des figures}%
+}
+\addto\captionsfrench{\def\figurename{Figure}}
+\addto\captionsfrench{\def\tablename{Tableau}}
+
+% ----------------------------------------------------------------------
+% tableaux
+\definecolor{tablegray}{gray}{0.8}%table
+
+% ----------------------------------------------------------------------
+% importantion de code
+\definecolor{mygray}{rgb}{0.5,0.5,0.5} % définition du gris (n° ligne)
+\usepackage{listings}
+\usepackage{listingsutf8}
+
+% pour la numerotation des codes
+\usepackage{chngcntr}
+\AtBeginDocument{\counterwithin{lstlisting}{section}}
+
+\renewcommand{\lstlistlistingname}{Liste des extraits de code}
+%%options for listings
+\DeclareCaptionFont{white}{\color{white}}
+\DeclareCaptionFormat{listing}{\colorbox{black!80}{\parbox{\textwidth}{#1#2#3}}}
+\captionsetup[lstlisting]{format=listing,labelfont={white,tt},textfont=white}
+\definecolor{Rred}{rgb}{0.6,0,0} % for strings
+\definecolor{Rgreen}{rgb}{0.25,0.5,0.35} % comments
+\definecolor{Rpurple}{rgb}{0.5,0,0.35} % keywords
+\definecolor{Rdocblue}{rgb}{0.25,0.35,0.75} % Rdoc
+\lstset{
+    float,
+    columns=fullflexible,
+    numbers=left,
+    tabsize=2,
+    breaklines=true,
+    basicstyle=\small\ttfamily,
+    basewidth=0.51em,
+    showspaces=false,
+    showstringspaces=false,
+    stringstyle=\color{Rred},
+    commentstyle=\color{Rgreen},
+    keywordstyle=\color{Rdocblue}
+}
+% gestion des accents dans le code
+\renewcommand{\lstlistingname}{Code}
+\lstset{literate=
+    {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+    {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+    {à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
+    {À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
+    {ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+    {Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+    {â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
+    {Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
+    {œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
+    {ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
+    {€}{{\EUR}}1 {£}{{\pounds}}1
+}
+
+% ----------------------------------------------------------------------
+% trucs en vracs
+\usepackage[         %
+    top    = 2.75cm, %
+    bottom = 3.50cm, %
+    left   = 3.00cm, %
+    right  = 2.50cm]{geometry}   % marges
+\usepackage{makeidx}             % make index (finalement je ne l'utilise pas)
+\makeindex                       % génération de l'index, besoin d'une compilation séparée
+
+\usepackage{fancyhdr}            % entête et pied de page (pour les modifier)
+\pagestyle{fancy}                % style des pages
+\fancyhf{}
+\renewcommand{\sectionmark}[1]{\markboth{\thesection{} -- #1}{}}
+\fancyhead[L]{\leftmark}
+\fancyhead[R]{\thesubsection}
+\makeatletter
+\fancyfoot[L]{\@author \space --- \schoolShortName{} }
+\makeatother 
+\fancyfoot[R]{\thepage}
+\renewcommand{\footrulewidth}{0.1pt}
+
+\usepackage{setspace}     % gestion des interlignages
+\onehalfspacing           % interlignage de 1.5
+
+% ----------------------------------------------------------------------
+%Page de titre
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+\usepackage{model/titlepage}
+
+% ----------------------------------------------------------------------
+% modification du style des parties (pour la classe article)
+\makeatletter
+\renewcommand\part{%
+  \clearpage
+  \thispagestyle{empty}%
+  \null\vfill
+  \secdef\@part\@spart}
+\def\@part[#1]#2{%
+    \ifnum \c@secnumdepth >-2\relax
+      \refstepcounter{part}%
+      \addcontentsline{toc}{part}{\thepart\hspace{1em}#1}%
+    \else
+      \addcontentsline{toc}{part}{#1}%
+    \fi
+    \markboth{}{}%
+    {\centering
+     \interlinepenalty \@M
+     \vskip 20\p@
+     \normalfont
+     \ifnum \c@secnumdepth >-2\relax
+       \huge\bfseries \partname\nobreakspace\thepart
+       \par
+       \vskip 20\p@
+     \fi
+     \Huge \bfseries\sffamily #2\par}%
+    \@endpart}
+\def\@spart#1{%
+    {\centering
+     \interlinepenalty \@M
+     \vskip 20\p@
+     \normalfont
+     \Huge \bfseries #1\par}%
+    \@endpart}
+\def\@endpart{\vfill
+              \newpage
+              }
+\makeatother
+
+
+\renewcommand*{\thefootnote}{(\arabic{footnote})}
+% ----------------------------------------------------------------------
+% nouvelles commandes
+\newcommand{\fraction}[2]{\raisebox{0.5ex}{#1}\slash\raisebox{-0.5ex}{#2}}
+% pour afficher 1/2, ne fonctionne pas dans un environnement mathématique
+
+\newcommand{\ie}{\emph{i.e.}}
+\newcommand{\eg}{\emph{e.g.}}
+
+\newcommand{\Cpp}{\emph{C++}}
+\newcommand{\Python}{\emph{Python}}
+\newcommand{\ROOT}{\texttt{ROOT}}
+
+\newcommand{\includeMd}[1]{\input{|"pandoc --wrap=preserve --listings -t latex #1"}}
+\def\tightlist{}

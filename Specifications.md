@@ -112,6 +112,8 @@ En utilisant la méthode **POST**, l'utilisateur met à jour sa position. Les pa
 }
 ```
 
+Si l'utilisateur n'est pas connecté au moment de mettre à jour sa position, le serveur va tenter de l'authentifier et sauvegarder sa position.
+
 ## Partie administration
 
 Les fonctionnalités minimales pour l'application d'administration sont :

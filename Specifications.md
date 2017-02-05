@@ -70,7 +70,7 @@ Cette URL permet de récupérer en méthode **GET** une liste de noms de personn
 
 ```js
 {
-    'name': [
+    'list': [
         'userName1',
         'userName2',
         'userName3'

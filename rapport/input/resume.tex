@@ -4,15 +4,21 @@
 
 %FR
 
-Résumé en français
+La travail présenté dans ce rapport concerne l'élaboration d'une solution visant à \textbf{orienter} facilement des utilisateur au sein d'un bâtiment. Pour ceci, les utilisateurs disposent d'une \textbf{carte interactive} sur \textbf{mobile} se mettant à jour en effectuant des requêtes sur un \textbf{Service Web}. Ce travail se découpe donc en 2 parties distinctes : une partie Service Web, ainsi qu'une partie application mobile \textbf{Android}.
+
+La partie Service Web est réalisée en utilisant le module \textbf{Express} ajouté au framework de base \textbf{NodeJS}, permettant de réaliser simplement un serveur Web. D'autres modules complémentaires viennent s'ajouter pour disposer de plus de fonctionnalités. Ce service va permettre de traiter des requêtes soumises par les clients mobiles, ainsi que de stocker des données relatives au bon fonctionnement de l'application.
+
+La seconde partie concernant l'application Android permet à un utilisateur de se connecter au Service Web. Cette application effectuera des requêtes visant à mettre à jour la position de l'utilisateur sur le Service Web. Ainsi les applications d'autres utilisateurs seront capables de récupérer ces positions et les placer au sein d'une carte modélisant un bâtiment.
+
+Les tests de cette solution ont pu montrer qu'il est possible d'afficher la position des utilisateurs sur une carte modélisée de l'ISIMA. Cependant, des erreurs de positionnement se retrouvent dans la position des utilisateurs, du fait de la mauvaise réception GPS par le mobile. Cette solution mise en place pourra faire l'objet d'améliorations futures telles que l'ajout d'itinéraires entre 2 utilisateurs ou vers un point d'intérêt.
 
 %%
-Liste des mots clés
+Carte interactive, Express, NodeJS, Android, Service Web, mobile.
 
 %EN
 
 English abstract
 
 %%
-List of keywords
+NodeJS, Android, Web Service, mobile
 

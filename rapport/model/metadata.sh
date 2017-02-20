@@ -14,6 +14,6 @@ echo "
 	pdfsubject  = {\subject},
 	pdftitle    = {\@title},
 	pdfkeywords = {$keywords},
-	pdfcreator  = {SkeLaTeX}
+	pdfcreator  = {BBS007}
 }
 \\makeatother"

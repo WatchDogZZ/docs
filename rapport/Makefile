@@ -1,11 +1,11 @@
 SRC = main
 
-DEBUG_MODE ?= N
+DEBUG_MODE ?= Y
 LATEX = pdflatex --shell-escape
 EDITOR = subl
 
 ifeq ($(DEBUG_MODE), Y)
-#LATEX += -interaction=nonstopmode
+LATEX += -interaction=nonstopmode
 else
 LATEX += -interaction=batchmode
 endif

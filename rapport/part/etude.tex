@@ -2,9 +2,34 @@
 
 \subsection{Présentation du projet}
 
+Ce projet à été mis en place selon notre propre initiative et nous avons donc défini les objectifs à atteindre ainsi que les fonctionnalités de nous même, avec l'aide du tuteur de projet.
+
+Le but de ce projet est de proposer une manière simple pour tout le monde de pouvoir s'orienter dans le locaux de l'ISIMA. Une fois cette solution éprouvée avec les bâtiments de l'ISIMA, nous pouvons penser l'étendre à n'importe quel autre bâtiment donc nous pouvons avoir les plans. Cette idée est inspirée d'un film de Harry Potter, avec la fameuse carte du Maraudeur qui lui permet de suivre les déplacements de tout le monde dans Poudlard.
+
+De manière générale, nous devons être capable de visualiser une carte de l'ISIMA, mais également de pouvoir trouver facilement un bureau ou une salle de cours. De plus, il serait intéréssant de pouvoir également localiser n'importe quelle autre personne visualisant la carte en même temps.
+Cette visualisation doit s'actualiser assez rapidement pour que la location de personnes soit la plus précise possible pour les utilisateurs.
+
 \subsection{Analyse de l'existant}
 
 \subsection{Spécifications du projet}
+
+Etant donné que peu de solutions sont disponibles sur le marché, nous avons choisi de partir de zéro et créer notre solution.
+
+La solution la plus évidente en terme de support de visualisation pour les utilisateurs et de leur proposer une application qu'ils pourront installer sur leur smartphone, pc, montre connectée ou encore tablette.
+Afin de rendre cette application dynamique et de proposer un suivi de position d'utilisateurs en temps réel, il est convenu d'utiliser un Service Web. Ce service permettra également de stocker des informations utiles aux utilisateurs, ce qui permettra également d'alléger le volume de données stockées sur leurs terminaux.
+
+\subsubsection{Architecture}
+
+L'architecture choisie pour organiser notre solution est la suivante.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[height=10cm]{../infrastructure.png}
+    \caption{Architecture}
+    \label{architecture}
+\end{figure}
+
+Nous pouvons observer dans la figure~\ref{architecture} que celle-ci ressemble à une architecture client/serveur, ce qui est le but recherché.
 
 \subsubsection{Partie serveur}
 La partie centrale est celle du Web Service. Le serveur doit etre capable de répondre aux différentes connexions et requêtes des utilisateurs (se connectant sur l'application Android ou tout autre...). Le serveur sera un service Web permettant (au minimum) :
@@ -156,12 +181,12 @@ Le premier sera certainement un CaaS Amazon pour NodeJS. Le serveur d'intégrati
 
 L'organisation temporelle théorique du travail est décrite dans le diagramme de Gantt ci-dessous.
 
-\newpage
 \begin{landscape}
-\begin{figure}[h]
-    \centering
-    \includegraphics[height=\textwidth]{../gantt_initial.png}
-    \caption{Diagramme de Gantt théorique}
-\end{figure}
+    \begin{figure}[h]
+        \centering
+        \includegraphics[height=\textwidth]{../gantt_initial.png}
+        \caption{Diagramme de Gantt théorique}
+    \end{figure}
 \end{landscape}
 
+suite...

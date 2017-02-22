@@ -2,7 +2,7 @@ language: c
 sudo: true
 install:
 - sudo apt-get update -y
-- sudo apt-get install -y texlive-latex-extra texlive-lang-french biblatex texlive-fonts-extra texlive-fonts-recommended texlive-science
+- sudo apt-get install -y texlive-latex-extra texlive-lang-french biblatex texlive-fonts-extra texlive-fonts-recommended texlive-science texlive-bibtex-extra
 script:
 - cd rapport
 - chmod +rwx ./model/* 

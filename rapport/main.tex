@@ -74,7 +74,8 @@
 \renewcommand{\thepage}{\arabic{page}}
 \setcounter{page}{1}
 
-\section{Introduction}
+\section*{Introduction}
+\addcontentsline{toc}{section}{Introduction}
 \input{part/intro}
 
 \newpage
@@ -95,7 +96,8 @@
 \addtocontents{toc}{\bigskip}
 \newpage
 
-\section{Conclusion}
+\section*{Conclusion}
+\addcontentsline{toc}{section}{Conclusion}
 \input{part/conclu}
 
 %%% BIBLIOGRAPHY %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

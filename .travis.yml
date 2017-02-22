@@ -1,7 +1,7 @@
 language: c
 sudo: true
 install:
-- sudo apt-get install texlive-latex-extra
+- sudo apt-get install texlive-latex-extra texlive-lang-french biber
 script:
 - cd rapport
 - make clean

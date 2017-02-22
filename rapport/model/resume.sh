@@ -1,9 +1,7 @@
-#! /bin/bash
-
+#!/bin/bash
 resume_file=$1
-
 function resume_key() {
-	LANG=$1
+	LANG=$1;;
 	case $LANG in
 		"FR" ) SECTION="Résumé";   KEYS="Mots clés ";;
 		"EN" ) SECTION="Abstract"; KEYS="Keywords"  ;;

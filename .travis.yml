@@ -2,7 +2,7 @@ language: c
 sudo: true
 install:
 - sudo apt-get -y update
-- sudo apt-get install -y texlive-full texlive-latex-extra texlive-lang-french biblatex texlive-fonts-extra texlive-fonts-recommended texlive-science texlive-bibtex-extra biber
+- sudo apt-get install -y texlive-full texlive-latex-extra texlive-lang-french biblatex texlive-fonts-extra texlive-fonts-recommended texlive-science texlive-bibtex-extra
 script:
 - cd rapport
 - make clean

@@ -67,7 +67,7 @@
 
 \section*{Glossaire}
 \addcontentsline{toc}{section}{Glossaire}
-	\input{|"model/gloss.sh"}
+\input{|"model/gloss.sh"}
 
 %%% INTRODUCTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
@@ -76,6 +76,11 @@
 
 \section*{Introduction}
 \addcontentsline{toc}{section}{Introduction}
+
+% header avec juste le nom de la section
+\fancyhead[L]{Introduction}
+\fancyhead[R]{}
+
 \input{part/intro}
 
 \newpage
@@ -86,6 +91,11 @@
 % ----------------------------------------------------------------------
 % Corps du rapport
 % ----------------------------------------------------------------------
+
+% Header avec le nom de la section et le numéro de sous-section
+\fancyhead[L]{\leftmark}
+\fancyhead[R]{\thesubsection}
+
 \input{part/etude}
 \input{part/conception}
 \input{part/resultat}
@@ -98,6 +108,11 @@
 
 \section*{Conclusion}
 \addcontentsline{toc}{section}{Conclusion}
+
+% header avec juste le nom de la section
+\fancyhead[L]{Conclusion}
+\fancyhead[R]{}
+
 \input{part/conclu}
 
 %%% BIBLIOGRAPHY %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

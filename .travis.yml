@@ -1,0 +1,18 @@
+language: c
+install:
+- apt-get install texlive-full
+script:
+- cd rapport
+- make clean
+- make
+- make
+before_deploy:
+- cp rapport/main.pdf rapport.pdf
+deploy:
+  skip_cleanup: true
+  provider: releases
+  api_key:
+    secure: wTbvHaf3P9Pa1XnvBB9zlaWnSuNmuvMvkYhAEwLls5MPpPYzIqaRWpP9GYxW33MyOc6+cow5tUKVJEH7bzMJ0rEXwmGJdXCeB1K3BiPg/uwIWiIUnHVSkgTVcVeZYZxIz2exR+mabGaI2CPGLtgZXwSwDH4xH+dFyzeQMRsTV/tXkaLlkCkQR7/euQ8+9CJjrgWmD/LVreLE0UOS0gGZPg7PyXSesMsfXk6Lehbf/uLnH8pl0so5uSozX6Kf3Kkx5KcaEHZ50W6A65T2RUCm0Fq6a6C3tS63ELdwD4Je4fkumKCZNmDGJMQq85IrIy3lTZY7mF4n74lrJSOSQ1+n0KyPDPrx8l11vnUjcYWxLAkieA/lBtSRN1aWwY9OevL/FrSVog41BQWayfW8IxBFvZ3Q1EDOzqAynmq47/MYVAM+B6ocWUhjj+JiiXS9D7SHFaYfV2jlaE77ofPu5qFybbt6feTLf7cKm6lSwqX/seWQgnNmhV48jJRegJoKP+MQHg3XzwQPJvcCLTNnXwF3qdhwZbGBAqeU/iL/liB9koPKlCYXCbuObxxwezupI0zZhINZOrEoxB/y5GQjrYIuR7oTRMdifikiNwQtSxVdPYtwBeeJXWTxwpBPuPExrs+7qVpV1ib4Qe2q07rEsxl4f2jWYlNTMqOHIhfv6BlP+k8=
+  file: rapport.pdf
+  on:
+    repo: WatchDogZZ/docs

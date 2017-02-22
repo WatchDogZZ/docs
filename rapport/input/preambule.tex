@@ -236,12 +236,15 @@
 % ----------------------------------------------------------------------
 % trucs en vracs
 \usepackage[         %
-    top    = 2.75cm, %
-    bottom = 3.50cm, %
+    top    = 2.50cm, %
+    bottom = 2.50cm, %
     left   = 3.00cm, %
-    right  = 2.50cm]{geometry}   % marges
+    right  = 2.00cm]{geometry}   % marges
 \usepackage{makeidx}             % make index (finalement je ne l'utilise pas)
 \makeindex                       % génération de l'index, besoin d'une compilation séparée
+
+\usepackage{parskip}             % gestion de l'espacement entre les paragraphes
+\setlength{\parindent}{0cm}      % supprime le retrait de premiere ligne
 
 \usepackage{fancyhdr}            % entête et pied de page (pour les modifier)
 \pagestyle{fancy}                % style des pages

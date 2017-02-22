@@ -1,6 +1,7 @@
 language: c
+sudo: true
 install:
-- apt-get install texlive-full
+- sudo apt-get install texlive-full
 script:
 - cd rapport
 - make clean

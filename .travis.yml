@@ -2,6 +2,7 @@ language: c
 sudo: true
 install:
 - sudo apt-get -y update
+- sudo apt-get install -y libautovivification-perl libbtparse1 libbusiness-isbn-data-perl libbusiness-isbn-perl libbusiness-ismn-perl libbusiness-issn-perl libdata-compare-perl libdata-dump-perl libdate-simple-perl libencode-eucjpms-perl libencode-hanextra-perl libencode-jis2k-perl libfile-find-rule-perl libfile-slurp-perl libfile-slurp-unicode-perl libipc-run3-perl liblist-allutils-perl liblog-log4perl-perl libmime-charset-perl libnumber-compare-perl libreadonly-perl libreadonly-xs-perl libregexp-common-perl libsombok3 libtext-bibtex-perl libtext-glob-perl libtie-cycle-perl libunicode-collate-perl libunicode-linebreak-perl libxml-libxml-simple-perl libxml-libxslt-perl libxml-writer-perl
 - wget http://old-releases.ubuntu.com/ubuntu/pool/universe/b/biber/biber_0.9.9+release-1_all.deb
 - sudo dpkg -i biber_0.9.9+release-1_all.deb 2> /dev/null
 - sudo apt-get -f install

@@ -4,6 +4,7 @@ install:
 - export DEBIAN_FRONTEND=noninteractive
 - sudo service postgresql stop
 - sudo service postgresql stop 9.1
+- sudo apt-get remove -y -q postgresql-common
 - sudo DEBIAN_FRONTEND=noninteractive apt-get -q -y update
 - sudo DEBIAN_FRONTEND=noninteractive apt-get -q -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" upgrade
 - sudo DEBIAN_FRONTEND=noninteractive apt-get -q -y dist-upgrade

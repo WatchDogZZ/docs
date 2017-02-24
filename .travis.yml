@@ -2,6 +2,7 @@ language: c
 sudo: true
 install:
 - export DEBIAN_FRONTEND=noninteractive
+- sudo apt-get -q -y remove tcpdump
 - sudo DEBIAN_FRONTEND=noninteractive apt-get -q -y update
 - sudo DEBIAN_FRONTEND=noninteractive apt-get -q -y upgrade
 - sudo DEBIAN_FRONTEND=noninteractive apt-get -q -y dist-upgrade

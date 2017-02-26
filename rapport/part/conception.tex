@@ -13,39 +13,39 @@ Le développement du client mobile a suivi le schéma classique de conception d�
 
 Il n’a pas été choisi ici de faire du développement dirigé par les tests car la technologie Android était dans le cadre de ce projet une découverte et il aurait était hasardeux de définir des tests Java sur les concepts Android. Les tests ont donc ici vocation à valider les mécaniques métiers a posteriori ainsi que le bon fonctionnement et l’intégrité de l’application au fur et à mesure de l’ajout de fonctionnalités. La partie relative aux tests se subdivise en deux autres : les tests unitaires et les tests instrumentés. Les premiers sont plutôt classiques et permettent de tester les mécaniques métiers et de vérifier tout ce qui est mockable, autrement dit simulable. Toutefois, il y a certains aspects dans un programme Android qu’il n’est pas possible de mocker sans enlever l’intérêt du test. Nous parlons ici de fonctionnalités s’appuyant intrinsèquement sur le système Android comme les appels réseaux, le GPS, l’écran, etc. Il est nécessaire dès lors que l’on veut simuler une fonctionnalité Android même basique, de simuler tout un système Android. D’où l’intérêt de la deuxième catégorie de tests : les tests instrumentés. Ceux-ci vont être exécutés sur un émulateur Android directement afin de pouvoir tester dans notre cas les appels réseaux et l’utilisation du GPS.
 
-Le projet de tests est donc un projet annexe venant en soutien au projet principal : celui du développement de l’application Android. L’ensemble doit gérer des données et les afficher, c’est pourquoi un modèle MVC semblait adapté. Le modèle MVC se compose de trois parties en interaction comme c’est visible \ref{mvc}.
+Le projet de tests est donc un projet annexe venant en soutien au projet principal : celui du développement de l’application Android. L’ensemble doit gérer des données et les afficher, c’est pourquoi un modèle MVC semblait adapté. Le modèle MVC se compose de trois parties en interaction comme c’est visible figure \ref{mvc}.
 
 \begin{figure}
     \centering
-    \includegraphics{./img/mvc.png}
+    \includegraphics[width=\textwidth]{./img/mvc.png}
     \caption{Patron de conception MVC}
     \label{mvc}
 \end{figure}
 
-Le modèle (M) représente les données traitées, dans le cas de l’application ce sont principalement les utilisateurs et leur position GPS. Les deux autres composants n’interagissent pas directement avec les données brutes mais ont accès à l’API du modèle symbolisée par le gestionnaire d’utilisateur (UserManager) comme sur la \ref{model}. Le modèle gère donc tous les petits traitements bas niveau sur les données et les sert au reste de l’architecture selon les besoins.
+Le modèle (M) représente les données traitées, dans le cas de l’application ce sont principalement les utilisateurs et leur position GPS. Les deux autres composants n’interagissent pas directement avec les données brutes mais ont accès à l’API du modèle symbolisée par le gestionnaire d’utilisateur (UserManager) comme sur la figure \ref{model}. Le modèle gère donc tous les petits traitements bas niveau sur les données et les sert au reste de l’architecture selon les besoins.
 
 \begin{figure}
     \centering
-    \includegraphics{./img/android-model.png}
+    \includegraphics[width=\textwidth]{./img/android-model.png}
     \caption{Diagramme du modèle}
     \label{model}
 \end{figure}
 
-Le contrôleur (C) s’occupe des interactions avec l’utilisateur, il doit pouvoir transmettre les commandes émanant de l’utilisateur aux autres composants. Dans le cadre de l’application Android, le contrôleur est symbolisé par les activités : ce sont les activités Android qui proposent les interfaces de contrôle utilisateur. Elles permettent de recevoir les évènements utilisateur comme un clic ou encore les messages du système comme l’arrivée d’un SMS ou encore l’actualisation de la position GPS. Les informations reçues peuvent ensuite être utilisées pour effectuer une mise à jour du modèle ou un rafraîchissement de l’affichage. Les différents types d’activités sont visible sur \ref{controller}.
+Le contrôleur (C) s’occupe des interactions avec l’utilisateur, il doit pouvoir transmettre les commandes émanant de l’utilisateur aux autres composants. Dans le cadre de l’application Android, le contrôleur est symbolisé par les activités : ce sont les activités Android qui proposent les interfaces de contrôle utilisateur. Elles permettent de recevoir les évènements utilisateur comme un clic ou encore les messages du système comme l’arrivée d’un SMS ou encore l’actualisation de la position GPS. Les informations reçues peuvent ensuite être utilisées pour effectuer une mise à jour du modèle ou un rafraîchissement de l’affichage. Les différents types d’activités sont visible sur la figure \ref{controller}.
 
 \begin{figure}
     \centering
-    \includegraphics{./img/android-controller.png}
+    \includegraphics[width=\textwidth]{./img/android-controller.png}
     \caption{Diagramme du contrôleur}
     \label{controller}
 \end{figure}
 
 
-La vue (V) est l’ensemble des éléments constituant la façon dont vont être présentées les données. La réalisation concrète dans l’application Android de la vue est faite par les fichiers XML de layout et autres ressources. Dans la vue entre aussi un pan important du concept de l’application : la gestion de l’affichage 3D. En effet, pour la plupart des éléments d’interface, tout peut être géré par des fichiers de métadonnées mais pour générer la carte en trois dimensions d’un lieu il est nécessaire de décrire dans le code la manière d’utiliser les données pour les afficher avec de véritables classes Java. La vue est donc un ensemble complexe constitué de diverses ressources comme on peut le voir sur \ref{view}.
+La vue (V) est l’ensemble des éléments constituant la façon dont vont être présentées les données. La réalisation concrète dans l’application Android de la vue est faite par les fichiers XML de layout et autres ressources. Dans la vue entre aussi un pan important du concept de l’application : la gestion de l’affichage 3D. En effet, pour la plupart des éléments d’interface, tout peut être géré par des fichiers de métadonnées mais pour générer la carte en trois dimensions d’un lieu il est nécessaire de décrire dans le code la manière d’utiliser les données pour les afficher avec de véritables classes Java. La vue est donc un ensemble complexe constitué de diverses ressources comme on peut le voir sur la figure \ref{view}.
 
 \begin{figure}
     \centering
-    \includegraphics{./img/view-android.png}
+    \includegraphics[width=\textwidth]{./img/android-view.png}
     \caption{Diagramme de la vue}
     \label{view}
 \end{figure}
@@ -56,11 +56,11 @@ Le deuxième service est celui responsable de la communication avec le serveur e
 
 Le patron de conception majeur dans ce système applicatif est celui observer-observable : il permet à une des entités d’être prévenue par une autre après inscription qu’un traitement a été effectué. Ceci permet le parallélisme des services et de ne pas bloquer l’interface graphique lors d’un traitement long (communication réseau).
 
-L’ensemble est sécurisé par le système d’authentification Google. Ce choix a été motivé par la simplicité puisque le client étant sur un système Android, il possède forcément un compte Google associé. Il suffit alors d’effectuer une requête sur les serveurs de Google avec les informations d’authentification de l’appareil pour récupérer un token validant l’identité de l’utilisateur. Ce token est ensuite transmis lors de chaque requête au serveur WatchDogZZ en vue de vérifier l’identité du demandeur (voir la \ref{token}).
+L’ensemble est sécurisé par le système d’authentification Google. Ce choix a été motivé par la simplicité puisque le client étant sur un système Android, il possède forcément un compte Google associé. Il suffit alors d’effectuer une requête sur les serveurs de Google avec les informations d’authentification de l’appareil pour récupérer un token validant l’identité de l’utilisateur. Ce token est ensuite transmis lors de chaque requête au serveur WatchDogZZ en vue de vérifier l’identité du demandeur (voir la figure \ref{token}).
 
 \begin{figure}
     \centering
-    \includegraphics{./img/android-token.png}
+    \includegraphics[width=\textwidth]{./img/android-token.png}
     \caption{Utilisation du token Google}
     \label{token}
 \end{figure}
@@ -69,12 +69,12 @@ La carte du maraudeur est une vue qui a été créée spécialement pour l’app
 
 \begin{figure}
     \centering
-    \includegraphics{./img/android-3d.png}
+    \includegraphics[width=\textwidth]{./img/android-3d.png}
     \caption{Fonctionnement de la 3D Android}
     \label{3d}
 \end{figure}
 
-La conception de l’application Android est très simple mais fait intervenir de nombreux éléments et services qui touchent énormément d’aspects de la programmation Android. Il existe sur les versions les plus récentes du Framework des fonctionnalités plus intéressantes et performantes toutefois le choix a été fait d’essayer de faire l’application la plus diffusable possible et donc de supporter un maximum d’appareil. Au début du développement, la version choisie était la 9 mais suite à des contraintes inévitables de développement nous avons dû monter à la version 12. Ceci reste correct d’autant plus que cela représente toujours plus de 99% de parts de marché.
+La conception de l’application Android est très simple mais fait intervenir de nombreux éléments et services qui touchent énormément d’aspects de la programmation Android. Il existe sur les versions les plus récentes du Framework des fonctionnalités plus intéressantes et performantes toutefois le choix a été fait d’essayer de faire l’application la plus diffusable possible et donc de supporter un maximum d’appareil. Au début du développement, la version choisie était la 9 mais suite à des contraintes inévitables de développement nous avons dû monter à la version 12. Ceci reste correct d’autant plus que cela représente toujours plus de 99\% de parts de marché.
 
 
 \subsection{Technologies utilisées}

@@ -16,12 +16,6 @@
 \usepackage{courier}
 \renewcommand{\familydefault}{\sfdefault}
 
-% changer les puces de liste
-\renewcommand{\labelitemi}{$\bullet$}
-\renewcommand{\labelitemii}{$\cdot$}
-\renewcommand{\labelitemiii}{$\diamond$}
-\renewcommand{\labelitemiv}{$\ast$}
-
 \usepackage{datetime} % pour avoir l'heure de compilation avec \currenttime
 
 \usepackage{pdflscape} % page en paysage
@@ -76,22 +70,6 @@
 \usepackage{bookmark}
 
 %\usepackage{tablefootnote}
-
-% ----------------------------------------------------------------------
-%packages pour les maths
-% \usepackage{amsmath}
-% \usepackage{amssymb}
-% \usepackage{mathabx} %   \ldbrack et \rdbrack
-%\usepackage{amsfonts}
-% \usepackage{mathrsfs}
-% \usepackage{wasysym}
-% \usepackage{textcomp}
-%\usepackage{bbm}
-% \DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it} % \mathpzc{ABCdef}
-% \usepackage{eufrak}                             % \mathfrak{ABCdef}
-
-% % change la numéroration des équations
-% \numberwithin{equation}{section}
 
 % ----------------------------------------------------------------------
 % packages pour les algorithmes
@@ -241,44 +219,6 @@
 \newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
 \usepackage{model/titlepage}
 
-% ----------------------------------------------------------------------
-% modification du style des parties (pour la classe article)
-% \makeatletter
-% \renewcommand\part{%
-%   \clearpage
-%   \thispagestyle{empty}%
-%   \null\vfill
-%   \secdef\@part\@spart}
-% \def\@part[#1]#2{%
-%     \ifnum \c@secnumdepth >-2\relax
-%       \refstepcounter{part}%
-%       \addcontentsline{toc}{part}{\thepart\hspace{1em}#1}%
-%     \else
-%       \addcontentsline{toc}{part}{#1}%
-%     \fi
-%     \markboth{}{}%
-%     {\centering
-%      \interlinepenalty \@M
-%      \vskip 20\p@
-%      \normalfont
-%      \ifnum \c@secnumdepth >-2\relax
-%        \huge\bfseries \partname\nobreakspace\thepart
-%        \par
-%        \vskip 20\p@
-%      \fi
-%      \Huge \bfseries\sffamily #2\par}%
-%     \@endpart}
-% \def\@spart#1{%
-%     {\centering
-%      \interlinepenalty \@M
-%      \vskip 20\p@
-%      \normalfont
-%      \Huge \bfseries #1\par}%
-%     \@endpart}
-% \def\@endpart{\vfill
-%               \newpage
-%               }
-% \makeatother
 
 \renewcommand*{\thefootnote}{(\arabic{footnote})}
 
@@ -286,3 +226,9 @@
 
 \newcommand{\includeMd}[1]{\input{|"pandoc --wrap=preserve --listings -t latex #1"}}
 \def\tightlist{}
+
+% changer les puces de liste
+\renewcommand{\labelitemi}{$\bullet$}
+\renewcommand{\labelitemii}{$\cdot$}
+\renewcommand{\labelitemiii}{$\diamond$}
+\renewcommand{\labelitemiv}{$\ast$}

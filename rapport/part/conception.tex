@@ -1,72 +1,83 @@
 \section{Conception de la solution}
 
-\subsection{Architecture de la solution}
+    \subsection{Technologies utilisées}
 
-    \subsubsection{Web Service}
+        \subsubsection{Service Web}
 
-Le serveur + Mongodb.
-Jasmine
-Pattern bridge pour la bdd. Des entités.
+            Pour la conception du Service Web, nous avions besoin d'une technologie disposant des caractéristiques suivantes :
+            \begin{itemize}
+                \item Facile à utiliser ;
+                \item Disposant de nombreuses fonctionnalités ;
+                \item Rapide à l'exécution ;
+                \item Exécution légère sur serveur ;
+                \item Configuration rapide.
+            \end{itemize}
 
-    \subsubsection{Application Android}
-Le développement du client mobile a suivi le schéma classique de conception d’une application Android. Pour rappel les objectifs initiaux majeurs de ce client étaient de pouvoir récupérer des données sur un web service, les exploiter, les afficher à l’utilisateur et enfin retourner des données au service en question. De façon général la solution Android s’organise en deux projets directeurs : les tests et l’implémentation de l’application. 
+            Toutes ces caractéristiques se retrouvent avec le framework NodeJS \cite{nodejs}. C'est un framework Javascript qui dispose de nombreuses librairies installables à l'aide du gestionnaire de modules NPM \cite{npmjs}. De plus, étant donné que l'un d'entre-nous avait déjà utilisé une telle technologie, cela nous permettait de démarrer plus rapidement.
 
-Il n’a pas choisi ici de faire du développement dirigé par les tests car la technologie Android était dans le cadre de ce projet une découverte et il aurait était hasardeux de définir des tests Java sur les concepts Android. Les tests ont donc ici vocation à valider les mécaniques métiers a posteriori ainsi que le bon fonctionnement et l’intégrité de l’application au fur et à mesure de l’ajout de fonctionnalités. La partie relative aux tests se subdivise en deux autres : les tests unitaires et les tests instrumentés. Les premiers sont plutôt classiques et permettent de tester les mécaniques métiers et de vérifier tout ce qui est mockable, autrement dit simulable. Toutefois, il y a certains aspects dans un programme Android qu’il n’est pas possible de mocker sans enlever l’intérêt du test. Nous parlons ici de fonctionnalités s’appuyant intrinsèquement sur le système Android comme les appels réseaux, le GPS, l’écran, etc. Il est nécessaire dès lors que l’on veut simuler une fonctionnalité Android même basique, de simuler tout un système Android. D’où l’intérêt de la deuxième catégorie de tests : les tests instrumentés. Ceux-ci vont être exécutés sur un émulateur Android directement afin de pouvoir tester dans notre cas les appels réseaux et l’utilisation du GPS.
+            Le gestionnaire de modules NPM permet d'effectuer plusieurs choses.
+            Premièrement c'est lui qui va permettre l'installation des modules nécéssaires au bon fonctionnement du Service. Ensuite, il va se charger de résoudre les dépendances entre modules. C'est à dire que si un module à besoin d'un autre module pour fonctionner, alors celui-ci sera installé automatiquement.
+            Enfin, il est possible de disposer de plusieurs listes de modules à installer :
+            \begin{description}
+                \item [Production] : comporte les modules nécéssaires au lancement du Service en mode production, donc sans les outils de debug ;
+                \item [Dev] : comporte les modules installés en production ainsi que des modules complémentaires utilisés lors de la conception du Service ou à des fins de debuggage.
+            \end{description}
 
-Le projet de tests est donc un projet annexe venant en soutien au projet principal : celui du développement de l’application Android. L’ensemble doit gérer des données et les afficher, c’est pourquoi un modèle MVC semblait adapté. Le modèle MVC se compose de trois parties en interaction comme c’est visible \ref{mvc}. 
+            Afin de mettre en place notre Service Web, nous avons utilisés plusieurs modules :
+            \begin{description}
+                \item [Body-parser] : parser le contenu JSON des requêtes ;
+                \item [Express] : créer un serveur Http ou Https ;
+                \item [Jasmine] : effectuer des tests de spécifications ;
+                \item [Letsencrypt-express] : gérer les certificats Https du serveur ;
+                \item [Mongodb] : système de gestion de base de données ;
+                \item [Request] : effectuer des requêtes http ou https ;
+                \item [Winston] : faire des logs sur plusieurs niveaux (info, error, warning, debug).
+            \end{description}
 
-\begin{figure}
-    \centering
-    \includegraphics{./img/mvc.png}
-    \caption{Patron de conception MVC}
-    \label{mvc}
-\end{figure}
+        \subsubsection{Android}
 
-Le modèle (M) représente les données traitées, dans le cas de l’application ce sont principalement les utilisateurs et leur position GPS. Les deux autres composants n’interagissent pas directement avec les données brutes mais on accès à l’API du modèle symbolisée par le gestionnaire d’utilisateur (UserManager). Le modèle gère donc tous les petits traitements bas niveau sur les données et les sert au reste de l’architecture selon les besoins.
+            Le développement d'une application Android s'effectue généralement en utilisant le JAVA ainsi qu'Android Studio \cite{androidstudio}, permettant d'inclure les bibliothèques Android.
+            Ici, nous avons donc utilisé ces technologies pour permettre une intégration parfaite sur le système Android.
 
-Le contrôleur (C) s’occupe des interactions avec l’utilisateur, il doit pouvoir transmettre les commandes émanant de l’utilisateur aux autres composants.
+    \subsection{Architecture de la solution}
 
+        \subsubsection{Web Service}
 
-\subsection{Technologies utilisées}
+            Du coté serveur, il faudra gérer plusieurs parties. D'un coté, il faut s'occuper des requêtes utilisateur, et de l'autre, il faut stocker certaines données que l'on renverra aux utilisateurs.
+            Pour ce faire, l'architecture est la suivante.
 
-    \subsubsection{Service Web}
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=\textwidth]{./img/architecture-service-web.png}
+                \caption{Architecture du Service Web}
+                \label{asweb}
+            \end{figure}
 
-Pour la conception du Service Web, nous avions besoin d'une technologie disposant des caractéristiques suivantes :
-\begin{itemize}
-    \item Facile à utiliser ;
-    \item Disposant de nombreuses fonctionnalités ;
-    \item Rapide à l'exécution ;
-    \item Exécution légère sur serveur ;
-    \item Configuration rapide.
-\end{itemize}
-
-Toutes ces caractéristiques se retrouvent avec le framework NodeJS \cite{nodejs}. C'est un framework Javascript qui dispose de nombreuses librairies installables à l'aide du gestionnaire de modules NPM \cite{npmjs}. De plus, étant donné que l'un d'entre-nous avait déjà utilisé une telle technologie, cela nous permettait de démarrer plus rapidement.
-
-Le gestionnaire de modules NPM permet d'effectuer plusieurs choses.
-Premièrement c'est lui qui va permettre l'installation des modules nécéssaires au bon fonctionnement du Service. Ensuite, il va se charger de résoudre les dépendances entre modules. C'est à dire que si un module à besoin d'un autre module pour fonctionner, alors celui-ci sera installé automatiquement.
-Enfin, il est possible de disposer de plusieurs listes de modules à installer :
-\begin{description}
-    \item [Production] : comporte les modules nécéssaires au lancement du Service en mode production, donc sans les outils de debug ;
-    \item [Dev] : comporte les modules installés en production ainsi que des modules complémentaires utilisés lors de la conception du Service ou à des fins de debuggage.
-\end{description}
-
-Afin de mettre en place notre Service Web, nous avons utilisés plusieurs modules :
-\begin{description}
-    \item [Body-parser] : parser le contenu JSON des requêtes ;
-    \item [Express] : créer un serveur Http ou Https ;
-    \item [Jasmine] : effectuer des tests de spécifications ;
-    \item [Letsencrypt-express] : gérer les certificats Https du serveur ;
-    \item [Mongodb] : système de gestion de base de données ;
-    \item [Request] : effectuer des requêtes http ou https ;
-    \item [Winston] : faire des logs sur plusieurs niveaux (info, error, warning, debug).
-\end{description}
-
-    \subsubsection{Android}
-
-Le développement d'une application Android s'effectue généralement en utilisant le JAVA ainsi qu'Android Studio \cite{androidstudio}, permettant d'inclure les bibliothèques Android.
-Ici, nous avons donc utilisé ces technologies pour permettre une intégration parfaite sur le système Android.
+            Comme nous pouvons l'observer dans la figure \ref{asweb}, 
 
 
 
-\subsection{Fonctionnalités introduites}
+            Le serveur + Mongodb.
+            Pattern bridge pour la bdd. Des entités.
+
+        \subsubsection{Application Android}
+
+            Le développement du client mobile a suivi le schéma classique de conception d’une application Android. Pour rappel les objectifs initiaux majeurs de ce client étaient de pouvoir récupérer des données sur un web service, les exploiter, les afficher à l’utilisateur et enfin retourner des données au service en question. De façon général la solution Android s’organise en deux projets directeurs : les tests et l’implémentation de l’application. 
+
+            Il n’a pas choisi ici de faire du développement dirigé par les tests car la technologie Android était dans le cadre de ce projet une découverte et il aurait était hasardeux de définir des tests Java sur les concepts Android. Les tests ont donc ici vocation à valider les mécaniques métiers a posteriori ainsi que le bon fonctionnement et l’intégrité de l’application au fur et à mesure de l’ajout de fonctionnalités. La partie relative aux tests se subdivise en deux autres : les tests unitaires et les tests instrumentés. Les premiers sont plutôt classiques et permettent de tester les mécaniques métiers et de vérifier tout ce qui est mockable, autrement dit simulable. Toutefois, il y a certains aspects dans un programme Android qu’il n’est pas possible de mocker sans enlever l’intérêt du test. Nous parlons ici de fonctionnalités s’appuyant intrinsèquement sur le système Android comme les appels réseaux, le GPS, l’écran, etc. Il est nécessaire dès lors que l’on veut simuler une fonctionnalité Android même basique, de simuler tout un système Android. D’où l’intérêt de la deuxième catégorie de tests : les tests instrumentés. Ceux-ci vont être exécutés sur un émulateur Android directement afin de pouvoir tester dans notre cas les appels réseaux et l’utilisation du GPS.
+
+            Le projet de tests est donc un projet annexe venant en soutien au projet principal : celui du développement de l’application Android. L’ensemble doit gérer des données et les afficher, c’est pourquoi un modèle MVC semblait adapté. Le modèle MVC se compose de trois parties en interaction comme c’est visible \ref{mvc}. 
+
+            \begin{figure}[H]
+                \centering
+                \includegraphics{./img/mvc.png}
+                \caption{Patron de conception MVC}
+                \label{mvc}
+            \end{figure}
+
+            Le modèle (M) représente les données traitées, dans le cas de l’application ce sont principalement les utilisateurs et leur position GPS. Les deux autres composants n’interagissent pas directement avec les données brutes mais on accès à l’API du modèle symbolisée par le gestionnaire d’utilisateur (UserManager). Le modèle gère donc tous les petits traitements bas niveau sur les données et les sert au reste de l’architecture selon les besoins.
+
+            Le contrôleur (C) s’occupe des interactions avec l’utilisateur, il doit pouvoir transmettre les commandes émanant de l’utilisateur aux autres composants.
+
+    \subsection{Fonctionnalités introduites}
 

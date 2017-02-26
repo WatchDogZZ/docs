@@ -14,11 +14,13 @@
 \usepackage[utf8]{inputenc}
 \usepackage{helvet}
 \usepackage{courier}
-%\renewcommand{\familydefault}{\sfdefault}
-%\pdfcompresslevel=3
-%\usepackage{fourier}
+\renewcommand{\familydefault}{\sfdefault}
 
-% \usepackage{pdfpages} % pour inclure des pdf directement
+% changer les puces de liste
+\renewcommand{\labelitemi}{$\bullet$}
+\renewcommand{\labelitemii}{$\cdot$}
+\renewcommand{\labelitemiii}{$\diamond$}
+\renewcommand{\labelitemiv}{$\ast$}
 
 \usepackage{datetime} % pour avoir l'heure de compilation avec \currenttime
 
@@ -67,13 +69,6 @@
 \makeatother
 %%%% fin macro %%%%
 
-% ----------------------------------------------------------------------
-% diagramme de Gantt
-%\usepackage{model/pgfgantt}
-
-% ----------------------------------------------------------------------
-% pour mettre une page en mode paysage
-\usepackage{lscape}
 
 % ----------------------------------------------------------------------
 % Miscelianous
@@ -235,11 +230,15 @@
 
 % ----------------------------------------------------------------------
 % trucs en vracs
-\usepackage[         %
-    top    = 2.50cm, %
-    bottom = 2.50cm, %
-    left   = 3.00cm, %
-    right  = 2.00cm]{geometry}   % marges
+\usepackage{geometry}   % marges
+\geometry{
+  a4paper,
+  top    = 25mm,
+  bottom = 25mm,
+  left   = 30mm,
+  right  = 20mm
+}
+
 \usepackage{makeidx}             % make index (finalement je ne l'utilise pas)
 \makeindex                       % génération de l'index, besoin d'une compilation séparée
 
@@ -256,7 +255,6 @@
 \fancyfoot[R]{\thepage}
 \renewcommand{\footrulewidth}{0.1pt}
 
-
 \usepackage{setspace}     % gestion des interlignages
 \onehalfspacing           % interlignage de 1.5
 
@@ -267,56 +265,46 @@
 
 % ----------------------------------------------------------------------
 % modification du style des parties (pour la classe article)
-\makeatletter
-\renewcommand\part{%
-  \clearpage
-  \thispagestyle{empty}%
-  \null\vfill
-  \secdef\@part\@spart}
-\def\@part[#1]#2{%
-    \ifnum \c@secnumdepth >-2\relax
-      \refstepcounter{part}%
-      \addcontentsline{toc}{part}{\thepart\hspace{1em}#1}%
-    \else
-      \addcontentsline{toc}{part}{#1}%
-    \fi
-    \markboth{}{}%
-    {\centering
-     \interlinepenalty \@M
-     \vskip 20\p@
-     \normalfont
-     \ifnum \c@secnumdepth >-2\relax
-       \huge\bfseries \partname\nobreakspace\thepart
-       \par
-       \vskip 20\p@
-     \fi
-     \Huge \bfseries\sffamily #2\par}%
-    \@endpart}
-\def\@spart#1{%
-    {\centering
-     \interlinepenalty \@M
-     \vskip 20\p@
-     \normalfont
-     \Huge \bfseries #1\par}%
-    \@endpart}
-\def\@endpart{\vfill
-              \newpage
-              }
-\makeatother
-
+% \makeatletter
+% \renewcommand\part{%
+%   \clearpage
+%   \thispagestyle{empty}%
+%   \null\vfill
+%   \secdef\@part\@spart}
+% \def\@part[#1]#2{%
+%     \ifnum \c@secnumdepth >-2\relax
+%       \refstepcounter{part}%
+%       \addcontentsline{toc}{part}{\thepart\hspace{1em}#1}%
+%     \else
+%       \addcontentsline{toc}{part}{#1}%
+%     \fi
+%     \markboth{}{}%
+%     {\centering
+%      \interlinepenalty \@M
+%      \vskip 20\p@
+%      \normalfont
+%      \ifnum \c@secnumdepth >-2\relax
+%        \huge\bfseries \partname\nobreakspace\thepart
+%        \par
+%        \vskip 20\p@
+%      \fi
+%      \Huge \bfseries\sffamily #2\par}%
+%     \@endpart}
+% \def\@spart#1{%
+%     {\centering
+%      \interlinepenalty \@M
+%      \vskip 20\p@
+%      \normalfont
+%      \Huge \bfseries #1\par}%
+%     \@endpart}
+% \def\@endpart{\vfill
+%               \newpage
+%               }
+% \makeatother
 
 \renewcommand*{\thefootnote}{(\arabic{footnote})}
+
 % ----------------------------------------------------------------------
-% nouvelles commandes
-\newcommand{\fraction}[2]{\raisebox{0.5ex}{#1}\slash\raisebox{-0.5ex}{#2}}
-% pour afficher 1/2, ne fonctionne pas dans un environnement mathématique
-
-\newcommand{\ie}{\emph{i.e.}}
-\newcommand{\eg}{\emph{e.g.}}
-
-\newcommand{\Cpp}{\emph{C++}}
-\newcommand{\Python}{\emph{Python}}
-\newcommand{\ROOT}{\texttt{ROOT}}
 
 \newcommand{\includeMd}[1]{\input{|"pandoc --wrap=preserve --listings -t latex #1"}}
 \def\tightlist{}

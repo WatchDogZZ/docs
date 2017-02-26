@@ -13,6 +13,8 @@ install:
 - wget http://old-releases.ubuntu.com/ubuntu/pool/universe/b/biber/biber_0.9.9+release-1_all.deb
 - wget https://launchpad.net/ubuntu/+source/libtext-bibtex-perl/0.66-2/+build/5479331/+files/libtext-bibtex-perl_0.66-2_amd64.deb
 - wget http://launchpadlibrarian.net/170881974/perl_5.18.2-2ubuntu1_amd64.deb
+- wget http://security.ubuntu.com/ubuntu/pool/main/p/perl/perl-base_5.18.2-2ubuntu1.1_amd64.deb
+- sudo DEBIAN_FRONTEND=noninteractive gdebi perl-base_5.18.2-2ubuntu1.1_amd64.deb
 - sudo DEBIAN_FRONTEND=noninteractive gdebi perl_5.18.2-2ubuntu1_amd64.deb
 - sudo DEBIAN_FRONTEND=noninteractive gdebi libtext-bibtex-perl_0.66-2_amd64.deb
 - sudo DEBIAN_FRONTEND=noninteractive gdebi biber_0.9.9+release-1_all.deb

@@ -29,9 +29,9 @@
 \usepackage{color}
 \usepackage[table]{xcolor}
 
-\usepackage{sectsty}
-\allsectionsfont{\bfseries\sffamily\color{black!90}\hspace{-1em}}
-\partfont{\sffamily}
+% \usepackage{sectsty}
+% \allsectionsfont{\bfseries\sffamily\color{black!90}\hspace{-1em}}
+% \partfont{\sffamily}
 \usepackage[font={small,it}]{caption}
 \makeatletter
 \def\@seccntformat#1{\llap{\csname the#1\endcsname\quad}}
@@ -79,43 +79,19 @@
 
 % ----------------------------------------------------------------------
 %packages pour les maths
-\usepackage{amsmath}
-\usepackage{amssymb}
-\usepackage{mathabx} %   \ldbrack et \rdbrack
+% \usepackage{amsmath}
+% \usepackage{amssymb}
+% \usepackage{mathabx} %   \ldbrack et \rdbrack
 %\usepackage{amsfonts}
-\usepackage{mathrsfs}
-\usepackage{wasysym}
-\usepackage{textcomp}
+% \usepackage{mathrsfs}
+% \usepackage{wasysym}
+% \usepackage{textcomp}
 %\usepackage{bbm}
-\DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it} % \mathpzc{ABCdef}
-\usepackage{eufrak}                             % \mathfrak{ABCdef}
+% \DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it} % \mathpzc{ABCdef}
+% \usepackage{eufrak}                             % \mathfrak{ABCdef}
 
-% change la numéroration des équations
-\numberwithin{equation}{section}
-
-% ----------------------------------------------------------------------
-% pour les unités
-%\usepackage[load=physical]{siunitx}
-\newcommand{\eV}{\mathrm{eV}}
-\newcommand{\s}{\mathrm{s}}
-\newcommand{\m}{\mathrm{m}}
-\newcommand{\g}{\mathrm{g}}
-\newcommand{\V}{\mathrm{V}}
-\newcommand{\sample}{\mathrm{s}}
-\newcommand{\Hz}{\mathrm{Hz}}
-\newcommand{\pc}{\mathrm{pc}}
-
-\newcommand{\nano}{\mathrm{n}}
-\newcommand{\micro}{\mathrm{\mu}}
-\newcommand{\milli}{\mathrm{m}}
-\newcommand{\centi}{\mathrm{c}}
-\newcommand{\kilo}{\mathrm{k}}
-\newcommand{\mega}{\mathrm{M}}
-\newcommand{\giga}{\mathrm{G}}
-\newcommand{\tera}{\mathrm{T}}
-\newcommand{\exa}{\mathrm{E}}
-\newcommand{\zetta}{\mathrm{Z}}
-
+% % change la numéroration des équations
+% \numberwithin{equation}{section}
 
 % ----------------------------------------------------------------------
 % packages pour les algorithmes
@@ -250,7 +226,9 @@
 \fancyhf{}
 \renewcommand{\sectionmark}[1]{\markboth{\thesection{} -- #1}{}}
 \makeatletter
-\fancyfoot[L]{\@author \space --- \schoolShortName{} }
+\fancyfoot[L]{\@author \space}
+\makeatother
+\fancyfoot[C]{ \schoolShortName{} }
 \makeatother 
 \fancyfoot[R]{\thepage}
 \renewcommand{\footrulewidth}{0.1pt}

@@ -1,4 +1,4 @@
-language: c
+language: swift
 sudo: true
 install:
 - export DEBIAN_FRONTEND=noninteractive

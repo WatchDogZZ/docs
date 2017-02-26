@@ -4,6 +4,10 @@
 
     \subsubsection{Web Service}
 
+Le serveur + Mongodb.
+Jasmine
+Pattern bridge pour la bdd. Des entités.
+
     \subsubsection{Application Android}
 Le développement du client mobile a suivi le schéma classique de conception d’une application Android. Pour rappel les objectifs initiaux majeurs de ce client étaient de pouvoir récupérer des données sur un web service, les exploiter, les afficher à l’utilisateur et enfin retourner des données au service en question. De façon général la solution Android s’organise en deux projets directeurs : les tests et l’implémentation de l’application.
 
@@ -72,8 +76,49 @@ La carte du maraudeur est une vue qui a été créée spécialement pour l’app
 
 La conception de l’application Android est très simple mais fait intervenir de nombreux éléments et services qui touchent énormément d’aspects de la programmation Android. Il existe sur les versions les plus récentes du Framework des fonctionnalités plus intéressantes et performantes toutefois le choix a été fait d’essayer de faire l’application la plus diffusable possible et donc de supporter un maximum d’appareil. Au début du développement, la version choisie était la 9 mais suite à des contraintes inévitables de développement nous avons dû monter à la version 12. Ceci reste correct d’autant plus que cela représente toujours plus de 99% de parts de marché.
 
-\subsection{Fonctionnalités introduites}
 
+\subsection{Technologies utilisées}
+
+    \subsubsection{Service Web}
+
+Pour la conception du Service Web, nous avions besoin d'une technologie disposant des caractéristiques suivantes :
+\begin{itemize}
+    \item Facile à utiliser ;
+    \item Disposant de nombreuses fonctionnalités ;
+    \item Rapide à l'exécution ;
+    \item Exécution légère sur serveur ;
+    \item Configuration rapide.
+\end{itemize}
+
+Toutes ces caractéristiques se retrouvent avec le framework NodeJS \cite{nodejs}. C'est un framework Javascript qui dispose de nombreuses librairies installables à l'aide du gestionnaire de modules NPM \cite{npmjs}. De plus, étant donné que l'un d'entre-nous avait déjà utilisé une telle technologie, cela nous permettait de démarrer plus rapidement.
+
+Le gestionnaire de modules NPM permet d'effectuer plusieurs choses.
+Premièrement c'est lui qui va permettre l'installation des modules nécéssaires au bon fonctionnement du Service. Ensuite, il va se charger de résoudre les dépendances entre modules. C'est à dire que si un module à besoin d'un autre module pour fonctionner, alors celui-ci sera installé automatiquement.
+Enfin, il est possible de disposer de plusieurs listes de modules à installer :
+\begin{description}
+    \item [Production] : comporte les modules nécéssaires au lancement du Service en mode production, donc sans les outils de debug ;
+    \item [Dev] : comporte les modules installés en production ainsi que des modules complémentaires utilisés lors de la conception du Service ou à des fins de debuggage.
+\end{description}
+
+Afin de mettre en place notre Service Web, nous avons utilisés plusieurs modules :
+\begin{description}
+    \item [Body-parser] : parser le contenu JSON des requêtes ;
+    \item [Express] : créer un serveur Http ou Https ;
+    \item [Jasmine] : effectuer des tests de spécifications ;
+    \item [Letsencrypt-express] : gérer les certificats Https du serveur ;
+    \item [Mongodb] : système de gestion de base de données ;
+    \item [Request] : effectuer des requêtes http ou https ;
+    \item [Winston] : faire des logs sur plusieurs niveaux (info, error, warning, debug).
+\end{description}
+
+    \subsubsection{Android}
+
+Le développement d'une application Android s'effectue généralement en utilisant le JAVA ainsi qu'Android Studio \cite{androidstudio}, permettant d'inclure les bibliothèques Android.
+Ici, nous avons donc utilisé ces technologies pour permettre une intégration parfaite sur le système Android.
+
+
+
+\subsection{Fonctionnalités introduites}
 
 \subsection{Méthodes de développement}
 

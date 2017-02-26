@@ -1,5 +1,7 @@
 language: swift
 sudo: true
+before_install:
+- sudo apt-get update -qq
 install:
 - port install biber texlive-full texlive-latex-extra texlive-lang-french biblatex texlive-fonts-extra texlive-fonts-recommended texlive-science texlive-bibtex-extra
 script:

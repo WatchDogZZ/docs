@@ -1,0 +1,84 @@
+\subsubsection{Fonctionnalités du Service Web}
+
+Requetes sur le web service
+Des URL sont mises à disposition par le service et permettent d'effectuer certaines tâches. Le passage de paramètres pour ces URL se fait directement dans le corps de la requête sous forme de JSON.
+Les réponses du service sont sous forme d'objet JSON dans le corps de la réponse. Les réponses contiennent les champs suivants :
+
+\lstset{language=Javascript}
+\begin{lstlisting}[caption=Corps de la réponse serveur]
+{
+    'status': 'ok' / 'fail', // L'état de la requête
+    'error': 'description' // Une description de l'erreur s'il y en a une
+}
+\end{lstlisting}
+
+
+La plupart des requêtes décrites nécéssitent que l'utilisateur soit authentifié.
+/login
+La première requête à effectuer sur le service doit s'effectuer avec la méthode POST sur cette URL. Pour se connecter, l'utilisateur doit envoyer les paramètres suivants: 
+\lstset{language=Javascript}
+\begin{lstlisting}[caption=Corps de la requête login]
+{
+    'name': 'username', // Le nom de l'utilisateur à connecter
+    'location': [1.0, 2.0, 3.0] // La position courrante de l'utilisateur
+}
+\end{lstlisting}
+
+/who
+Cette URL permet de récupérer en méthode GET une liste de noms de personnes actuellement en ligne. Le retour est sous la forme suivante:
+\lstset{language=Javascript}
+\begin{lstlisting}[caption=Corps de la requête who]
+{
+    'list': [
+        'userName1',
+        'userName2',
+        'userName3'
+    ]
+}
+\end{lstlisting}
+
+/where
+En utilisant la méthode GET, cette URL retourne la liste des utilisateurs ainsi que leur position. En utilisant la méthode POST et en passant les paramètres adéquats, l'utilisateur peut mettre à jour sa position.
+En méthode GET, le service renvoie une liste des utilisateurs connectés avec leurs positions :
+\lstset{language=Javascript}
+\begin{lstlisting}[caption=Corps de la requête where GET]
+{
+    'list': [
+        {
+            'name': 'username1',
+            'location': [1.0, 2.0, 3.0]
+        },
+        {
+            'name': 'username2',
+            'location': [1.0, 2.0, 3.0]
+        },
+        {
+            'name': 'username3',
+            'location': [1.0, 2.0, 3.0]
+        }
+    ]
+}
+\end{lstlisting}
+
+En utilisant la méthode POST, l'utilisateur met à jour sa position. Les paramètres à envoyer sont les suivants :
+
+\lstset{language=Javascript}
+\begin{lstlisting}[caption=Corps de la requête where POST]
+{
+    'name': 'username',
+    'location': [1.0, 2.0, 3.0]
+}
+\end{lstlisting}
+
+Si l'utilisateur n'est pas connecté au moment de mettre à jour sa position, le serveur va tenter de l'authentifier et sauvegarder sa position.
+Partie administration
+Les fonctionnalités minimales pour l'application d'administration sont :
+\begin{itemize}
+    \item visualisation des logs du serveur
+    \item visualisation du contenu de la base de donnée
+\end{itemize}
+
+Ensuite les fonctionnalités avancées pourront être :
+\begin{itemize}
+    \item gestion des utilisateurs
+\end{itemize}

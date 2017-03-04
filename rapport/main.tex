@@ -12,17 +12,17 @@
 
 \begin{document}
 
+% Pages sans header et footer au debut
+\pagestyle{plain}
 
 %%% TITLE PAGE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \renewcommand{\thepage}{}
-\thispagestyle{plain}
 
 \maketitle
 
 
 %%% THANKS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
-\thispagestyle{plain}
 \pagenumbering{roman}
 
 \ 
@@ -37,22 +37,20 @@
 
 %%% ABSRACT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
-\thispagestyle{plain}
 
 \section*{Résumé -- Abstract}
 \addcontentsline{toc}{section}{Résumé -- Abstract}
 	\input{|"model/resume.sh input/resume.tex"}
 
+
 %%% TABLE OF CONTENTS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
-\thispagestyle{plain}
 
 \tableofcontents{}
 \addcontentsline{toc}{section}{Table des matières}
 
 %%% LIST OF FIGURES AND TABLES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
-\thispagestyle{plain}
 
 \section*{Liste des figures, tableaux, algorithmes et extraits de code}
 \addcontentsline{toc}{section}{Liste des figures, tableaux, algorithmes et extraits de code}
@@ -63,7 +61,6 @@
 
 %%% GLOSSARY %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
-\thispagestyle{plain}
 
 \section*{Glossaire}
 \addcontentsline{toc}{section}{Glossaire}
@@ -72,8 +69,13 @@
 \newcounter{RomanCounter}
 \setcounter{RomanCounter}{\value{page}}
 
+
 %%% INTRODUCTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Pages avec header et footer
 \newpage
+\pagestyle{fancy}
+
+
 \renewcommand{\thepage}{\arabic{page}}
 \setcounter{page}{1}
 
@@ -89,6 +91,7 @@
 \newpage
 
 
+
 %%% TEXT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % ----------------------------------------------------------------------
@@ -97,7 +100,7 @@
 
 % Header avec le nom de la section et le numéro de sous-section
 \fancyhead[L]{\leftmark}
-\fancyhead[R]{\thesubsection}
+% \fancyhead[R]{\thesubsection}
 
 \input{part/etude}
 \input{part/conception}

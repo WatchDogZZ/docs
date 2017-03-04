@@ -4,11 +4,11 @@
 
 %FR
 
-Le travail présenté dans ce rapport concerne l'élaboration d'une solution visant à faciliter l’\textbf{orientation} des usagers au sein d'un bâtiment. Pour ceci, les utilisateurs disposent d'une \textbf{carte interactive} sur \textbf{plateforme mobile} se mettant à jour par des requêtes sur un \textbf{service web} afin d’afficher en temps réel la position des autres usagers ou bien des points d’intérêt. Ce projet s’inspire de la carte du \textbf{maraudeur} de l’univers Harry Potter et se découpe donc en deux parties distinctes : une partie service web, ainsi qu'une partie application mobile \textbf{Android}.
+Le travail présenté dans ce rapport concerne l'élaboration d'une solution visant à faciliter l’\textbf{orientation} des usagers au sein d'un bâtiment. Pour ceci, les utilisateurs disposent d'une \textbf{carte interactive} sur \textbf{plateforme mobile} se mettant à jour par des requêtes sur un \textbf{service web}, affichant temps réel la position des autres usagers ou de points d’intérêt. Ce projet s’inspire de la carte du \textbf{maraudeur} de l’univers Harry Potter et se découpe donc en deux parties distinctes : une partie service web, ainsi qu'une partie application mobile \textbf{Android}.
 
 La partie service web est réalisée en utilisant le module \textbf{Express} ajouté au framework de base \textbf{NodeJS}, permettant de réaliser simplement un serveur web. D'autres modules complémentaires viennent s'ajouter pour disposer de plus de fonctionnalités. Ce service permet de traiter des requêtes soumises par les clients mobiles, ainsi que de stocker des données relatives au bon fonctionnement de l'application.
 
-La seconde partie concernant l'application Android permet à un utilisateur d’afficher la carte interactive en se connectant au service web. Cette application effectue des requêtes visant à mettre à jour la position de l'utilisateur sur le service web. Ainsi l’application des autres utilisateurs est capable de récupérer ces \textbf{données ouvertes} et de les placer au sein de leur propre carte modélisant un bâtiment.
+La seconde partie concernant l'application Android permet à un utilisateur d’afficher la carte interactive et se de se connecter au service web. Cette application effectue des requêtes de mise à jour de la position de l'utilisateur sur le service web. Ainsi l’application des autres utilisateurs est capable de récupérer ces \textbf{données ouvertes} et de les placer au sein sa propre carte interactive.
 
 Les tests de cette solution ont pu montrer qu'il est possible d'afficher la position des utilisateurs sur une carte modélisée de l'ISIMA. Cependant, des erreurs de positionnement se retrouvent dans la position des utilisateurs, du fait de la mauvaise réception GPS par le mobile. Cette solution mise en place pourra faire l'objet d'améliorations futures telles que l'ajout d'itinéraires entre deux utilisateurs ou vers un point d'intérêt.
 
@@ -28,4 +28,3 @@ The tests on the solution demonstrated that it is possible to print the users' p
 
 %%
 Orient, interactive map, mobile platform, web service, marauder, Android, Express, NodeJS, open data.
-

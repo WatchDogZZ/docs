@@ -20,15 +20,15 @@ Enfin, il est possible de disposer de plusieurs listes de modules à installer :
 \end{description}
 
 Afin de mettre en place notre Service Web, nous avons utilisés plusieurs modules :
-\begin{description}
-    \item [Body-parser] : parser le contenu JSON des requêtes ;
-    \item [Express] : créer un serveur Http ou Https ;
-    \item [Jasmine] : effectuer des tests de spécifications ;
-    \item [Letsencrypt-express] : gérer les certificats Https du serveur ;
-    \item [Mongodb] : système de gestion de base de données ;
-    \item [Request] : effectuer des requêtes http ou https ;
-    \item [Winston] : faire des logs sur plusieurs niveaux (info, error, warning, debug).
-\end{description}
+\begin{itemize}
+    \item \textbf{Body-parser} : parser le contenu JSON des requêtes ;
+    \item \textbf{Express} : créer un serveur Http ou Https ;
+    \item \textbf{Jasmine} : effectuer des tests de spécifications ;
+    \item \textbf{Letsencrypt-express} : gérer les certificats Https du serveur ;
+    \item \textbf{Mongodb} : système de gestion de base de données ;
+    \item \textbf{Request} : effectuer des requêtes http ou https ;
+    \item \textbf{Winston} : faire des logs sur plusieurs niveaux (info, error, warning, debug).
+\end{itemize}
 
 Comme décrit dans la partie d'étude de ce projet, nous avons également besoin d'une base de données pour stocker certaines informations utilisateur.
 Pour ce faire, nous avons décidé d'utiliser une base MongoDB. Ce type de base de données est trés simple à mettre en place (et l'utilisation avec NodeJS se fait à l'aide d'un paquet) et se base sur un format de stockage texte BSON (JSON binaire). De ce fait, les opérations de stockage et écriture sont rapides et peut gourmandes en espace.

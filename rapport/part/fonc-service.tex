@@ -1,33 +1,36 @@
 \subsubsection{Fonctionnalités du Service Web}
 
-Requetes sur le web service
-Des URL sont mises à disposition par le service et permettent d'effectuer certaines tâches. Le passage de paramètres pour ces URL se fait directement dans le corps de la requête sous forme de JSON.
-Les réponses du service sont sous forme d'objet JSON dans le corps de la réponse. Les réponses contiennent les champs suivants :
+La principale fonctionnalités du Service Web est de répondre à des requêtes. Des URL sont mises à disposition par le service et permettent d'effectuer certaines tâches. Le passage de paramètres pour ces URL se fait directement dans le corps de la requête sous forme de JSON.
+Les réponses du service sont également sous forme d'objet JSON dans le corps de la réponse.
+Le paquet \textbf{Body-parser} utilisé dans le serveur permet d'effectuer le parsing automatique du corps de la requête pour le transformer en JSON, utilisable dans le code.
 
+Les réponses contiennent les champs suivants :
 \lstset{language=Javascript}
-\begin{lstlisting}[caption=Corps de la réponse serveur]
+\begin{lstlisting}[caption=Corps général de la réponse serveur]
 {
     'status': 'ok' / 'fail', // L'état de la requête
-    'error': 'description' // Une description de l'erreur s'il y en a une
+    'error': 'description' // Une description de l'erreur s'il y en a une, sinon ce champ est absent
 }
 \end{lstlisting}
 
-
-La plupart des requêtes décrites nécéssitent que l'utilisateur soit authentifié.
-/login
-La première requête à effectuer sur le service doit s'effectuer avec la méthode POST sur cette URL. Pour se connecter, l'utilisateur doit envoyer les paramètres suivants: 
+La plupart des requêtes décrites nécéssitent que l'utilisateur soit authentifié. Pour ce faire, il doit effectuer une première requête sur l'URL \textbf{/login} en utilisant la méthode \textbf{POST}. Les paramètres suivants sont attendus :
+Pour se connecter, l'utilisateur doit envoyer les paramètres suivants: 
 \lstset{language=Javascript}
-\begin{lstlisting}[caption=Corps de la requête login]
+\begin{lstlisting}[caption=Corps de la requête POST /login, label=postlogin]
 {
     'name': 'username', // Le nom de l'utilisateur à connecter
-    'location': [1.0, 2.0, 3.0] // La position courrante de l'utilisateur
+    'token': 'azertyuiop12345', // Le token de connexion fourni par Google
+    'location': [1.0, 2.0, 3.0], // La position courrante de l'utilisateur
+    'photo': 'http://photo/user1', // L'URL vers la photo de l'utilisateur
+    'email': 'mail@example.com' // L'adresse mail de l'utilisateur
 }
 \end{lstlisting}
 
-/who
-Cette URL permet de récupérer en méthode GET une liste de noms de personnes actuellement en ligne. Le retour est sous la forme suivante:
+Les champs \textbf{photo} et \textbf{email} sont optionnels. S'ils ne sont pas renseignés lors de la connexion, des données par défaut seront utilisées.
+
+Le service est capable de retourner la liste des personnes connectée sur le Service en effectuant une requête de type \textbf{GET} sur l'URL \textbf{/who}. Le résultat est transmis sous la forme suivante :
 \lstset{language=Javascript}
-\begin{lstlisting}[caption=Corps de la requête who]
+\begin{lstlisting}[caption=Corps de la réponse GET /who]
 {
     'list': [
         'userName1',
@@ -37,48 +40,84 @@ Cette URL permet de récupérer en méthode GET une liste de noms de personnes a
 }
 \end{lstlisting}
 
-/where
-En utilisant la méthode GET, cette URL retourne la liste des utilisateurs ainsi que leur position. En utilisant la méthode POST et en passant les paramètres adéquats, l'utilisateur peut mettre à jour sa position.
-En méthode GET, le service renvoie une liste des utilisateurs connectés avec leurs positions :
+Si l'on souhaite disposer d'informations supplémentaires en plus du nom des personnes connectées (url de photo, position, adresse mail), il est possible d'effectuer une requête \textbf{GET} sur l'URL \textbf{/where}.
 \lstset{language=Javascript}
-\begin{lstlisting}[caption=Corps de la requête where GET]
+\begin{lstlisting}[caption=Corps de la réponse GET /where]
 {
     'list': [
         {
             'name': 'username1',
-            'location': [1.0, 2.0, 3.0]
+            'location': [1.0, 2.0, 3.0],
+            'photo': 'http://photo/user1',
+            'email': 'mail1@example.com'
         },
         {
             'name': 'username2',
-            'location': [1.0, 2.0, 3.0]
+            'location': [4.0, 5.0, 6.0],
+            'photo': 'http://photo/user2',
+            'email': 'mail2@example.com'
         },
         {
             'name': 'username3',
-            'location': [1.0, 2.0, 3.0]
+            'location': [7.0, 8.0, 9.0],
+            'photo': 'http://photo/user2',
+            'email': 'mail3@example.com'
         }
     ]
 }
 \end{lstlisting}
 
-En utilisant la méthode POST, l'utilisateur met à jour sa position. Les paramètres à envoyer sont les suivants :
-
+Pour mettre à jour sa position sur le Service, l'utilisateur effectue une requête sur cette même URL \textbf{/where}, mais cette fois avec la méthode \textbf{POST}, et en spécifiant les champs suivants dans le corps de sa requête :
 \lstset{language=Javascript}
-\begin{lstlisting}[caption=Corps de la requête where POST]
+\begin{lstlisting}[caption=Corps de la requête POST /where]
 {
-    'name': 'username',
+    'token': '1A2Z3E4R5T6Y7U8I9O0P',
     'location': [1.0, 2.0, 3.0]
 }
 \end{lstlisting}
 
-Si l'utilisateur n'est pas connecté au moment de mettre à jour sa position, le serveur va tenter de l'authentifier et sauvegarder sa position.
-Partie administration
-Les fonctionnalités minimales pour l'application d'administration sont :
+Cette requête peut également permettre de connecter un utilisateur directement si celui-ci ne l'est pas déjà. En effet, puisque son token de connexion est fourni (et peut permettre de l'identifier de manière unique), il est possible de vérifier s'il est connecté (auquel cas, sa position est mise à jour simplement), sinon, nous allons pouvoir le connecter en utilisant les informations qu'in va nous fournir. Il est possible de fournir les mêmes informations que dans le code~\ref{postlogin}. Ainsi l'utilisateur sera créé avec les informations qu'il a soumises et sa position initiale est enregistrée. Il peut ensuite effectuer de simples requêtes POST sur l'URL /where pour mettre à jour sa position.
+
+Puisque le service répond à des requêtes utilisateur, il est possible que certaines de ces requêtes ne fonctionnent pas, pour plusieurs raisons :
 \begin{itemize}
-    \item visualisation des logs du serveur
-    \item visualisation du contenu de la base de donnée
+    \item Le service connaît une erreur interne (configuration, crash) ;
+    \item Le service ne parvient pas à communiquer avec la base de données ;
+    \item La requête utilisateur ne fourni pas les informations suffisantes au traitement de sa requête.
 \end{itemize}
 
-Ensuite les fonctionnalités avancées pourront être :
+Pour gérer cela, des codes d'erreur sont retournés à l'utilisateur.
 \begin{itemize}
-    \item gestion des utilisateurs
+    \item Erreur interne ou paramètres insuffisants : erreur 400 ;
+    \item Erreur de communication avec la base de données : erreur 503.
 \end{itemize}
+
+Ces erreurs peuvent ainsi être gérées par le client. Il peut ainsi choisir soit de réitérer sa requête (dans le cas d'une erreur 503 par exemple), soit d'informer l'utilisateur que le service est indisponible ou que sa requête n'est pas valable (cas d'une erreur 400).
+
+\textbf{A REVOIR}
+
+A chaque fois qu'une erreur survient sur le serveur, en plus d'être notifiée au client, elle est directement sauvegardée dans un système de log (introduit par le paquet \textbf{Winston}).
+Plusieurs fichiers sont mis en place :
+\begin{itemize}
+    \item \textbf{server-error.log}
+    \item \textbf{server-info.log}
+    \item \textbf{server-debug.log}
+\end{itemize}
+
+Ces fichiers contiennent des logs qui sont hiérarchisés selon leur importance :
+\begin{enumerate}
+    \item Error
+    \item Warn
+    \item Info
+    \item Verbose
+    \item Debug
+    \item Silly
+\end{enumerate}
+
+Chaque log comporte les données relatives à son importance et a celles qui sont au dessus de lui (info possède info, warn et error).
+
+Debug aura tout et permet de vérifier comment se comporte le serveur si on ajoute de nouvelles fonctionnalités par exemple.
+
+Il y a du https pour que ce soit secure. (pourquoi, comment ca marche, quel paquet).
+
+On a un ddns (regarder si pas déja abordé, dire pourquoi, comment ca fonctionne).
+

@@ -78,6 +78,8 @@ Pour mettre à jour sa position sur le Service, l'utilisateur effectue une requ�
 
 Cette requête peut également permettre de connecter un utilisateur directement si celui-ci ne l'est pas déjà. En effet, puisque son token de connexion est fourni (et peut permettre de l'identifier de manière unique), il est possible de vérifier s'il est connecté (auquel cas, sa position est mise à jour simplement), sinon, nous allons pouvoir le connecter en utilisant les informations qu'in va nous fournir. Il est possible de fournir les mêmes informations que dans le code~\ref{postlogin}. Ainsi l'utilisateur sera créé avec les informations qu'il a soumises et sa position initiale est enregistrée. Il peut ensuite effectuer de simples requêtes POST sur l'URL /where pour mettre à jour sa position.
 
+\textbf{DIAGRAMME SEQUENCE POUR LES REQUETES}
+
 Puisque le service répond à des requêtes utilisateur, il est possible que certaines de ces requêtes ne fonctionnent pas, pour plusieurs raisons :
 \begin{itemize}
     \item Le service connaît une erreur interne (configuration, crash) ;
@@ -98,9 +100,9 @@ Ces erreurs peuvent ainsi être gérées par le client. Il peut ainsi choisir so
 A chaque fois qu'une erreur survient sur le serveur, en plus d'être notifiée au client, elle est directement sauvegardée dans un système de log (introduit par le paquet \textbf{Winston}).
 Plusieurs fichiers sont mis en place :
 \begin{itemize}
-    \item \textbf{server-error.log}
-    \item \textbf{server-info.log}
-    \item \textbf{server-debug.log}
+    \item \textbf{server-error.log} : erreurs critiques ou de requetes, on a egalement quelques données supplémentaires : ip, code, header, url, parametres, 
+    \item \textbf{server-info.log} : démarage, port utilisé
+    \item \textbf{server-debug.log} : nouvelles fonctionnalités, ou fonctionnalités qui ne marchent pas
 \end{itemize}
 
 Ces fichiers contiennent des logs qui sont hiérarchisés selon leur importance :

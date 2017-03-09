@@ -10,7 +10,7 @@ La partie service web est réalisée en utilisant le module \textbf{Express} ajo
 
 La seconde partie concernant l'application Android permet à un utilisateur d’afficher la carte interactive et se de se connecter au service web. Cette application effectue des requêtes de mise à jour de la position de l'utilisateur sur le service web. Ainsi l’application des autres utilisateurs est capable de récupérer ces \textbf{données ouvertes} et de les placer au sein sa propre carte interactive.
 
-Les tests de cette solution ont pu montrer qu'il est possible d'afficher la position des utilisateurs sur une carte modélisée de l'ISIMA. Cependant, des erreurs de positionnement se retrouvent dans la position des utilisateurs, du fait de la mauvaise réception GPS par le mobile. Cette solution mise en place pourra faire l'objet d'améliorations futures telles que l'ajout d'itinéraires entre deux utilisateurs ou vers un point d'intérêt.
+Les tests de cette solution ont pu montrer qu'il est possible d'afficher la position des utilisateurs sur une carte modélisée de l'ISIMA. Cependant, des erreurs de positionnement se retrouvent dans la position des utilisateurs, du fait de la mauvaise réception GPS par le mobile. Cette solution mise en place pourra faire l'objet d'améliorations futures telles que l'ajout d'itinéraires entre deux utilisateurs ou vers un point d'intérêt. L'aspect modulaire de cette solution offre de multiples possibilités d'améliorations dans le futur.
 
 %%
 Orientation, carte interactive, plateforme mobile, service web, marauder, Android, Express, NodeJS, données ouvertes.
@@ -18,13 +18,16 @@ Orientation, carte interactive, plateforme mobile, service web, marauder, Androi
 
 %EN
 
-The work introduced in this report is about a solution to make it easier for people in a building to \textbf{orient} themselves. For that, users will be able to consult an \textbf{interactive map} on a \textbf{mobile plarform} which is updating by making requests on a \textbf{web service} to be able to print in real time other users' positions or interest points. This project is inspired by Harry Potter's \textbf{marauder}'s map and is splitted into two parts : a web service part, and an \textbf{Android} mobile application.
+The work introduced in this report is about a solution to make it easier for people in buildings to \textbf{orient} themselves. For that, users will be able to consult an \textbf{interactive map} displayed on a \textbf{mobile plarform}. This map is constantly updating itself by making requests on a \textbf{web service}, allowing to view in real time other users' positions or interest points. This project is inspired by Harry Potter's \textbf{marauder}'s map and is splitted into two parts : a web service part, and an \textbf{Android} mobile application.
 
-The web service part is realized using the \textbf{Express} module added in \textbf{NodeJS}, allowing to easily create a web server. Other additional modules will be added to get more features. This service allow to process requests send by mobile clients as log as storing data relative to proper application working.
+The web service part is realized using the \textbf{Express} module added in the \textbf{NodeJS} framework, allowing to easily create a web server. Other additional modules will also be added to get more features. This service allows to process requests send by mobile clients as log as storing data relative for proper application running and updating.
 
-The second part concerns the Android application and allows for a user to print the interactive map by connecting on the web service. This app makes requests to update the user's position on the web service. Thus, other users are able to recover these \textbf{open data} and place them on their own map modeling the building.
+The second part concerns the Android application and allows for a user to visualize the interactive map by connecting on the web service. This app makes requests to update the user's position on the web service. Thus, other users are able to recover these \textbf{open data} and place them on their own map modeling the building.
 
-The tests on the solution demonstrated that it is possible to print the users' positions on a modeled map of ISIMA. However positioning errors are still present when locating users, due to bad GPS reception in the building. The build solution could be enhanced by adding a feature to visualize route between two user or to an interest point.
+The tests on the solution demonstrated that it is possible to print the users' positions on a modeled map of ISIMA. However positioning errors are still present when locating users, due to bad GPS reception in the building. The build solution could be enhanced by adding a feature to visualize route between two user or to an interest point. The modular aspect of this solution offers several enhancement opportunities in the future.
 
 %%
 Orient, interactive map, mobile platform, web service, marauder, Android, Express, NodeJS, open data.
+
+
+

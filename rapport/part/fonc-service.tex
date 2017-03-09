@@ -1,10 +1,45 @@
-\subsubsection{Fonctionnalités du Service Web}
+Dans cette partie, nous allons traiter des différentes fonctionnalités présentées par la solution. Nous aborderons tant le point de vue des applications utilisatrices de ce service, que le point de vue de la gestion du service.
+
+\subsubsection{Concepts introduits}
+
+Avant de présenter les diverses fonctionnalités, certains mécanismes visant à la qualité du service vont être présentés.
+
+Pour commencer, un service de \underline{DynDNS} est utilisé. Ceci permettra par la suite à n'importe quelle application cliente d'effectuer ses requêtes sur une URL texte plutôt que sur une adresse IP. De plus, ces types de services permettent non seulement aux utilisateurs de s'en rappeller plus facilement (s'ils souhaitent effectuer des requêtes en ligne de commande), mais également de résoudre le problème lié aux adresses IP dynamiques. Ainsi, nous pourrons toujours accéder au service à l'aide de l'URL \textbf{https://watchdogzz.ddns.net}.
+
+Comme nous pouvons le constater dans l'URL fournie précédement, nous utilisons le protocole \textbf{\underline{https}}. Comme l'indique son dernier 's', celui est est sécurisé par une couche de chiffrement \underline{SSL}. Cette couche de chiffrement va s'occuper de \underline{chiffrer} les données fournies dans la requête de l'utilisateur, qui ne seront donc pas visible si une personne parvient à intercepter la requête.
+Pour introduire ce concept, le paquet \textbf{Letsencrypt-express} est utilisé et vient compléter le serveur \textbf{Express}. Ce paquet va en fait utiliser le service en ligne Letsencrypt~\cite{letsencrypt}, qui va se charger de gérer automatiquement les certificats relatifs à l'authentification du serveur ainsi que l'envoie des informations d'authentification et de chiffrement au client.
+
+Un dernier mécanisme introduit dans le service est celui du \textbf{logger}. Ce mécanisme consiste à enregistrer dans des fichiers (généralement dits "de log") certaines actions qui s'effectuent sur le service. Nous pouvons par exemple décider d'enregistrer des informations de contrôle relative au démarrage du service, des erreurs système, ou encore des informations de \underline{debug} lors de l'ajout de nouvelles fonctionnalités.
+
+Ce qui va nous intérésser principalement avec le logger, c'est la possibilité de pouvoir analyser les requêtes renvoyant des erreurs aux utilisateurs.
+De ce fait, si nous sauvegardons suffisament d'informations lorsqu'une requête échoue, nous serons capable de déterminer la cause de l'erreur, et ainsi éventuellement corriger un comportement menant à des erreurs involontaires.
+
+Le logger est mis en place à l'aide du module \textbf{Winston}, et va permettre de gérer les fichiers de log suivants :
+\begin{itemize}
+    \item \textbf{server-error.log} : erreurs critiques du serveur, de la base de données erreurs de requêtes ;
+    \item \textbf{server-info.log} : informations de contrôle sur le serveur ;
+    \item \textbf{server-debug.log} : informations utilisées lors du développement de nouvelles fonctionnalités.
+\end{itemize}
+
+Il faut noter que lorsque l'on souhaite logger une information (normale ou une erreur), il faut indiquer son niveau de sévérité. Avec le module ici utilisé, les niveaux sont les suivants (un niveau plus bas implique une importance plus grande) :
+\begin{enumerate}
+    \item \textbf{Error}
+    \item Warn
+    \item \textbf{Info}
+    \item Verbose
+    \item \textbf{Debug}
+    \item Silly
+\end{enumerate}
+
+Les fichiers de log décrits précédement correspondent chacun à un niveau de sévérité. Ainsi, nous aurons dans le fichier \textbf{server-error.log} uniquement les erreurs, ce qui permet un traitement facile de celles-ci ; dans le fichier \textbf{server-info.log}, nous disposerons d'informations de contrôle et des erreurs ; et enfin dans le fichier \textbf{server-debug.log}, nous disposerons des erreurs, informations de contrôle et informations de debug.
+
+\subsubsection{Utilisation du service}
 
 La principale fonctionnalités du Service Web est de répondre à des requêtes. Des URL sont mises à disposition par le service et permettent d'effectuer certaines tâches. Le passage de paramètres pour ces URL se fait directement dans le corps de la requête sous forme de JSON.
 Les réponses du service sont également sous forme d'objet JSON dans le corps de la réponse.
 Le paquet \textbf{Body-parser} utilisé dans le serveur permet d'effectuer le parsing automatique du corps de la requête pour le transformer en JSON, utilisable dans le code.
 
-Les réponses contiennent les champs suivants :
+En cas d'erreurs, les réponses contiennent les champs suivants :
 \lstset{language=Javascript}
 \begin{lstlisting}[caption=Corps général de la réponse serveur]
 {
@@ -13,8 +48,7 @@ Les réponses contiennent les champs suivants :
 }
 \end{lstlisting}
 
-La plupart des requêtes décrites nécéssitent que l'utilisateur soit authentifié. Pour ce faire, il doit effectuer une première requête sur l'URL \textbf{/login} en utilisant la méthode \textbf{POST}. Les paramètres suivants sont attendus :
-Pour se connecter, l'utilisateur doit envoyer les paramètres suivants: 
+La plupart des requêtes décrites nécéssitent que l'utilisateur soit authentifié. Pour ce faire, il doit effectuer une première requête sur l'URL \textbf{/login} en utilisant la méthode \textbf{POST}. Les paramètres suivants sont attendus par le service :
 \lstset{language=Javascript}
 \begin{lstlisting}[caption=Corps de la requête POST /login, label=postlogin]
 {
@@ -26,7 +60,7 @@ Pour se connecter, l'utilisateur doit envoyer les paramètres suivants:
 }
 \end{lstlisting}
 
-Les champs \textbf{photo} et \textbf{email} sont optionnels. S'ils ne sont pas renseignés lors de la connexion, des données par défaut seront utilisées.
+Notons que les champs \textbf{photo} et \textbf{email} sont optionnels. S'ils ne sont pas renseignés lors de la connexion, des données par défaut seront utilisées. Ce données pourraient par exemple venir à manquer si l'utilisateur ne souhaite pas donner son adresse mail, ou si par exemple il ne possède pas de photo (auquel cas une photo par défaut doit effectivement être utilisée par le client).
 
 Le service est capable de retourner la liste des personnes connectée sur le Service en effectuant une requête de type \textbf{GET} sur l'URL \textbf{/who}. Le résultat est transmis sous la forme suivante :
 \lstset{language=Javascript}
@@ -78,48 +112,27 @@ Pour mettre à jour sa position sur le Service, l'utilisateur effectue une requ�
 
 Cette requête peut également permettre de connecter un utilisateur directement si celui-ci ne l'est pas déjà. En effet, puisque son token de connexion est fourni (et peut permettre de l'identifier de manière unique), il est possible de vérifier s'il est connecté (auquel cas, sa position est mise à jour simplement), sinon, nous allons pouvoir le connecter en utilisant les informations qu'in va nous fournir. Il est possible de fournir les mêmes informations que dans le code~\ref{postlogin}. Ainsi l'utilisateur sera créé avec les informations qu'il a soumises et sa position initiale est enregistrée. Il peut ensuite effectuer de simples requêtes POST sur l'URL /where pour mettre à jour sa position.
 
-\textbf{DIAGRAMME SEQUENCE POUR LES REQUETES}
-
-Puisque le service répond à des requêtes utilisateur, il est possible que certaines de ces requêtes ne fonctionnent pas, pour plusieurs raisons :
+Ces requêtes, lorsque effectuées correctement sur le service, ne retournent pas d'erreurs. Cependant, il est possible que dans certains cas, elles n'aient pas fonctionnées sur le serveur, pour plusieurs raisons :
 \begin{itemize}
     \item Le service connaît une erreur interne (configuration, crash) ;
     \item Le service ne parvient pas à communiquer avec la base de données ;
     \item La requête utilisateur ne fourni pas les informations suffisantes au traitement de sa requête.
 \end{itemize}
 
-Pour gérer cela, des codes d'erreur sont retournés à l'utilisateur.
+Pour indiquer cela à l'utilisateur, le code de retour de la requête est choisi parmis les suivants :
 \begin{itemize}
-    \item Erreur interne ou paramètres insuffisants : erreur 400 ;
+    \item Pas d'erreur : code 200 ;
+    \item Erreur interne ou paramètres insuffisants pour la requête : erreur 400 ;
     \item Erreur de communication avec la base de données : erreur 503.
 \end{itemize}
 
-Ces erreurs peuvent ainsi être gérées par le client. Il peut ainsi choisir soit de réitérer sa requête (dans le cas d'une erreur 503 par exemple), soit d'informer l'utilisateur que le service est indisponible ou que sa requête n'est pas valable (cas d'une erreur 400).
+Ces erreurs peuvent par la suite être gérées par le client. Il peut ainsi choisir soit de réitérer sa requête (dans le cas d'une erreur 503 par exemple), soit d'informer l'utilisateur que le service est indisponible ou que sa requête n'est pas valable (cas d'une erreur 400).
 
-\textbf{A REVOIR}
+Le diagramme suivant (figure~\ref{servicereq} permet de mieux apprécier l'enchaînement des requêtes ainsi que leur cheminement sur le serveur. Pour des raisons de simplification, nous représenterons l'utilisateur comme une application capable d'utiliser correctement le service ainsi que toutes ses fonctionnalités.
 
-A chaque fois qu'une erreur survient sur le serveur, en plus d'être notifiée au client, elle est directement sauvegardée dans un système de log (introduit par le paquet \textbf{Winston}).
-Plusieurs fichiers sont mis en place :
-\begin{itemize}
-    \item \textbf{server-error.log} : erreurs critiques ou de requetes, on a egalement quelques données supplémentaires : ip, code, header, url, parametres, 
-    \item \textbf{server-info.log} : démarage, port utilisé
-    \item \textbf{server-debug.log} : nouvelles fonctionnalités, ou fonctionnalités qui ne marchent pas
-\end{itemize}
-
-Ces fichiers contiennent des logs qui sont hiérarchisés selon leur importance :
-\begin{enumerate}
-    \item Error
-    \item Warn
-    \item Info
-    \item Verbose
-    \item Debug
-    \item Silly
-\end{enumerate}
-
-Chaque log comporte les données relatives à son importance et a celles qui sont au dessus de lui (info possède info, warn et error).
-
-Debug aura tout et permet de vérifier comment se comporte le serveur si on ajoute de nouvelles fonctionnalités par exemple.
-
-Il y a du https pour que ce soit secure. (pourquoi, comment ca marche, quel paquet).
-
-On a un ddns (regarder si pas déja abordé, dire pourquoi, comment ca fonctionne).
-
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{./img/server-requests.png}
+    \caption{Diagramme de séquence des requêtes sur le service}
+    \label{servicereq}
+\end{figure}

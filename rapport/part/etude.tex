@@ -44,7 +44,7 @@ Le second type dit données mesurées représente toutes les informations que le
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{./img/googlemaps.png}
-    \caption{Suivi des déplacement sur Google Maps}
+    \caption{Suivi des déplacements sur Google Maps}
     \label{google-maps}
 \end{figure}
 
@@ -95,86 +95,130 @@ Le point étant fait sur les applications existant nous allons maintenant défin
 
 Etant donné que peu de solutions sont disponibles sur le marché, nous avons choisi de partir de zéro et créer notre solution. Cela nous permet également d'avoir un contrôle total sur les données du projet, les diverses implémentations de fonctionnalités ainsi que la manière dont nous souhaitons utiliser notre solution.
 
-La solution la plus évidente en termes de support de visualisation pour les utilisateurs et de leur proposer une application qu'ils pourront installer sur leur smartphone, pc, montre connectée ou encore tablette.
-Afin de rendre cette application dynamique et de proposer un suivi de position d'utilisateurs en temps réel, il est convenu d'utiliser un Service Web. Ce service permettra également de stocker des informations utiles aux utilisateurs, ce qui permettra également d'alléger le volume de données stockées sur leurs terminaux.
+La solution la plus évidente en termes de support de visualisation pour les utilisateurs est de leur proposer une application qu'ils pourront installer sur leur smartphone, PC, montre connectée ou encore tablette.
+
+Afin de rendre cette application dynamique et de proposer un suivi de position d'utilisateurs en temps réel, il est convenu d'utiliser un service web. Ce service devra également pouvoir stocker des informations utiles aux utilisateurs, ce qui permettra également d'alléger le volume de données stockées sur leurs terminaux.
+
+Nous allons donc détailler dans la suite les principaux éléments que nous voulons produire pour donner une vision de l’objectif final que nous souhaitons atteindre.
 
 \subsubsection{Architecture}
 
-L'architecture choisie pour organiser notre solution est la suivante.
+Tout d’abord nous souhaitons fournir un service à un groupe de personnes plutôt important : nous avons donc besoin d’une architecture qui puisse gérer plusieurs utilisateurs sur une même application. L'architecture choisie pour organiser notre solution en est une de type client-serveur comme elle peut être décrite sur la figure \ref{architecture}.
 
 \begin{figure}[H]
     \centering
     \includegraphics[height=10cm]{../infrastructure.png}
-    \caption{Architecture}
+    \caption{Architecture générale de la solution}
     \label{architecture}
 \end{figure}
 
-Nous pouvons observer dans la figure \ref{architecture} que celle-ci ressemble à une architecture client/serveur, ce qui est le but recherché.
+Nous pouvons donc observer sur cette figure un schéma tout à fait classique de système client-serveur qui nous permettra de dissocier le développement du service du développement des différentes interfaces utilisateur. Un intérêt majeur est de pouvoir faire évoluer un des clients sans que cela n’impacte le cours de vie des autres projets reposant sur le service et le service lui-même.
+
+Pour ce faire nous allons donc développer un service web de type REST pour que différent client, illustré dans notre projet par un client Android, puissent l’utiliser avec un minimum de contraintes. Les évolutions du serveur et du client n’auront donc pas d’impact l’un sur l’autre sauf bien sûr sur les modifications de l’interface. Si jamais un problème se déclarait dans la conception d’une partie nous comptons sur notre système d’intégration continue pour jouer le rôle de garde-fou en contrôlant le code versionné.
+
+Nous allons maintenant aborder en détails les objectifs fixés pour chacun de ces éléments.
 
 \subsubsection{Partie serveur}
-La partie centrale est celle du Web Service. Le serveur doit être capable de répondre aux différentes connexions et requêtes des utilisateurs (se connectant sur l'application Android ou tout autre...). Le serveur sera un Service Web de type \textbf{REST} disposant pour fonctionnalités minimales :
+
+Le serveur est le point reliant tous les clients et possèdent différents services mais la partie centrale est celle du service web. Le serveur doit être capable de répondre aux différentes connexions et requêtes des utilisateurs se connectant depuis l'application Android ou depuis tout autre client. Un service web n’est autre qu’un ensemble de services distants disponibles sur internet, ils peuvent permettre de récupérer des données ou bien d’effectuer des traitements spécifiques. L’intérêt est que le mode de communication avec un service web se veut standard ce qui permet à des utilisateurs de topologie différentes de le consommer.
+
+Le serveur sera un service web de type \textbf{REST} c’est-à-dire qu’il sera capable de répondre à des requêtes se basant sur les protocoles web comme http dans un format standardisé, le JSON.
+Le serveur disposera des fonctionnalités minimales suivantes :
+
 \begin{itemize}
-    \item de s'authentifier ;
-    \item d'obtenir les positions d'autres personnes connectées sur l'application ;
-    \item obtenir la liste des personnes connectées ;
-    \item envoyer la position actuelle de l'utilisateur connecté ;
-    \item se déconnecter.
+    \item un système d’authentification afin de valider l’identité des utilisateurs ;
+    \item un service de collection des positions des utilisateurs ;
+    \item un service d’obtention de la liste des personnes connectées ;
+    \item un service de récupération de la position actuelle de l'utilisateur connecté ;
+    \item un système de connexion/déconnexion des utilisateurs.
 \end{itemize}
 
-Ces fonctionnalités seront essentielles pour le fonctionnement de base de l'ensemble de la solution. Par la suite, des fonctionnalités supplémentaires pourront être ajoutées dans l'application, par exemple :
+Ces fonctionnalités seront essentielles pour le fonctionnement de base de l'ensemble de la solution. Par la suite, des fonctionnalités supplémentaires pourront être ajoutées dans l'application, comme par exemple :
+
 \begin{itemize}
-    \item historique des positions ;
-    \item calcul d'itinéraire entre 2 positions dans le bâtiment ;
-    \item partage de position (par sms, mail, ...).
+    \item un historique des positions ;
+    \item un service de calcul d'itinéraire entre deux positions dans le bâtiment ;
+    \item un service de partage de position (par sms, mail, etc.).
 \end{itemize}
 
-Pour stocker les diverses informations utilisateur (login, position), nous avons convenu d'utiliser une base de données qui s'interfacera directement avec le Service Web.
+Pour stocker les diverses informations utilisateur (login, position), nous avons convenu d'utiliser une base de données qui s'interfacera directement avec le service web.
+
+L’ensemble devra donc être disponible sur une machine atteignable sur internet et devra avoir une haute disponibilité. C’est pourquoi il n’est pas concevable de le déployer sur un ordinateur personnel. Deux solutions s’offrent donc à nous :
+
+\begin{itemize}
+    \item l’utilisation d’une machine dédiée autogérée ;
+    \item la location d’un IaaS ou CaaS (Infrastructure/Container as a Service).
+\end{itemize}
+
+La première solution consiste à utiliser une machine personnelle connectée en permanence à internet depuis notre domicile et la seconde à louer un service chez un fournisseur comme Amazon ou Google qui pourrait soit être une machine virtuelle Linux soit un conteneur d’applications. Le format aaS est à privilégier pour des raisons de performances et de disponibilité mais nous verrons que des soucis de budget nous ont conduit à opter pour la première solution.
+
+Nous avons fait le tour de ce à quoi devra ressembler le serveur, abordons maintenant la question du client.
 
 \subsubsection{Partie Android}
-Une seconde partie comporte une application Android (qui pourrait être déclinée pour iOS et Windows Phone). Cette application permettra :
+
+La seconde partie de ce projet concerne le client qui sera une application Android mais qui pourrait tout aussi bien être déclinée pour iOS et Windows Phone. Cette application sera donc une interface entre l’utilisateur et le serveur et devra lui permettre de profiter des fonctionnalités minimales attendues par rapport à la carte du maraudeur de Harry Potter.
+
+Les fonctionnalités majeures seront donc :
+
 \begin{itemize}
-    \item de s'inscrire
-    \item de se connecter
-    \item envoyer sa position gps au service web
-    \item recevoir les positions gps d'autres utilisateurs connectés
-    \item visualiser en temps réel sur une carte les positions
+    \item l’inscription ;
+    \item la connexion-déconnexion ;
+    \item l’envoi de sa position gps au service web ;
+    \item la réception des positions gps d'autres utilisateurs connectés ;
+    \item la visualisation en temps réel sur une carte des positions.
 \end{itemize}
 
-L'application pourra évoluer et proposer :
+Ces fonctionnalités forment le noyau dur indispensable au niveau minimal de qualité de notre application. Des améliorations sont envisageables pour augmenter le niveau de service, ainsi l'application pourra évoluer et proposer :
+
 \begin{itemize}
-    \item la carte en version 3D
-    \item la carte en version VR
-    \item l'ajout d'informations sur la carte (lieu / point de rdv)
+    \item une carte en version 3D ;
+    \item une carte en version réalité virtuelle ;
+    \item le partage de position ;
+    \item l'ajout d'informations sur la carte (lieu / point de rdv).
 \end{itemize}
 
-Le choix d'une application Android se justifie par :
-\begin{itemize}
-    \item la communauté Android est active
-    \item la quantité de terminaux
-    \item l'un de nous a des connaissances en Android
-\end{itemize}
-La mise à jour des positions est soit faite par l'application qui effectue une requête sur le serveur, soit c'est le serveur qui renvoie les positions des utilisateurs ayant bougé d'un delta suffisant qui permet sa mise à jour chez les utilisateurs. Les frameworks 3.X+ seront supportés pour fonctionner sur un maximum de terminaux.
+La mise à jour des informations sur le client sera initiée par l’application qui effectuera une requête sur le serveur. Le serveur renverra les positions des utilisateurs connectés qui permet sa mise à jour chez les utilisateurs.
 
+Le choix d'une application Android se justifie par plusieurs facteurs. Tout d’abord il existe une communauté très active et de nombreux documents autour de l’Android. Ceci est dû en grande partie que le marché est majoritairement composé de terminaux Android, il y a donc plus de travail. Enfin le langage Android se basant sur du Java il nous est plus accessible de partir sur cette plateforme plutôt que sur du iOS ou même du Windows Phone, de plus nous avons quelques notions en Android.
+
+Les versions du framework Android qui seront supportées seront les version 11 et ultérieures pour fonctionner sur un maximum de terminaux. Toutefois la version de compilation sera la 25 afin de pouvoir profiter des dernières mises à jour du framework. Ceci est rendu possible grâce aux ressources de post-compatibilité Android (appcompat) qui apportent aux terminaux un peu anciens certaines des améliorations non-existantes dans leur version.
+
+Nous allons maintenant aborder un aspect important dans le développement de ce projet : son intégration continue.
 
 \subsubsection{Intégration continue}
-Un des objectifs de ce projet est de mettre en place une intégration continue et un déploiement automatique. Pour ce faire il est nécessaire d'avoir deux serveurs :
-\begin{itemize}
-    \item un serveur d'application
-    \item un serveur d'intégration
-\end{itemize}
 
-Le premier sera certainement un CaaS Amazon pour NodeJS. Le serveur d'intégration sera un serveur Travis CI puisqu'il gère à la fois le NodeJS et l'Android (nouvelle fonctionnalité). Cela permettra contrairement à un serveur Jenkins de déployer facilement sans avoir à gérer un serveur mais juste en utilisant un service.
+Un des objectifs de ce projet est de mettre en place une intégration continue et un déploiement automatique. Pour ce faire, il est nécessaire d'avoir un serveur dédié à cela. 
+
+L’intégration continue est un ensemble de pratiques de génie logiciel permettant d’assurer la qualité et la non-régression du code au fur et à mesure du développement. L’intégration continue se base sur un système de versionnage de code et pour chaque commit, le serveur d’intégration teste des critères de non-régression du code, se charge du build et potentiellement déploie le résultat, s’il est correct afin de disposer en permanence d’une version fonctionnelle.
+
+Notre serveur d'intégration sera un serveur Travis CI puisqu'il gère à la fois le NodeJS et l'Android qui est une nouvelle fonctionnalité récemment ajoutée. Cela permettra contrairement à un serveur Jenkins de ne pas avoir à gérer un serveur mais juste à consommer un service en ligne.
+
+Le déploiement dans le cadre de l’application Android ne se fera pas sur le Google Play mais sur GitHub Releases pour des questions de budget. Un apk, qui est le format des applications sous Android, sera déposé par le serveur d’intégration sur GitHub Releases.
+
+Concernant le web service, il sera déployé sur son propre serveur avec une phase de copie, d’installation et d’exécution du service.
+
+Nous avons donc vu à quoi notre solution vise à ressembler, nous allons maintenant développer notre stratégie de planification du travail.
 
 \subsection{Organisation du travail}
 
-L'organisation temporelle théorique du travail est décrite dans le diagramme de Gantt ci-dessous.
+L'organisation temporelle théorique du travail est décrite dans le diagramme de Gantt de la figure \ref{ganttinit}. Elle se veut assez simple et découpée en quatre phases :
+
+\begin{itemize}
+    \item la phase de lancement qui s’étend jusqu’à la rentrée des vacances de la Toussaint et comporte toutes les travaux d’analyse et de mise en place du projet ;
+    \item la phase de développement basique qui s’étend jusqu’à début 2017 et concerne le développement des applications minimales du projet.
+    \item la phase d’amélioration durant laquelle l’ajout d’améliorations supplémentaires sera fait à l’application de base ;
+    \item la phase de finalisation comportant la préparation de la documentation autour du projet.
+\end{itemize}
+
+La première phase est celle qui se prête le plus à un travail commun, puis les phases suivantes ont été pensé de façon modulaire afin de pouvoir travailler indépendamment de l’autre sur chaque tâche. Nous verrons plus tard comment le déroulement du projet a eu lieu dans les faits et quelles modifications de planning ont été apportées.
+
+Nous avons discuté des différents points caractérisant notre projet et les objectifs que nous souhaitions atteindre, nous allons maintenant expliquer comment nous nous y sommes pris pour la conception dans la section suivante.
 
 \begin{landscape}
     \begin{figure}[h]
         \centering
         \includegraphics[height=\textwidth]{../gantt_initial.png}
         \caption{Diagramme de Gantt théorique}
+        \label{ganttinit}
     \end{figure}
 \end{landscape}
-
-suite...

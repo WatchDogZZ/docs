@@ -23,9 +23,6 @@
 \usepackage{color}
 \usepackage[table]{xcolor}
 
-% \usepackage{sectsty}
-% \allsectionsfont{\bfseries\sffamily\color{black!90}\hspace{-1em}}
-% \partfont{\sffamily}
 \usepackage[font={small,it}]{caption}
 \makeatletter
 \def\@seccntformat#1{\llap{\csname the#1\endcsname\quad}}
@@ -75,8 +72,6 @@
 % packages pour les algorithmes
 \usepackage[section]{algorithm}
 \usepackage[noend]{algpseudocode}
-
-\renewcommand{\algorithmiccomment}[1]{{\hfill$\vartriangleright$\scriptsize\sffamily~ #1}}
 
 % francisation des algorithmes
 \floatname{algorithm}{\sffamily Algorithme}
@@ -145,9 +140,10 @@
 
 \renewcommand{\lstlistlistingname}{Liste des extraits de code}
 %%options for listings
-\DeclareCaptionFont{white}{\color{white}}
-\DeclareCaptionFormat{listing}{\colorbox{black!80}{\parbox{\textwidth}{#1#2#3}}}
-\captionsetup[lstlisting]{format=listing,labelfont={white,tt},textfont=white}
+
+% Place la legende en dessous du code
+\lstset{captionpos=b}
+
 \definecolor{Rred}{rgb}{0.6,0,0} % for strings
 \definecolor{Rgreen}{rgb}{0.25,0.5,0.35} % comments
 \definecolor{Rpurple}{rgb}{0.5,0,0.35} % keywords
@@ -223,12 +219,3 @@
 \renewcommand*{\thefootnote}{(\arabic{footnote})}
 
 % ----------------------------------------------------------------------
-
-\newcommand{\includeMd}[1]{\input{|"pandoc --wrap=preserve --listings -t latex #1"}}
-\def\tightlist{}
-
-% changer les puces de liste
-\renewcommand{\labelitemi}{$\bullet$}
-\renewcommand{\labelitemii}{$\cdot$}
-\renewcommand{\labelitemiii}{$\diamond$}
-\renewcommand{\labelitemiv}{$\ast$}

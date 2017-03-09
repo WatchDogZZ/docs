@@ -1,0 +1,2 @@
+Fragment
+En Android les fragments sont des morceaux d’activité qui permettent de réutiliser des sous parties d’une activité sans avoir à instancier plusieurs activités.

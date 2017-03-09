@@ -1,0 +1,2 @@
+Intent
+En Android, les intents sont des descriptions d’une action à effectuer et pouvant comporter des données nommées. Les intents sont produits par les applications pour être dirigées par le système Android vers l’application la plus capable d’effectuer l’action et en cas de choix multiple, la décision est donnée à l’utilisateur.

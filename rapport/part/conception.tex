@@ -1,6 +1,10 @@
 \section{Conception de la solution}
 
-\subsection{Architecture de la solution}
+Dans cette section nous allons aborder plus précisément le déroulement de la conception de notre solution en détaillant nos travaux outils et méthodes.
+
+\subsection{Conception du couple client/serveur}
+
+Notre solution se décompose en effet en deux parties majeures et quasiment indépendante si l'on ne prend pas en compte l'interfaçage entre les deux. Nous allons donc voir en quoi celles-ci consistent exactement.
 
     \input{./part/archi-service}
 
@@ -8,9 +12,13 @@
 
 \subsection{Technologies utilisées}
 
+Cette partie détaille les technologies ainsi que les outils de génie logiciel utilisés dans le développement de l’application.
+
     \input{./part/techno-service}
 
     \input{./part/techno-android}
+
+    \input{./part/techno-ci}
 
 \subsection{Fonctionnalités introduites par la solution}
 
@@ -31,3 +39,16 @@ Au terme de cette première période nous avons pu livrer une application répon
 Nous avons listé tous les bugs connus, les améliorations et les fonctionnalités que nous souhaitions ajouter. Ensuite nous avons commencé à fonctionner en itérations agiles d’une durée de deux semaines. En début d’itérations nous sélectionnions un ensemble d’items qui étaient des « issues » sur GitHub et nous en faisions une milestone. Nous travaillions ensuite sur ces issues et en fin de cycle nous faisions le point sur l’itération terminée et nous rajoutions des issues en fonction de la situation. Le développement agile a permis de rajouter des fonctionnalités avancées sur deux ou trois itérations.
 
 L’ensemble de ces éléments fait que nous avons pu développer étape par étape une application qui semblait très complexe à mettre en place. Sans cette méthode nous aurions peut-être été perdu devant tout le travail mais dans les faits, malgré quelques difficultés nous avions toujours une version fonctionnelle qui répondait aux critères minimaux du cahier des charges.
+
+Finalement, le planning final ressemble sans entrer dans les détails au planning initial mais il comporte quand même des différences assez remarquables. Tout d’abord, la phase de développement d’une base a été un peu plus longue que prévue. Ensuite la phase d’ajout de fonctionnalités avancées a pris la forme d’un développement agile mais le temps d’installer ce processus nous n’avons eu le temps de faire que deux itérations. L’ensemble est représenté sur la figure \ref{ganttfinal}.
+
+Nous avons maintenant explorer tous les aspects de la conception de notre solution et nous allons enfin pouvoir passer à la présentation de nos résultats.
+
+\begin{landscape}
+    \begin{figure}[h]
+        \centering
+        \includegraphics[height=\textwidth]{../gantt_final.png}
+        \caption{Diagramme de Gantt réel}
+        \label{ganttfinal}
+    \end{figure}
+\end{landscape}

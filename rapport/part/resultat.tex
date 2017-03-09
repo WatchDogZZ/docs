@@ -102,3 +102,21 @@ Nous avons vu toutes les fonctionnalités disponibles sur notre solution mais il
 \subsection{Améliorations possibles}
 
 Bien que l'application WatchDogZZ soit à l'heure actuelle une application complète et répondant à nos attentes, ce projet reste un sujet très vaste et très ouvert sur lequel il est possible de faire énormément.
+
+La première chose qui pourrait apporter un plus à WatchDogZZ serait une interface d’administration. Initialement nous avions prévu d’en développer une, mais devant la quantité importante de travail nous avons préféré resté concentré sur la partie client-serveur pure. En effet deux des objectifs de ce projet était de monter en compétences en Android et en développement de service web en NodeJS, le développement web d’un frontend ne nous aurait pas forcément apporté quelque chose dans ce cadre.
+
+De plus il y a des détails de fonctionnement qui pourraient être améliorés comme par exemple l’utilisation du jeton d’authentification Google. Il est utilisé pour valider l’identité de l’utilisateur et ensuite transmis à chaque échange mais ce token n’est pas vérifier à chaque fois par le service auprès de Google. Ceci peut entraîner une faille de sécurité importante et devrait être corrigé avant une distribution de l’application. Concernant l’application Android elle aussi dispose d’une faille de sécurité puisque pour le moment elle est signée à l’aide d’une clé de debug au lieu d’une vraie clé de signature pour des raisons de simplicité de développement.
+
+Ensuite, il y a quelques fonctionnalités que nous voulions ajouter mais elles n’ont pas été sélectionnées au cours des itérations. On peut citer par exemple :
+\begin{itemize}
+    \item la gestion des étages : actuellement, même si la carte est en trois dimensions, la composante altitude est uniformisée par soucis de calibrage ;
+    \item l’utilisation d’une carte en réalité virtuelle avec la technologie Google Cardboard qui permet d’utiliser un smartphone comme un casque de réalité virtuelle en produisant deux images sur l’écran et en positionnant le smartphone à quelques centimètres des yeux de l’utilisateur ;
+    \item le calcul d’itinéraire : l’application possède dans sa dernière version toutes les briques nécessaires pour faire un calcul d’itinéraire entre deux points (utilisateur ou intérêt) et l’afficher mais il reste à développer un algorithme de pathfinding manipulant nos données ;
+    \item l’amélioration de l’interface utilisateur : l’interface est assez austère et n’est pas un produit commercialisable en l’état, il manquerait aussi à finaliser des micro-fonctionnalités générales comme le menu de configurations et des petits détails que l’on retrouve dans bon nombre d’application modernes, par exemple l’application a un système d’internationalisation qui n’a que deux langues, le français et l’anglais ;
+    \item l’interception des SMS : nous aurions aimé pouvoir intercepter les SMS comportant un schéma spécial afin d’intégrer des informations provenant de sources multiples dans l’application. Par exemple ; lorsqu’un utilisateur partage sa position par SMS, si le destinataire possède l’application il pourrait être en mesure de l’afficher directement dans l’application sans savoir qu’il a reçu un sms avec des coordonnées gps brutes ;
+    \item la communication entre usagers : il aurait été intéressant d’intégrer un service de messagerie à l’application pour pouvoir communiquer avec les autres usagers même si on ne dispose pas de ses coordonnées téléphoniques ;
+    \item la gestion des logs du service : afin de pouvoir surveiller au mieux l’activité sur le serveur et pouvoir requêter des informations concernant une date, un utilisateur ou tout autre information utile ;
+    \item un système de backup pour la base de données du serveur : en effet à l’heure actuelle aucune mesure de sauvegarde ni de restauration des données n’existe, ce qui ne serait pas tolérable sur un serveur professionnel.
+\end{itemize}
+
+Ce projet qui peut être perçu comme sans fin dispose d’énormément de possibilités d’évolutions et d’améliorations limitées seulement par notre imagination et notre budget.

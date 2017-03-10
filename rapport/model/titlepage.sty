@@ -42,9 +42,11 @@
 \vspace{5cm}
 
 \center
-{\LARGE \rapportType\\[-0.25cm]
+{\LARGE \rapportType\\[0.5cm]
 \rapportProject\\[0.5cm]
 \filliere}\\[0.5cm]
+
+\vspace{1.5cm}
 
 % \textsc{\@subject}\\[0.5cm]
 % Title
@@ -52,24 +54,31 @@
 { \huge \bfseries \@title}\\
 \HRule \\[1.4cm]
 %\vfill
+\vspace{0.75cm}
 % Author
-\begin{minipage}{0.48\textwidth}
+\begin{minipage}{1\textwidth}
 	\begin{flushleft} \large
 		\vspace{-1.4cm}
-		\ \, \emph{Étudiants} :\\
-			\Large\@author
+		\ \, \emph{Présenté par :} \Large\@author
+	\end{flushleft}
+\end{minipage}
+
+\vspace{5cm}
+
+\begin{minipage}{0.60\textwidth}
+	\begin{flushleft} \large
+		\emph{Tuteur} : \enterpriseTutor\\
+		\emph{Référent} : \schoolTutor
 	\end{flushleft}
 \end{minipage}
 ~
-\begin{minipage}{0.48\textwidth}
-	\begin{flushright} \large
-		\emph{Tuteur} : \, \\
-			\enterpriseTutor\\
-		\emph{Tuteur ISIMA} : \, \\
-			\schoolTutor
-	\end{flushright}
-\end{minipage}\\[2.0cm]
-~
+% metadata
+\begin{minipage}{0.36\textwidth}
+	\begin{flushleft} \large
+		\dateSoutenance\\
+		\duration
+	\end{flushleft}
+\end{minipage}
 
 \end{titlepage}%
 	\setcounter{footnote}{0}%

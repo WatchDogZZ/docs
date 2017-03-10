@@ -187,15 +187,18 @@ Nous allons maintenant aborder un aspect important dans le développement de ce 
 
 \subsubsection{Intégration continue}
 
-Un des objectifs de ce projet est de mettre en place une intégration continue et un déploiement automatique. Pour ce faire, il est nécessaire d'avoir un serveur dédié à cela. 
+Un des objectifs de ce projet est de mettre en place une intégration continue et un déploiement automatique.
 
-L’intégration continue est un ensemble de pratiques de génie logiciel permettant d’assurer la qualité et la non-régression du code au fur et à mesure du développement. L’intégration continue se base sur un système de versionnage de code et pour chaque commit, le serveur d’intégration teste des critères de non-régression du code, se charge du build et potentiellement déploie le résultat, s’il est correct afin de disposer en permanence d’une version fonctionnelle.
+Dans les milieux industriels, le développement de solutions comporte souvent 3 phases :
+\begin{itemize}
+    \item L'analyse ;
+    \item Le développement ;
+    \item Les tests et l'intégration.
+\end{itemize}
 
-Notre serveur d'intégration sera un serveur Travis CI puisqu'il gère à la fois le NodeJS et l'Android qui est une nouvelle fonctionnalité récemment ajoutée. Cela permettra contrairement à un serveur Jenkins de ne pas avoir à gérer un serveur mais juste à consommer un service en ligne.
+Cette dernière étape est l'une des plus importantes, puisque c'est au cours de cette phase que la solution va être validée à l'aide de tests de non-régréssion, puis mise en production afin d'être livrée à ses clients. C'est ce que l'on appelle la phase d'\textbf{intégration continue}, qui permet d'assurer la qualité du code tout au long de l'évolution de la solution.
 
-Le déploiement dans le cadre de l’application Android ne se fera pas sur le Google Play mais sur GitHub Releases pour des questions de budget. Un apk, qui est le format des applications sous Android, sera déposé par le serveur d’intégration sur GitHub Releases.
-
-Concernant le web service, il sera déployé sur son propre serveur avec une phase de copie, d’installation et d’exécution du service.
+Cette phase est généralement automatisée afin de libérer du temps aux développeurs et éviter des tâches répétitives. C'est pourquoi des outils existent sur le marché pour effectuer ces tests de non-régréssion et effectuer l'opération menant à l'établissement d'une version de production pour la solution visée.
 
 Nous avons donc vu à quoi notre solution vise à ressembler, nous allons maintenant développer notre stratégie de planification du travail.
 

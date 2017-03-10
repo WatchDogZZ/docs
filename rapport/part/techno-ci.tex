@@ -1,7 +1,46 @@
 \subsubsection{Intégration continue}
 
-Présentation de la CI
+Lors de l'ajout de la phase d'intégration continue pour notre solution, nous avions plusieurs choix :
+\begin{itemize}
+    \item Travis CI ;
+    \item Circle CI ;
+    \item Amazon AWS CodePipeline ;
+    \item Jenkins.
+\end{itemize}
 
-Outils Existants
+Les outils Jenkins ou CodePipeline sont des outils largement utilisés dans les industries et permettent une customization trés fine des opérations de test et de déploiement. Cependant, ceci nécéssite une configuration avancée des outils et parfois un serveur sur lequel placer l'outil (par exemple pour Jenkins). Du fait que nous n'avions pas besoin d'une configuration particulière pour tester et produire notre solution, nous nous sommes orienté vers l'outil \textbf{Travis CI}, qui permet de gérer aussi bien \textbf{Android} que \textbf{NodeJS}.
 
-Travis CI
+Cet outil s'utilie trés facilement avec la plateforme GitHub~\cite{github} que nous avons utilisé pour gérer le code source des différentes parties de la solution. Il faut simplement ajouter le service d'intégration pour chaque dépôt contenant le code à tester et déployer.
+
+La configuration de ce service s'effectue à l'aide d'un fichier \textbf{.travis.yml} dont un exemple est donné dans le code~\ref{travisyml}.
+
+\lstset{language=sh}
+\begin{lstlisting}[caption=Exemple de fichier de configuration Travis (service web), label=travisyml]
+language: node_js
+node_js:
+    - "node"
+
+before_install: # Install the dev dependencies
+    - sudo apt-get -qq update
+    - sudo apt-get install -y mongodb-org
+
+install:
+    - npm install -d
+
+before_script: # Run the server in background
+    - npm start &
+    - ./start_database.sh &
+
+script:
+    - npm test
+
+after_script: # Stop the server launched and the database
+    - kill %1
+    - kill %2
+\end{lstlisting}
+
+Nous pouvons ainsi indiquer quelle version d'un framework utiliser, ajouter des paquets, effectuer des actions supplémentaires (par exemple lancer la base de données dans le cas du service web).
+
+Le déploiement dans le cadre de l’application Android ne se fera pas sur le Google Play mais sur GitHub Releases pour des questions de budget. Un \textbf{.apk}, qui est le format des applications sous Android, sera déposé automatiquement par le serveur d’intégration sur \textbf{GitHub Releases}, et accéssible depuis la page principal du dépôt Android.
+
+En ce qui concerne le déploiement du service web, celui-ci était auparavant associé à Amazon AWS OpsWorks, ce qui permettait de créer automatiquement une machine virtuelle Unix exécutant le service web ainsi que la base de données lors tests d'intégration réussis. En raison du dépassement de l'offre gratuite proposée par Amazon, nous avons décidé de prendre en main cette étape et l'effectuer manuellement sur un serveur personnel.

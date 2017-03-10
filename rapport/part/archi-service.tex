@@ -15,9 +15,12 @@
 
     Une autre partie importante va concerner le stockage des données. Ceci s'effectue par l'intermédiaire de la base de données. Avant de choisir une technologie, nous souhaitions qu'il soit possible de facilement modifier le gestionnaire de base de données (Oracle, MySQL, MongoDB, Microsoft Access).
     
-    Pour que ceci se fasse plus facilement, il a été décidé de mettre en place un patron de conception "bridge" (à quelques exceptions, puisque Javascript ne dispose pas du concept d'interfaces).
+    Pour que ceci se fasse plus facilement, il a été décidé de mettre en place un patron de conception "bridge" (à quelques exceptions, puisque Javascript ne dispose pas du concept d'interfaces), que nous détaillerons plus tard.
 
     Nous remarquons donc dans la figure \ref{asweb} que notre fichier \textbf{database.js} dispose de méthodes manipulant les entités du service pour un certain type de base de données. Ce fichier et ensuite inclus dans le fichier \textbf{service.methods.js}, ce qui va permettre de les utiliser. Dans l'application, ce seront finalement les méthodes du fichier \textbf{service.methods.js} qui seront utilisées, permettant de masquer quel gestionnaire de base de données nous utilisons.
     
-    Pour changer de gestionnaire de base de données, il suffit de créer un autre fichier, par exemple \textbf{database-sql.js}, d'y recréer les mêmes fonctions que dans le fichier \textbf{database.js} en modifiant la logique de celles-ci. Ensuite, il suffira simplement de modifier le fichier inclus dans \textbf{service.methods.js} par \textbf{database-sql.js}.
+    Pour le gestionnaire de données, le patron de conception "bridge" est utilisé. Cela signifie que nous allons spécifier des méthodes que nous souhaitons utiliser dans un fichier (généralement en utilisant un interface, mais ce n'est pas possible avec Javascript). Ici, ces méthodes seront écrites dans le fichier \textbf{service.methods.js}. Lorsque l'on souhaite ajouter un gestionnaire de base de données, il faut lui créer un autre fichier associé, et re-créer dans celui-ci les méthodes définies plus tôt.
+    Ensuite, pour utiliser ce gestionnaire, il faut le référencer dans le fichier \textbf{service.methods.js}, qui lui-même se chargera de "wrapper" (masquer) les appels des méthodes du gestionnaire. Ainsi, dans l'application, nous utiliserons nos méthodes définies dans le fichier \textbf{service.methods.js}, ce qui masque le gestionnaire de base de données utilisé.
+
+    Pour changer de gestionnaire de base de données, il suffit de créer un autre fichier, par exemple \textbf{database-sql.js}, d'y recréer les mêmes fonctions que dans le fichier \textbf{database.js} en modifiant la logique de celles-ci. Ensuite, il suffira simplement de modifier le fichier inclus (\textbf{database.js}) dans \textbf{service.methods.js} par \textbf{database-sql.js}.
 

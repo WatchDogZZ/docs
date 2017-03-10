@@ -1,0 +1,2 @@
+HTTPS
+HyperText Transfer Protocol Secure, combine le protocole http avec une couche de sécurité TLS. Ce protocole êrùet de vérifier l'identité du site web auquel un utilisateur accède par l'intermédiaire d'un certificat d'authentification émis par une autorité de confiance. Ce protocole garantit également la fiabilité et la confidentialité des données envoyées.

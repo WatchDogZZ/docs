@@ -12,7 +12,8 @@ Les outils Jenkins ou CodePipeline sont des outils largement utilisés dans les 
 
 Cet outil s'utilie trés facilement avec la plateforme GitHub~\cite{github} que nous avons utilisé pour gérer le code source des différentes parties de la solution. Il faut simplement ajouter le service d'intégration pour chaque dépôt contenant le code à tester et déployer.
 
-La configuration de ce service s'effectue à l'aide d'un fichier \textbf{.travis.yml} dont un exemple est donné dans le code~\ref{travisyml}.
+La configuration de ce service s'effectue à l'aide d'un fichier \textbf{.travis.yml}. Ce fichier est versionné au même titre que le code source de la solution. Ainsi, à chaque évolution de la solution, ce fichier peut également évoluer et permettre les tests et le déploiement du code concerné.
+Un exemple de fichier de configuration est donné dans le code~\ref{travisyml}.
 
 \lstset{language=sh}
 \begin{lstlisting}[caption=Exemple de fichier de configuration Travis (service web), label=travisyml]

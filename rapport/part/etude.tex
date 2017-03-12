@@ -122,7 +122,7 @@ Nous allons maintenant aborder en détails les objectifs fixés pour chacun de c
 
 Le serveur est le point reliant tous les clients et possèdent différents services mais la partie centrale est celle du service web. Le serveur doit être capable de répondre aux différentes connexions et requêtes des utilisateurs se connectant depuis l'application Android ou depuis tout autre client. Un service web n’est autre qu’un ensemble de services distants disponibles sur internet, ils peuvent permettre de récupérer des données ou bien d’effectuer des traitements spécifiques. L’intérêt est que le mode de communication avec un service web se veut standard ce qui permet à des utilisateurs de topologie différentes de le consommer.
 
-Le serveur sera un service web de type \textbf{REST} c’est-à-dire qu’il sera capable de répondre à des requêtes se basant sur les protocoles web comme http dans un format standardisé, le JSON.
+Le serveur sera un service web de type \textbf{REST} c’est-à-dire qu’il sera capable de répondre à des requêtes http dans un format standardisé, le JSON.
 Le serveur disposera des fonctionnalités minimales suivantes :
 
 \begin{itemize}
@@ -179,7 +179,7 @@ Ces fonctionnalités forment le noyau dur indispensable au niveau minimal de qua
 
 La mise à jour des informations sur le client sera initiée par l’application qui effectuera une requête sur le serveur. Le serveur renverra les positions des utilisateurs connectés qui permet sa mise à jour chez les utilisateurs.
 
-Le choix d'une application Android se justifie par plusieurs facteurs. Tout d’abord il existe une communauté très active et de nombreux documents autour de l’Android. Ceci est dû en grande partie que le marché est majoritairement composé de terminaux Android, il y a donc plus de travail. Enfin le langage Android se basant sur du Java il nous est plus accessible de partir sur cette plateforme plutôt que sur du iOS ou même du Windows Phone, de plus nous avons quelques notions en Android.
+Le choix d'une application Android se justifie par plusieurs facteurs. Tout d’abord il existe une communauté très active et de nombreux documents autour de l’Android. Ceci est dû en grande partie que le marché est majoritairement composé de terminaux Android, il y a donc plus de références et de documentation. Enfin le langage Android se basant sur du Java il nous est plus accessible de partir sur cette plateforme plutôt que sur du iOS ou même du Windows Phone, de plus nous avons quelques notions en Android.
 
 Les versions du framework Android qui seront supportées seront les version 11 et ultérieures pour fonctionner sur un maximum de terminaux. Toutefois la version de compilation sera la 25 afin de pouvoir profiter des dernières mises à jour du framework. Ceci est rendu possible grâce aux ressources de post-compatibilité Android (appcompat) qui apportent aux terminaux un peu anciens certaines des améliorations non-existantes dans leur version.
 
@@ -198,7 +198,8 @@ Dans les milieux industriels, le développement de solutions comporte souvent 3 
 
 Cette dernière étape est l'une des plus importantes, puisque c'est au cours de cette phase que la solution va être validée à l'aide de tests de non-régréssion, puis mise en production afin d'être livrée à ses clients. C'est ce que l'on appelle la phase d'\textbf{intégration continue}, qui permet d'assurer la qualité du code tout au long de l'évolution de la solution.
 
-Cette phase est généralement automatisée afin de libérer du temps aux développeurs et éviter des tâches répétitives. C'est pourquoi des outils existent sur le marché pour effectuer ces tests de non-régréssion et effectuer l'opération menant à l'établissement d'une version de production pour la solution visée.
+Cette phase est généralement automatisée afin de libérer du temps aux développeurs, éviter des tâches répétitives, mais surtout permettre l'élimination d'erreurs humaines et assurer la reproductibilité des builds et des tests. Ces dernier critères sont assurés par la présence de fichiers de configuration de l'intégration continue qui sont versionnés au même titre que le code la solution. Ainsi, ces fichiers évoluent en même temps que la solution elle-même.
+Des outils sont donc disponibles sur le marché pour effectuer ces tests de non-régréssion et effectuer l'opération menant à l'établissement d'une version de production pour la solution visée.
 
 Nous avons donc vu à quoi notre solution vise à ressembler, nous allons maintenant développer notre stratégie de planification du travail.
 

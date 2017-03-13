@@ -26,7 +26,7 @@ La dernière version de notre solution offre donc les fonctionnalités suivantes
     \label{screen1}
 \end{figure}
 
-Cette première activité est un classique des applications connectées Android moderne et apporte un niveau de fiabilité supérieur à un système d’authentification artisanal.
+Cette première activité est un classique des applications connectées Android moderne et apporte un niveau souvent bien plus fiable de sécurité qu'un système d'authentification géré par le développeur où les failles peuvent vite devenir nombreuses (mots de passes non chiffrés en base, etc.).
 
 Une fois cette phase d’authentification passée, l’utilisateur arrive donc sur l’activité principale de l’application : la carte de l’ISIMA. Cette carte en trois dimensions est une simple vue OpenGL où l’arbre de scène du Renderer a été réimplémenté afin d’obtenir les fonctionnalités de navigation et d’affichage voulues de la carte.
 
@@ -95,7 +95,7 @@ Toutes ces fonctionnalités nécessitent l’utilisation du serveur, mais la der
 
 Enfin concernant les communications avec le serveur, celles-ci sont sécurisées puisqu’elles utilisent le protocole https. Il a fallu pour ce faire créer un certificat pour le serveur enregistré auprès d’un service de certification et ensuite ajouter ce service de certification auprès des services de confiance de l’application. Au final ceci permet d’échanger avec le serveur toutes les informations personnelles nécessaires en garantissant la sécurité minimale.
 
-Concernant les performances du service, elles semblent plutôt bonnes pour un nombre limité d’utilisateur. La position du terminal courant peut être récupérée à une fréquence au moins égale à la fréquence d’affichage sur le service gps et celles des autres ne nécessitent que quelques dizaines de millisecondes ce qui est plutôt convenable pour des appels réseaux répétés. Toutefois nous n’avons pas d’information sur le comportement de notre service à une échelle plus réaliste c’est-à-dire avec un nombre d’utilisateur représentatif d’une situation réelle.
+Concernant les performances du service, elles semblent plutôt bonnes pour un nombre limité d’utilisateur. La position du terminal courant peut être récupérée à une fréquence au moins égale à la fréquence d’affichage sur le service gps et celles des autres ne nécessitent que quelques dizaines de millisecondes ce qui est plutôt convenable pour des appels réseaux répétés. Toutefois nous n’avons pas d’information sur le comportement de notre service à une échelle plus réaliste c’est-à-dire avec un nombre d’utilisateur représentatif d’une situation réelle. Nous aurions pu utiliser un outil comme Gatling pour effectuer des tests de performances et simuler l'utilisation de notre service par un grands nombre d'utilisateurs mais le temps nous manquait.
 
 Nous avons vu toutes les fonctionnalités disponibles sur notre solution mais il en existe de nombreuses autres que nous n’avons pas pu développer et certains points pourraient aussi être améliorés.
 

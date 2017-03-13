@@ -124,7 +124,8 @@ Nous allons maintenant aborder en détails les objectifs fixés pour chacun de c
 
 Le serveur est le point reliant tous les clients et possèdent différents services mais la partie centrale est celle du service web. Le serveur doit être capable de répondre aux différentes connexions et requêtes des utilisateurs se connectant depuis l'application Android ou depuis tout autre client. Un service web n’est autre qu’un ensemble de services distants disponibles sur internet, ils peuvent permettre de récupérer des données ou bien d’effectuer des traitements spécifiques. L’intérêt est que le mode de communication avec un service web se veut standard ce qui permet à des utilisateurs de topologie différentes de le consommer.
 
-Le serveur sera un service web de type \textbf{REST} c’est-à-dire qu’il sera capable de répondre à des requêtes http dans un format standardisé, le JSON.
+Le serveur sera un service web de type \textbf{REST}~\cite{rest} c’est-à-dire qu’il sera capable de répondre à des requêtes http dans un format standardisé, le JSON. Ce type de service est de plus en plus répandu car il est supposé \textbf{sans état} du client sur le serveur, effectue des requêtes \textbf{auto-descriptives} (informations sur son contenu, sa date de création, son expiration, ...) sur des URL \textbf{identifiant} des ressources de manière \textbf{précise}.
+
 Le serveur disposera des fonctionnalités minimales suivantes :
 
 \begin{itemize}

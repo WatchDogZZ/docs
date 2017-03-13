@@ -116,7 +116,7 @@ Tout d’abord nous souhaitons fournir un service à un groupe de personnes plut
 
 Nous pouvons donc observer sur cette figure un schéma tout à fait classique de système client-serveur qui nous permettra de dissocier le développement du service du développement des différentes interfaces utilisateur. Un intérêt majeur est de pouvoir faire évoluer un des clients sans que cela n’impacte le cours de vie des autres projets reposant sur le service et le service lui-même.
 
-Pour ce faire nous allons donc développer un service web de type REST pour que différent client, illustré dans notre projet par un client Android, puissent l’utiliser avec un minimum de contraintes. Les évolutions du serveur et du client n’auront donc pas d’impact l’un sur l’autre sauf bien sûr sur les modifications de l’interface. Si jamais un problème se déclarait dans la conception d’une partie nous comptons sur notre système d’intégration continue pour jouer le rôle de garde-fou en contrôlant le code versionné.
+Pour ce faire nous allons donc développer un service web de type REST pour que différents clients, illustrés dans notre projet par un client Android, puissent l’utiliser avec un minimum de contraintes. Les évolutions du serveur et du client n’auront donc pas d’impact l’un sur l’autre sauf bien sûr sur les modifications de l’interface. Si jamais un problème se déclarait dans la conception d’une partie nous comptons sur notre système d’intégration continue pour jouer le rôle de garde-fou en contrôlant le code versionné.
 
 Nous allons maintenant aborder en détails les objectifs fixés pour chacun de ces éléments.
 
@@ -184,6 +184,8 @@ La mise à jour des informations sur le client sera initiée par l’application
 Le choix d'une application Android se justifie par plusieurs facteurs. Tout d’abord il existe une communauté très active et de nombreux documents autour de l’Android. Ceci est dû en grande partie que le marché est majoritairement composé de terminaux Android, il y a donc plus de références et de documentation. Enfin le langage Android se basant sur du Java il nous est plus accessible de partir sur cette plateforme plutôt que sur du iOS ou même du Windows Phone, de plus nous avons quelques notions en Android.
 
 Les versions du framework Android qui seront supportées seront les version 11 et ultérieures pour fonctionner sur un maximum de terminaux. Toutefois la version de compilation sera la 25 afin de pouvoir profiter des dernières mises à jour du framework. Ceci est rendu possible grâce aux ressources de post-compatibilité Android (appcompat) qui apportent aux terminaux un peu anciens certaines des améliorations non-existantes dans leur version.
+
+Nous aurions pu faire le choix de développer dans une technologie cross-plateform se basant sur des technologies web comme Ionic mais nos besoins en accès matériel de part le gps et OpenGL nous semblait être en désaccord avec un tel choix.
 
 Nous allons maintenant aborder un aspect important dans le développement de ce projet : son intégration continue.
 

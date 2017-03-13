@@ -44,4 +44,25 @@ Nous pouvons ainsi indiquer quelle version d'un framework utiliser, ajouter des 
 
 Le déploiement dans le cadre de l’application Android ne se fera pas sur le Google Play mais sur GitHub Releases pour des questions de budget. Un \textbf{.apk}, qui est le format des applications sous Android, sera déposé automatiquement par le serveur d’intégration sur \textbf{GitHub Releases}, et accéssible depuis la page principal du dépôt Android.
 
-En ce qui concerne le déploiement du service web, celui-ci était auparavant associé à Amazon AWS OpsWorks, ce qui permettait de créer automatiquement une machine virtuelle Unix exécutant le service web ainsi que la base de données lors tests d'intégration réussis. En raison du dépassement de l'offre gratuite proposée par Amazon, nous avons décidé de prendre en main cette étape et l'effectuer manuellement sur un serveur personnel.
+En ce qui concerne le déploiement du service web, celui-ci est effectué sur une machine personnelle, exécutant \textbf{Ubuntu Server 16.10}. Cette machine dispose également d'une installation de MongoDB. Pour le déploiement (ou redéploiement) du service, un script (voir code~\ref{deploy}) se charge d'effectuer les opérations suivantes :
+\begin{enumerate}
+    \item Arrêt de l'ancienne instance ;
+    \item Mise à jour du code du service ;
+    \item Mise à jour des dépendances ;
+    \item Relance du service.
+\end{enumerate}
+
+Les opérations du script sont lancées en ssh à partir d'une machine dont la clé ssh est copiée sur le serveur. Pour plus de sécurité, l'authentification par mot de passe en ssh a été désactivée. Ce mode de mise à jour du service implique une période d'indisponibilité entre les étapes 2 et 3 décrite au-dessus.
+
+\lstset{language=sh}
+\begin{lstlisting}[caption=Script de déploiement du service, label=deploy]
+echo "ssh -T -i ${KEY_FILE} ${USERNAME}@${IP}"
+ssh -i ${KEY_FILE} ${USERNAME}@${IP} <<'ENDSSH'
+    cd server
+    npm stop
+    git pull
+    npm install
+    npm start &>/dev/null &
+    exit
+ENDSSH
+\end{lstlisting}

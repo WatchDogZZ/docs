@@ -59,7 +59,7 @@ La liste des utilisateurs permet donc d’identifier plus aisément chaque utili
     \label{screen3}
 \end{figure}
 
-La couleur associée à chaque utilisateur est issue du hashage de leur nom : ainsi leur couleur dans la liste est la même que celui de leur item sur la carte ce qui nous permet de les identifier. L’algorithme de hashage du nom est très simple et peut se traduire comme sur le code suivant.
+La couleur associée à chaque utilisateur est issue du \underline{hashage} de leur nom : ainsi leur couleur dans la liste est la même que celui de leur item sur la carte ce qui nous permet de les identifier. L’algorithme de hashage du nom est très simple et peut se traduire comme sur le code suivant.
 
 \lstset{language=Java}
 \begin{lstlisting}[caption=Hashage du nom en couleur]
@@ -73,7 +73,7 @@ b = abs((hash % 10)*255/10f/255f); 	// calcul de la composante bleue
 
 De plus en sélectionnant un utilisateur dans la liste, on peut obtenir une carte simplifiée avec seulement le suivi de cette personne pour un suivi plus clair.
 
-Pour en revenir aux points d’intérêt, leur ajout se fait comme dit précédemment par l’utilisation du bouton flottant au bas de l’écran. Cette action invite l’utilisateur à positionner le point vert à l’emplacement désiré et à valider ce placement avec bouton d’ajout. Cette nouvelle action lance un nouveau fragment permettant de nommer se point (figure \ref{screen4}).
+Pour en revenir aux points d’intérêt, leur ajout se fait comme dit précédemment par l’utilisation du bouton flottant au bas de l’écran. Cette action invite l’utilisateur à positionner le point vert à l’emplacement désiré et à valider ce placement avec bouton d’ajout. Cette nouvelle action lance un nouveau \underline{fragment} permettant de nommer se point (figure \ref{screen4}).
 
 \begin{figure}[H]
     \centering
@@ -111,7 +111,7 @@ Ensuite, il y a quelques fonctionnalités que nous voulions ajouter mais elles n
 \begin{itemize}
     \item la gestion des étages : actuellement, même si la carte est en trois dimensions, la composante altitude est uniformisée par soucis de calibrage ;
     \item l’utilisation d’une carte en réalité virtuelle avec la technologie Google Cardboard qui permet d’utiliser un smartphone comme un casque de réalité virtuelle en produisant deux images sur l’écran et en positionnant le smartphone à quelques centimètres des yeux de l’utilisateur ;
-    \item le calcul d’itinéraire : l’application possède dans sa dernière version toutes les briques nécessaires pour faire un calcul d’itinéraire entre deux points (utilisateur ou intérêt) et l’afficher mais il reste à développer un algorithme de pathfinding manipulant nos données ;
+    \item le calcul d’itinéraire : l’application possède dans sa dernière version toutes les briques nécessaires pour faire un calcul d’itinéraire entre deux points (utilisateur ou intérêt) et l’afficher mais il reste à développer un algorithme de \underline{pathfinding} manipulant nos données ;
     \item l’amélioration de l’interface utilisateur : l’interface est assez austère et n’est pas un produit commercialisable en l’état, il manquerait aussi à finaliser des micro-fonctionnalités générales comme le menu de configurations et des petits détails que l’on retrouve dans bon nombre d’application modernes, par exemple l’application a un système d’internationalisation qui n’a que deux langues, le français et l’anglais ;
     \item l’interception des SMS : nous aurions aimé pouvoir intercepter les SMS comportant un schéma spécial afin d’intégrer des informations provenant de sources multiples dans l’application. Par exemple ; lorsqu’un utilisateur partage sa position par SMS, si le destinataire possède l’application il pourrait être en mesure de l’afficher directement dans l’application sans savoir qu’il a reçu un sms avec des coordonnées gps brutes ;
     \item la communication entre usagers : il aurait été intéressant d’intégrer un service de messagerie à l’application pour pouvoir communiquer avec les autres usagers même si on ne dispose pas de ses coordonnées téléphoniques ;

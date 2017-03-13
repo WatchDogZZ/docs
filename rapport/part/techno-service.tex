@@ -14,10 +14,10 @@ Toutes ces caractéristiques se retrouvent avec le framework NodeJS \cite{nodejs
 Le gestionnaire de modules NPM permet d'effectuer plusieurs choses.
 Premièrement c'est lui qui va permettre l'installation des modules nécéssaires au bon fonctionnement du Service. Ensuite, il va se charger de résoudre les dépendances entre modules. C'est à dire que si un module à besoin d'un autre module pour fonctionner, alors celui-ci sera installé automatiquement.
 Enfin, il est possible de disposer de plusieurs listes de modules à installer :
-\begin{description}
-    \item [Production] : comporte les modules nécéssaires au lancement du Service en mode production, donc sans les outils de debug ;
-    \item [Dev] : comporte les modules installés en production ainsi que des modules complémentaires utilisés lors de la conception du Service ou à des fins de debuggage.
-\end{description}
+\begin{itemize}
+    \item \textbf{Production} : comporte les modules nécéssaires au lancement du Service en mode production, donc sans les outils de debug ;
+    \item \textbf{Dev} : comporte les modules installés en production ainsi que des modules complémentaires utilisés lors de la conception du Service ou à des fins de debuggage.
+\end{itemize}
 
 Afin de mettre en place notre Service Web, nous avons utilisés plusieurs modules :
 \begin{itemize}

@@ -11,7 +11,7 @@ L’idée originelle que nous avions proposée était inspirée de la carte du M
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{./img/marauder.jpg}
-    \caption{Morceau de la carte du Maraudeur tirée du film}
+    \caption{Morceau de la carte du Maraudeur tirée du film Harry Potter}
     \label{marauder}
 \end{figure}
 
@@ -19,7 +19,7 @@ Nous avons donc décidé de proposer une manière simple pour tout le monde de p
 
 De manière générale, nous devons être capable de visualiser une carte de l'ISIMA, mais également de pouvoir trouver facilement une personne, un bureau ou une salle de cours. De plus, il serait intéressant de pouvoir faire ceci en temps réel. L'actualisation des données doit donc être assez rapide pour que la localisation des utilisateurs soit la plus précise possible.
 
-Une fois cette solution éprouvée avec les bâtiments de l'ISIMA, nous pouvons penser l'étendre à n'importe quel autre bâtiment dont nous pouvons avoir les plans. L’intérêt ici étant de développer une preuve de fonctionnement du suivi de personnes dans un bâtiment qui plus est considéré comme étant très surchargé de signaux. Comme nous l’évoquions plus tôt ceci pourrait trouver différentes utilisations dans différents contextes comme par exemple le fonctionnement d’un hôpital, la surveillance d’une prison, l’évacuation d’un bâtiment. Avec l’avènement de l’open data, il y a aussi de nombreuses questions éthiques à résoudre vis-à-vis des informations récoltées et diffusées. La CNIL au travers de la loi Informatique et Libertés règlemente l'utilisation de la géolocalisation d'employés dans une entreprise \cite{loigeo} en mettant en avant les droits des employés : il faut que cette géolocalisation est une finalité claire et prédéterminée, que les données ne soient pas conservées plus longtemps que prévu, l'employé doit avoir connaissance du dispositif et doit pouvoir l'interrompre. Toutefois, la CNIL n'est pas très précise quant à la géolocalisation de particuliers. Il existe aussi une directive européenne sur les traceurs \cite{cookies} qui demande à ce que les internautes donnent leur consentement avant l'introduction d'un traceur, par exemple un cookie. Cette demande de consentement existe déjà plus ou moins sur les applications Android puisque lors de l'installation d'une application il faut demander l'autorisation d'accéder au gps si telle est la volonté de l'application. A ceci on peut rajouter les lois sur la protection de la vie privée et des données personnelles.
+Une fois cette solution éprouvée avec les bâtiments de l'ISIMA, nous pouvons penser l'étendre à n'importe quel autre bâtiment dont nous pouvons avoir les plans. L’intérêt ici étant de développer une preuve de fonctionnement du suivi de personnes dans un bâtiment qui plus est considéré comme étant très surchargé de signaux. Comme nous l’évoquions plus tôt ceci pourrait trouver différentes utilisations dans différents contextes comme par exemple le fonctionnement d’un hôpital, la surveillance d’une prison, l’évacuation d’un bâtiment. Avec l’avènement de l’open data, il y a aussi de nombreuses questions éthiques à résoudre vis-à-vis des informations récoltées et diffusées. La CNIL au travers de la loi Informatique et Libertés règlemente l'utilisation de la géolocalisation d'employés dans une entreprise \cite{loigeo} en mettant en avant les droits des employés : il faut que cette géolocalisation est une finalité claire et prédéterminée, que les données ne soient pas conservées plus longtemps que prévu, l'employé doit avoir connaissance du dispositif et doit pouvoir l'interrompre. Toutefois, la CNIL n'est pas très précise quant à la géolocalisation de particuliers. Il existe aussi une directive européenne sur les traceurs \cite{cookies} qui demande à ce que les internautes donnent leur consentement avant l'introduction d'un traceur, par exemple un cookie. Cette demande de consentement existe déjà plus ou moins sur les applications Android puisque lors de l'installation d'une application, celle-ci fait part du besoin d'accéder au gps, ce que l'utilisateur est libre d'autoriser ou non. A ceci on peut rajouter les lois sur la protection de la vie privée et des données personnelles.
 
 Il faut aussi se demander comment notre application va se positionner par rapport aux applications existantes. Pour ce faire nous allons maintenant aborder l’analyse de l’existant.
 
@@ -114,9 +114,9 @@ Tout d’abord nous souhaitons fournir un service à un groupe de personnes plut
     \label{architecture}
 \end{figure}
 
-Nous pouvons donc observer sur cette figure un schéma tout à fait classique de système client-serveur qui nous permettra de dissocier le développement du service du développement des différentes interfaces utilisateur. Un intérêt majeur est de pouvoir faire évoluer un des clients sans que cela n’impacte le cours de vie des autres projets reposant sur le service et le service lui-même.
+Nous pouvons donc observer sur cette figure un schéma tout à fait classique de système client-serveur qui nous permettra de dissocier le développement du service du développement des différentes interfaces utilisateur. Un intérêt majeur est de pouvoir faire évoluer un des clients sans que cela n’impacte le cours de vie des autres projets reposant sur le service ou le service lui-même.
 
-Pour ce faire nous allons donc développer un service web de type REST pour que différents clients, illustrés dans notre projet par un client Android, puissent l’utiliser avec un minimum de contraintes. Les évolutions du serveur et du client n’auront donc pas d’impact l’un sur l’autre sauf bien sûr sur les modifications de l’interface. Si jamais un problème se déclarait dans la conception d’une partie nous comptons sur notre système d’intégration continue pour jouer le rôle de garde-fou en contrôlant le code versionné.
+Pour ce faire nous allons donc développer un service web de type REST~\cite{rest} pour que différents clients, illustrés dans notre projet par un client Android, puissent l’utiliser avec un minimum de contraintes. Les évolutions du serveur et du client n’auront donc pas d’impact l’un sur l’autre sauf bien sûr sur les modifications de l’interface. Si jamais un problème se déclarait dans la conception d’une partie nous comptons sur notre système d’intégration continue pour jouer le rôle de garde-fou en contrôlant le code versionné.
 
 Nous allons maintenant aborder en détails les objectifs fixés pour chacun de ces éléments.
 
@@ -124,7 +124,7 @@ Nous allons maintenant aborder en détails les objectifs fixés pour chacun de c
 
 Le serveur est le point reliant tous les clients et possèdent différents services mais la partie centrale est celle du service web. Le serveur doit être capable de répondre aux différentes connexions et requêtes des utilisateurs se connectant depuis l'application Android ou depuis tout autre client. Un service web n’est autre qu’un ensemble de services distants disponibles sur internet, ils peuvent permettre de récupérer des données ou bien d’effectuer des traitements spécifiques. L’intérêt est que le mode de communication avec un service web se veut standard ce qui permet à des utilisateurs de topologie différentes de le consommer.
 
-Le serveur sera un service web de type \textbf{REST}~\cite{rest} c’est-à-dire qu’il sera capable de répondre à des requêtes http dans un format standardisé, le JSON. Ce type de service est de plus en plus répandu car il est supposé \textbf{sans état} du client sur le serveur, effectue des requêtes \textbf{auto-descriptives} (informations sur son contenu, sa date de création, son expiration, ...) sur des URL \textbf{identifiant} des ressources de manière \textbf{précise}.
+Le serveur sera un service web de type \textbf{REST} c’est-à-dire qu’il sera capable de répondre à des requêtes http dans un format standardisé, le \underline{JSON}. Ce type de service est de plus en plus répandu car il est supposé \textbf{sans état} du client sur le serveur, effectue des requêtes \textbf{auto-descriptives} (informations sur son contenu, sa date de création, son expiration, ...) sur des \underline{URL} \textbf{identifiant} des ressources de manière \textbf{précise}. Ceci en fait donc une base idéale pour les architectures basées sur des services web.
 
 Le serveur disposera des fonctionnalités minimales suivantes :
 
@@ -159,10 +159,9 @@ Nous avons fait le tour de ce à quoi devra ressembler le serveur, abordons main
 
 \subsubsection{Partie Android}
 
-La seconde partie de ce projet concerne le client qui sera une application Android mais qui pourrait tout aussi bien être déclinée pour iOS et Windows Phone. Cette application sera donc une interface entre l’utilisateur et le serveur et devra lui permettre de profiter des fonctionnalités minimales attendues par rapport à la carte du maraudeur de Harry Potter.
+La seconde partie de ce projet concerne le client qui sera une application Android mais qui pourrait tout aussi bien être déclinée pour iOS et Windows Universel. Cette application sera donc une interface entre l’utilisateur et le service et devra lui permettre de profiter des fonctionnalités minimales attendues par rapport à la carte du maraudeur de Harry Potter.
 
 Les fonctionnalités majeures seront donc :
-
 \begin{itemize}
     \item l’inscription ;
     \item la connexion-déconnexion ;
@@ -172,7 +171,6 @@ Les fonctionnalités majeures seront donc :
 \end{itemize}
 
 Ces fonctionnalités forment le noyau dur indispensable au niveau minimal de qualité de notre application. Des améliorations sont envisageables pour augmenter le niveau de service, ainsi l'application pourra évoluer et proposer :
-
 \begin{itemize}
     \item une carte en version 3D ;
     \item une carte en version réalité virtuelle ;
@@ -182,11 +180,11 @@ Ces fonctionnalités forment le noyau dur indispensable au niveau minimal de qua
 
 La mise à jour des informations sur le client sera initiée par l’application qui effectuera une requête sur le serveur. Le serveur renverra les positions des utilisateurs connectés qui permet sa mise à jour chez les utilisateurs.
 
-Le choix d'une application Android se justifie par plusieurs facteurs. Tout d’abord il existe une communauté très active et de nombreux documents autour de l’Android. Ceci est dû en grande partie que le marché est majoritairement composé de terminaux Android, il y a donc plus de références et de documentation. Enfin le langage Android se basant sur du Java il nous est plus accessible de partir sur cette plateforme plutôt que sur du iOS ou même du Windows Phone, de plus nous avons quelques notions en Android.
+Le choix d'une application Android se justifie par plusieurs facteurs. Tout d’abord il existe une communauté très active et de nombreux documents autour de l’Android. Ceci est dû en grande partie que le marché est majoritairement composé de terminaux Android, il y a donc plus de références et de documentation. Enfin le langage Android se basant sur du Java il nous est plus accessible de partir sur cette plateforme plutôt que sur du iOS ou même du Windows Universel, de plus nous avons quelques notions en Android.
 
-Les versions du framework Android qui seront supportées seront les version 11 et ultérieures pour fonctionner sur un maximum de terminaux. Toutefois la version de compilation sera la 25 afin de pouvoir profiter des dernières mises à jour du framework. Ceci est rendu possible grâce aux ressources de post-compatibilité Android (appcompat) qui apportent aux terminaux un peu anciens certaines des améliorations non-existantes dans leur version.
+Les versions du framework Android qui seront supportées seront les version 11 et ultérieures pour fonctionner sur un maximum de terminaux. Toutefois la version de compilation sera la 25 afin de pouvoir profiter des dernières mises à jour du framework. Ceci est rendu possible grâce aux ressources de post-compatibilité Android (appcompat) qui apportent aux terminaux plus anciens certaines des améliorations non-existantes dans leur version.
 
-Nous aurions pu faire le choix de développer dans une technologie cross-plateform se basant sur des technologies web comme Ionic mais nos besoins en accès matériel de part le gps et OpenGL nous semblait être en désaccord avec un tel choix.
+Nous aurions pu faire le choix de développer dans une technologie cross-plateform se basant sur des technologies web comme Ionic mais nos besoins en accès matériel de part le gps et \underline{OpenGL} nous semblait être en désaccord avec un tel choix.
 
 Nous allons maintenant aborder un aspect important dans le développement de ce projet : son intégration continue.
 
@@ -201,7 +199,7 @@ Dans les milieux industriels, le développement de solutions comporte souvent 3 
     \item Les tests et l'intégration.
 \end{itemize}
 
-Cette dernière étape est l'une des plus importantes, puisque c'est au cours de cette phase que la solution va être validée à l'aide de tests de non-régréssion, puis mise en production afin d'être livrée à ses clients. C'est ce que l'on appelle la phase d'\textbf{intégration continue}, qui permet d'assurer la qualité du code tout au long de l'évolution de la solution.
+Cette dernière étape est l'une des plus importantes, puisque c'est au cours de cette phase que la solution va être validée à l'aide de tests de non-régréssion, puis mise en production afin d'être livrée à ses clients. C'est ce que l'on appelle la phase d'intégration continue, qui permet d'assurer la qualité du code tout au long de l'évolution de la solution.
 
 Cette phase est généralement automatisée afin de libérer du temps aux développeurs, éviter des tâches répétitives, mais surtout permettre l'élimination d'erreurs humaines et assurer la reproductibilité des builds et des tests. Ces dernier critères sont assurés par la présence de fichiers de configuration de l'intégration continue qui sont versionnés au même titre que le code la solution. Ainsi, ces fichiers évoluent en même temps que la solution elle-même.
 Des outils sont donc disponibles sur le marché pour effectuer ces tests de non-régréssion et effectuer l'opération menant à l'établissement d'une version de production pour la solution visée.

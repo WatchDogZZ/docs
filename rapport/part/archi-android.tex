@@ -13,7 +13,7 @@ Le projet de tests est donc un projet annexe venant en soutien au projet princip
     \label{mvc}
 \end{figure}
 
-Le modèle (M) représente les données traitées, dans le cas de l’application ce sont principalement les utilisateurs et leur position GPS. Les deux autres composants n’interagissent pas directement avec les données brutes mais ont accès à l’API du modèle symbolisée par le gestionnaire d’utilisateur (UserManager) comme sur la figure \ref{model}. Le modèle gère donc tous les petits traitements bas niveau sur les données et les sert au reste de l’architecture selon les besoins.
+Le modèle (M) représente les données traitées, dans le cas de l’application ce sont principalement les utilisateurs et leur position GPS. Les deux autres composants n’interagissent pas directement avec les données brutes mais ont accès à l’\underline{API} du modèle symbolisée par le gestionnaire d’utilisateur (UserManager) comme sur la figure \ref{model}. Le modèle gère donc tous les petits traitements bas niveau sur les données et les sert au reste de l’architecture selon les besoins.
 
 \begin{figure}[H]
     \centering
@@ -22,7 +22,7 @@ Le modèle (M) représente les données traitées, dans le cas de l’applicatio
     \label{model}
 \end{figure}
 
-Le contrôleur (C) s’occupe des interactions avec l’utilisateur, il doit pouvoir transmettre les commandes émanant de l’utilisateur aux autres composants. Dans le cadre de l’application Android, le contrôleur est symbolisé par les activités : ce sont les activités Android qui proposent les interfaces de contrôle utilisateur. Elles permettent de recevoir les évènements utilisateur comme un clic ou encore les messages du système comme l’arrivée d’un SMS ou encore l’actualisation de la position GPS. Les informations reçues peuvent ensuite être utilisées pour effectuer une mise à jour du modèle ou un rafraîchissement de l’affichage. Les différents types d’activités sont visible sur la figure \ref{controller}.
+Le contrôleur (C) s’occupe des interactions avec l’utilisateur, il doit pouvoir transmettre les commandes émanant de l’utilisateur aux autres composants. Dans le cadre de l’application Android, le contrôleur est symbolisé par les \underline{activités} : ce sont les activités Android qui proposent les interfaces de contrôle utilisateur. Elles permettent de recevoir les évènements utilisateur comme un clic ou encore les messages du système comme l’arrivée d’un SMS ou encore l’actualisation de la position GPS. Les informations reçues peuvent ensuite être utilisées pour effectuer une mise à jour du modèle ou un rafraîchissement de l’affichage. Les différents types d’activités sont visible sur la figure \ref{controller}.
 
 \begin{figure}[H]
     \centering

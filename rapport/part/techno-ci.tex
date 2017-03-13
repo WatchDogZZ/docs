@@ -44,7 +44,7 @@ Nous pouvons ainsi indiquer quelle version d'un framework utiliser, ajouter des 
 
 Le déploiement dans le cadre de l’application Android ne se fera pas sur le Google Play mais sur GitHub Releases pour des questions de budget. Un \textbf{.apk}, qui est le format des applications sous Android, sera déposé automatiquement par le serveur d’intégration sur \textbf{GitHub Releases}, et accéssible depuis la page principal du dépôt Android.
 
-En ce qui concerne le déploiement du service web, celui-ci est effectué sur une machine personnelle, exécutant \textbf{Ubuntu Server 16.10}. Cette machine dispose également d'une installation de MongoDB. Pour le déploiement (ou redéploiement) du service, un script (voir code~\ref{deploy}) se charge d'effectuer les opérations suivantes :
+En ce qui concerne le déploiement du service web, celui-ci est effectué sur une machine personnelle, exécutant \textbf{Ubuntu Server 16.10}. Cette machine dispose également d'une installation de MongoDB. Pour le déploiement (ou mise à jour) du service, un script (voir code~\ref{deploy}) se charge d'effectuer les opérations suivantes :
 \begin{enumerate}
     \item Arrêt de l'ancienne instance ;
     \item Mise à jour du code du service ;
@@ -56,7 +56,6 @@ Les opérations du script sont lancées en ssh à partir d'une machine dont la c
 
 \lstset{language=sh}
 \begin{lstlisting}[caption=Script de déploiement du service, label=deploy]
-echo "ssh -T -i ${KEY_FILE} ${USERNAME}@${IP}"
 ssh -i ${KEY_FILE} ${USERNAME}@${IP} <<'ENDSSH'
     cd server
     npm stop

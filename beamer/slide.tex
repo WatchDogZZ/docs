@@ -1,0 +1,134 @@
+%\documentclass[draft]{beamer} %temporary render
+\documentclass{beamer} %final render
+
+\usepackage[french]{babel} 	%utilisation des
+\usepackage[T1]{fontenc} 	%caracteres
+\usepackage[utf8]{inputenc} 	%francais
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{ccaption}
+\usepackage{fancyvrb}
+\usepackage{verbatim}
+\usepackage{float}
+\usepackage{csquotes}	%pour les citations
+\usetheme{Frankfurt}
+\usepackage{marvosym} % \MVRIGHTarrow
+
+\AtBeginSection[] 	%va permettre fl'affichage du sommaire avant
+{					%chaque vouvelle partie
+  \begin{frame}
+    \frametitle{Plan}
+    \tableofcontents[currentsection, hideothersubsections]
+  \end{frame} 
+}
+
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}[frame number]
+\setbeamercolor{footline}{fg=gray,bg=black}
+
+\makeatletter
+\newcommand\titlegraphicii[1]{\def\inserttitlegraphicii{#1}}
+\titlegraphicii{}
+\setbeamertemplate{title page}
+{
+  \vbox{}
+   {\usebeamercolor[fg]{titlegraphic}\inserttitlegraphic\hfill\inserttitlegraphicii\par}
+  \begin{centering}
+    \begin{beamercolorbox}[sep=8pt,center]{institute}
+      \insertinstitute
+    \end{beamercolorbox}
+    \begin{beamercolorbox}[sep=8pt,center]{title}
+      \usebeamerfont{title}\inserttitle\par%
+      \ifx\insertsubtitle\@empty%
+      \else%
+        \vskip0.25em%
+        {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}%
+      \fi%     
+    \end{beamercolorbox}%
+    \vskip1em\par
+    \begin{beamercolorbox}[sep=8pt,center]{author}
+      \usebeamerfont{author}\insertauthor
+    \end{beamercolorbox}
+    \begin{beamercolorbox}[sep=8pt,center]{date}
+      \usebeamerfont{date}\insertdate
+    \end{beamercolorbox}%\vskip0.5em
+  \end{centering}
+  %\vfill
+}
+\makeatother
+\author{Benjamin BARBESANGE et Benoît GARCON}
+\title{Soutenance de Projet Ingénieur 3ème Année}
+\subtitle{WatchDogZZ - Suivi de personnes dans les bâtiments}
+%\institute{Siemens Industry Software\\ISIMA}
+\date{Projet de 120h}
+% \titlegraphicii{\includegraphics[height=5mm]{watchdogzz.png}}
+\titlegraphic{\includegraphics[height=5mm]{isima.png}}
+
+\logo{\includegraphics[height=10mm]{logo.png}} %le logo en bas a droite
+
+\begin{document}
+
+	\begin{frame} %frame de titre
+		\maketitle
+    \vspace*{1cm}
+    \footnotesize
+    \begin{tabular}{ll}
+      Tuteur projet &: Pierre COLOMB\\
+      Référent ISIMA &: Eva HASSINGER
+    \end{tabular}
+	\end{frame}
+
+%---------- Ok
+  \section{Introduction}
+  \begin{frame}{\secname}
+    
+  \end{frame}
+
+%---------- Ok
+
+  \begin{frame}{Plan}
+    \tableofcontents
+  \end{frame}
+
+%---------- Ok
+
+  \section{Solution}
+  \begin{frame}
+
+  \end{frame}
+
+  \subsection{Android}
+  \begin{frame}{\subsecname}  
+
+  \end{frame}
+
+  \subsection{Service Web}
+  \begin{frame}{\subsecname}    
+
+  \end{frame}
+
+  \subsection{Résultats} %todo
+  \begin{frame}{\subsecname}
+
+  \end{frame}
+  
+%----------
+
+  \section{Conclusion}
+  \begin{frame}{\secname}
+      
+  \end{frame}
+
+  \begin{frame}{\secname}
+    
+  \end{frame}
+
+%---------- Ok
+
+  \begin{frame}{Fin}
+    \begin{center}
+      Merci de votre attention.
+    \end{center}
+  \end{frame}
+
+\end{document} %finished!

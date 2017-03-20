@@ -195,56 +195,72 @@
       \end{column}
     \end{columns}
 
-    Objectif : utiliser simplement un service web.
-    Architecture en 2 parties :
-    Service Web : gestion des données
-    Un client mobile : demande et fournit les données
-    Communication du client avec le service. Le client ne sait “rien faire” dans un premier temps. Il délègue tout au service (stockage, traitement des données).
-    Répartition des tâches :
-    Client : Benoît
-    Service : Benjamin
-    Echange de rôles pour avoir le point de vue de chacun -> pas possible car mettre en place une solution de base a pris du temps et il a fallu apporter des améliorations
+    \begin{block}{Répartition des tâches}
+      \begin{itemize}
+        \item Benoît : Client mobile
+        \item Benjamin : Service web
+      \end{itemize}
+    \end{block}
   \end{frame}
 
   \subsection{Spécifications}
   \begin{frame}{\subsecname}
-    Serveur :
-    REST
-    Traite des requêtes clients et y réponds
-    Stockage des données
-    Fonctionnalités minimales :
-    Connexion / Déconnexion du service
-    Fournir la liste des personnes connectées
-    Récupérer la position  d’un utilisateur
-    Fournir les positions des utilisateurs
-    Possibles améliorations :
-    Historique de positions
-    Calcul d’itinéraires
-    Partage de position (sms, mail, etc)
+    \begin{block}{Service web}
+      \begin{itemize}
+        \item Traite les requêtes client
+        \item REST
+        \item Stocke les données
+        \item Fonctionnalités supplémentaires
+      \end{itemize}
+    \end{block}
+
+    \begin{alertblock}{Fonctionnalités requises}
+      \begin{itemize}
+        \item Connexion / déconnexion du service
+        \item Fournir la liste des personnes connectées
+        \item Fournir la position des utilisateurs
+      \end{itemize}
+    \end{alertblock}
+
+    \begin{exampleblock}{Fonctionnalités supplémentaires}
+      \begin{itemize}
+        \item Historique de positions
+        \item Calcul d'itinéraires
+        \item Partage de position (sms, mail)
+      \end{itemize}
+    \end{exampleblock}
+
   \end{frame}
 
   \begin{frame}{\subsecname}
-    Android :
-    Un client
-    Le fonctionnement dépend du serveur
-    Mobile
-      Avoir la carte sur soi
-      Volonté d'effectuer du développement mobile
-    But
-      Servir d'interface aux utilisateurs finaux
+    \begin{block}{Android}
+      \begin{itemize}
+        \item Un client du service
+        \item Mobile
+        \begin{itemize}
+          \item Avoir la carte sur soi
+          \item Choix personnel
+        \end{itemize}
+        \item But : servir d'\textbf{interface} aux utilisateurs finaux
+      \end{itemize}
+    \end{block}
 
-    Doit :
-    Gerer un utilisateur
-    Rendre le service de localisation
-    Consommer le service web
-    Répondre à des critères minimaux
-      utilisabilité
-      performances
+    \begin{alertblock}{Fonctionnalités requises}
+      \begin{itemize}
+        \item Gérer un utilisateur
+        \item Consommer le service
+        \item Répondre à des critères d'\textbf{utilisabilité} et de \textbf{performances}
+      \end{itemize}
+    \end{alertblock}
 
-    Pourra:
-    Visualisation dans une carte 3D
-    Visualisation en réalité virtuelle
-    Ajout d'informations personnalisées
+    \begin{exampleblock}{Fonctionnalités supplémentaires}
+      \begin{itemize}
+        \item Visualisation d'une carte en 3D
+        \item Visualisation en réalité virtuelle
+        \item Ajout d'informations personnalisées
+      \end{itemize}
+    \end{exampleblock}
+
   \end{frame}
 
 

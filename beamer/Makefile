@@ -20,6 +20,9 @@ view : $(OUT).pdf
 clean : *.aux
 	rm -f *.aux;rm -f *.log;rm -f *.nav;rm -f *.out;rm -f *.snm;rm -f *.toc;rm -f *.*~ *.pdf
 
+one : 
+	$(CC) $(OPT) slide.tex
+
 all : 
 	$(CC) $(OPT) slide.tex
 	$(CC) $(OPT) slide.tex	

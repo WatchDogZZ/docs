@@ -280,18 +280,31 @@
 
   \subsection{Technologies mobile}
   \begin{frame}{\subsecname}
-    \begin{block}{Android}
-      \begin{itemize}
-        \item Android studio
-        \item Framework (version > 12)
-        \item Gestion du réseau
+  \begin{columns}
+    \begin{column}{0.58\textwidth}
+      \begin{block}{Android}
         \begin{itemize}
-          \item Volley
-          \item Picasso
+          \item Android studio
+          \item Framework (version > 12)
+          \item Gestion du réseau
+          \begin{itemize}
+            \item Volley
+            \item Picasso
+          \end{itemize}
+          \item Bibliothèque graphique : OpenGL ES
         \end{itemize}
-        \item Bibliothèque graphique : OpenGL ES
-      \end{itemize}
-    \end{block}
+      \end{block}
+      
+    \end{column}
+    \begin{column}{0.38\textwidth}
+      \begin{figure}
+        \includegraphics[height=0.25\textheight, keepaspectratio]{android.png}
+      \end{figure}
+      \begin{figure}
+        \includegraphics[width=\linewidth, height=\textheight, keepaspectratio]{opengl.png}
+      \end{figure}
+    \end{column}
+  \end{columns}
     
   \end{frame}
 
@@ -319,40 +332,82 @@
         \end{column}
       \end{columns}
 
-    % 3 activités
-    % = unité d’action
-    % Des fragments
-
-    % Utilisation de services asynchrones
-    % Communication réseau
   \end{frame}
 
-  % frame contenant les diagrammes de conception mobile
   \begin{frame}{\subsecname}
+    \begin{block}{Composition de l'application}
+      \begin{itemize}
+        \item 3 activités
+        \begin{itemize}
+          \item Unité d'action
+          \item Des fragments
+        \end{itemize}
+      \end{itemize}
+    \end{block}
+
+    \begin{block}{Communications}
+      \begin{itemize}
+        \item Utilisation de services asynchrones
+        \item Communication réseau
+      \end{itemize}
+    \end{block}
     
   \end{frame}
 
   \subsection{Technologies serveur}
   \begin{frame}{\subsecname}
-    Technos - Serveur
-    Framework NodeJS, avec plusieurs paquets (npm) :
-    Express : serveur web
-    Jasmine : tests par specs
-    MongoDB : Base de données
-    Winston : Logs
-    Fonctionnalités ajoutées :
-    DNS
-    Https
-    DynDNS
-    Logs d’erreurs / débug
+
+    \begin{columns}
+      \begin{column}{0.58\textwidth}
+        \begin{block}{Technologies}
+          \begin{itemize}
+            \item Framework NodeJS
+            \item Ajout de paquets NPM
+            \begin{itemize}
+              \item Express : serveur web
+              \item Jasmine : tests par specs
+              \item MongoDB : gestion de la base
+              \item Winston : système de log
+            \end{itemize}
+            \item MongoDB : base de données
+          \end{itemize}
+        \end{block}
+        
+      \end{column}
+      \begin{column}{0.38\textwidth}
+        \begin{figure}
+        \includegraphics[width=\linewidth, height=\textheight, keepaspectratio]{nodeexpress.png}
+        \end{figure}
+        \begin{figure}
+          \includegraphics[width=\linewidth, height=0.1\textheight, keepaspectratio]{npm.png}
+        \end{figure}
+      \end{column}
+    \end{columns}
+
+    \begin{exampleblock}{Services ajoutés}
+      \begin{itemize}
+        \item DNS et DynDNS
+        \item Https avec Letsencrypt
+        \item Log d'erreurs
+      \end{itemize}
+    \end{exampleblock}
+
   \end{frame}
 
   \subsection{Réalisation serveur}
   \begin{frame}{\subsecname}
-    Réalisation Server (archi + explications + process mis en place)
-    Utilisations :
-    Requêtes : server.js, Express
-    Données : database.js , MongoDB wrappé par service.methods.js
+    \vspace*{-2mm}
+    \begin{figure}
+      \includegraphics[width=0.8\linewidth, height=\textheight, keepaspectratio]{architecture-service-web-simple.png}
+    \end{figure}
+    \begin{block}{Description}
+      \begin{itemize}
+        \item server.js : code \textbf{serveur} et gestion de \textbf{requêtes}
+        \item service.entities.js : gestion des \textbf{entités} et \textbf{valeurs par défaut}
+        \item service.methods.js : wrapper l'utilisation de la base de données
+        \item database.js : code de gestion \textbf{MongoDB}
+      \end{itemize}
+    \end{block}
   \end{frame}
 
   \section{Résultats}

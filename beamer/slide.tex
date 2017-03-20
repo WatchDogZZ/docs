@@ -63,7 +63,7 @@
 \title{Soutenance de Projet Ingénieur 3ème Année}
 \subtitle{WatchDogZZ - Suivi de personnes dans les bâtiments}
 %\institute{Siemens Industry Software\\ISIMA}
-\date{Projet de 120h}
+\date{Projet de 120h\\Soutenu le 21 Mars 2017}
 % \titlegraphicii{\includegraphics[height=5mm]{watchdogzz.png}}
 \titlegraphic{\includegraphics[height=5mm]{isima.png}}
 
@@ -77,7 +77,7 @@
     \footnotesize
     \begin{tabular}{ll}
       Tuteur projet &: Pierre COLOMB\\
-      Référent ISIMA &: Eva HASSINGER
+      Référente ISIMA &: Eva HASSINGER
     \end{tabular}
 	\end{frame}
 
@@ -100,7 +100,7 @@
         \item Secourisme
         \item Sécurité
         \item Optimisation de déplacements
-        \item Analyser des déplacements dans un bâtiment
+        \item Analyse des déplacements dans un bâtiment
       \end{itemize}
     \end{exampleblock}
 
@@ -108,7 +108,7 @@
 
     \begin{alertblock}{Objectifs}
       \begin{itemize}
-        \item Suivre des personnes en \textbf{temps réel}
+        \item Suivi des personnes en \textbf{temps réel}
         \item Architecture \textbf{simple} et \textbf{modulaire}
       \end{itemize}
     \end{alertblock}
@@ -169,7 +169,7 @@
     \begin{block}{Géolocalisation}
       \begin{itemize}
         \item GPS intégré
-        \item Smart*, Google Glass, 
+        \item Smart*, Google Glass
         \item Suit les déplacements de l'utilisateur
       \end{itemize}
     \end{block}
@@ -221,7 +221,7 @@
     \begin{block}{Service web}
       \begin{itemize}
         \item REST
-        \item Stocke et distribue des données
+        \item Stocker et distribuer des données
       \end{itemize}
     \end{block}
 
@@ -229,7 +229,7 @@
 
     \begin{alertblock}{Fonctionnalités requises}
       \begin{itemize}
-        \item Connexion / déconnexion du service
+        \item Connecter / déconnecter l'utilisateur du service
         \item Fournir la liste des personnes connectées
         \item Fournir la position des utilisateurs
         \item Mettre à jour la position d'un utilisateur
@@ -240,19 +240,19 @@
 
     \begin{exampleblock}{Fonctionnalités supplémentaires}
       \begin{itemize}
-        \item Historique de positions
-        \item Calcul d'itinéraires
-        \item Partage de position (sms, mail)
+        \item Fournir un historique de positions
+        \item Calculer un itinéraire
+        \item Partager sa position (sms, mail)
       \end{itemize}
     \end{exampleblock}
 
   \end{frame}
 
   \begin{frame}{\subsecname}
-    \begin{block}{Android}
+    \begin{block}{Client mobile}
       \begin{itemize}
         \item \textbf{Un client} du service
-        \item Mobile : \textbf{portabilité}, choix personnel de développement
+        \item Mobile : \textbf{portabilité}
         \item But : servir d'\textbf{interface} aux utilisateurs finaux
       \end{itemize}
     \end{block}
@@ -271,9 +271,9 @@
 
     \begin{exampleblock}{Fonctionnalités supplémentaires}
       \begin{itemize}
-        \item Visualisation d'une carte en 3D
-        \item Visualisation en réalité virtuelle
-        \item Ajout d'informations personnalisées
+        \item Visualiser une carte en 3D
+        \item Visualier en réalité virtuelle
+        \item Ajouter des informations personnalisées
       \end{itemize}
     \end{exampleblock}
 
@@ -283,18 +283,18 @@
   \section{Réalisation de la solution}
   \subsection{Technologies transverses}
   \begin{frame}{\subsecname}
-    \begin{block}{GitHub}
-      \begin{itemize}
-        \item \textbf{Versionner} le code source
-        \item \textbf{Planifier} et \textbf{assigner} de tâches
-        \item Recenser les bugs
-      \end{itemize}
-    \end{block}
-
     \begin{block}{Travis CI}
       \begin{itemize}
         \item Intégration continue
         \item \textbf{Tests} et \textbf{déploiements} automatiques
+      \end{itemize}
+    \end{block}
+
+    \begin{block}{GitHub}
+      \begin{itemize}
+        \item \textbf{Versionner} le code source
+        \item \textbf{Planifier} et \textbf{assigner} des tâches
+        \item Recenser les bugs
       \end{itemize}
     \end{block}
     
@@ -303,9 +303,10 @@
   \subsection{Technologies mobile}
   \begin{frame}{\subsecname}
   \begin{columns}
-    \begin{column}{0.58\textwidth}
+    \begin{column}{0.62\textwidth}
       \begin{block}{Android}
         \begin{itemize}
+          \item Choix personnel
           \item Android studio
           \item Framework (version > 12)
           \item Gestion du réseau
@@ -349,7 +350,7 @@
         \end{column}
         \begin{column}{0.58\textwidth}
           \begin{figure}
-          \includegraphics[width=\linewidth, height=\textheight, keepaspectratio]{android-model.png}
+          \includegraphics[width=\linewidth, height=\textheight, keepaspectratio]{android-view.png}
           \end{figure}
         \end{column}
       \end{columns}
@@ -445,7 +446,7 @@
       \begin{itemize}
         \item POST /login : se connecter
         \item POST /logout : se déconnecter
-        \item GET /who : liste des personnes connectéess
+        \item GET /who : lister les personnes connectées
         \item POST /where : mettre à jour sa position
         \item GET /where : obtenir les positions des utilisateurs
       \end{itemize}
@@ -486,15 +487,6 @@
           \item Authentification Google
           \item Partage de position
         \end{itemize}
-
-        \pause
-
-        \item Fonctionnement
-        \begin{enumerate}
-          \item Authentification
-          \item Parcours de la carte
-          \item Navigation dans le menu
-        \end{enumerate}
       \end{itemize}
     \end{block}
     
@@ -586,8 +578,9 @@
 
       \begin{block}{Perspectives}
         \begin{itemize}
+          \item Améliorations possibles
           \item Projet accessible librement sur GitHub
-          \item Tout le mode peut y contribuer
+          \item Tout le monde peut y contribuer
         \end{itemize}
       \end{block}
   \end{frame}
@@ -596,7 +589,12 @@
 
   \begin{frame}{Fin}
     \begin{center}
+      \huge
       Merci de votre attention.
+
+      \begin{figure}
+        \includegraphics[width=\linewidth, height=0.6\textheight, keepaspectratio]{logo.png}
+      \end{figure}
     \end{center}
   \end{frame}
 

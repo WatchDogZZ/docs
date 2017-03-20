@@ -4,7 +4,7 @@
       \begin{itemize}
         \item POST /login : se connecter
         \item POST /logout : se déconnecter
-        \item GET /who : liste des personnes connectéess
+        \item GET /who : lister les personnes connectées
         \item POST /where : mettre à jour sa position
         \item GET /where : obtenir les positions des utilisateurs
       \end{itemize}

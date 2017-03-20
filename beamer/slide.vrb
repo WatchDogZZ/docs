@@ -1,0 +1,25 @@
+\frametitle{\subsecname }
+
+    \begin{block}{URLs mises en place}
+      \begin{itemize}
+        \item POST /login : se connecter
+        \item POST /logout : se déconnecter
+        \item GET /who : liste des personnes connectéess
+        \item POST /where : mettre à jour sa position
+        \item GET /where : obtenir les positions des utilisateurs
+      \end{itemize}
+    \end{block}
+
+    \pause
+
+    \begin{exampleblock}{Exemple de corps de requête (POST /where)}
+      \begin{verbatim}
+        {
+            "token": "1A2Z3E4R5T6Y7U8I9O0P",
+            "location": [
+                1.0, 2.0, 3.0
+            ]
+        }
+      \end{verbatim}
+    \end{exampleblock}
+

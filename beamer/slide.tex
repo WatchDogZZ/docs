@@ -13,6 +13,9 @@
 \usepackage{csquotes}	%pour les citations
 \usetheme{Frankfurt}
 \usepackage{marvosym} % \MVRIGHTarrow
+\usepackage{listings}
+\usepackage{float}
+
 
 \AtBeginSection[] 	%va permettre fl'affichage du sommaire avant
 {					%chaque vouvelle partie
@@ -140,6 +143,8 @@
       \end{itemize}
     \end{block}
     
+    \pause
+
     \begin{alertblock}{Contraintes}
       \begin{itemize}
         \item Solution évolutive
@@ -168,6 +173,12 @@
         \item Suit les déplacements de l'utilisateur
       \end{itemize}
     \end{block}
+
+    \pause
+
+    \begin{alertblock}{Localiser des personnes dans des bâtiments ?}
+      Pas de solution, nous devons créer la nôtre
+    \end{alertblock}
     
   \end{frame}
 
@@ -195,6 +206,8 @@
       \end{column}
     \end{columns}
 
+    \pause
+
     \begin{block}{Répartition des tâches}
       \begin{itemize}
         \item Benoît : Client mobile
@@ -212,13 +225,18 @@
       \end{itemize}
     \end{block}
 
+    \pause
+
     \begin{alertblock}{Fonctionnalités requises}
       \begin{itemize}
         \item Connexion / déconnexion du service
         \item Fournir la liste des personnes connectées
         \item Fournir la position des utilisateurs
+        \item Mettre à jour la position d'un utilisateur
       \end{itemize}
     \end{alertblock}
+
+    \pause
 
     \begin{exampleblock}{Fonctionnalités supplémentaires}
       \begin{itemize}
@@ -239,6 +257,8 @@
       \end{itemize}
     \end{block}
 
+    \pause
+
     \begin{alertblock}{Fonctionnalités requises}
       \begin{itemize}
         \item Gérer un utilisateur
@@ -246,6 +266,8 @@
         \item Répondre à des critères d'\textbf{utilisabilité} et de \textbf{performances}
       \end{itemize}
     \end{alertblock}
+
+    \pause
 
     \begin{exampleblock}{Fonctionnalités supplémentaires}
       \begin{itemize}
@@ -384,6 +406,8 @@
       \end{column}
     \end{columns}
 
+    \pause
+
     \begin{exampleblock}{Services ajoutés}
       \begin{itemize}
         \item DNS et DynDNS
@@ -400,11 +424,14 @@
     \begin{figure}
       \includegraphics[width=0.8\linewidth, height=\textheight, keepaspectratio]{architecture-service-web-simple.png}
     \end{figure}
+
+    \pause
+
     \begin{block}{Description}
       \begin{itemize}
-        \item server.js : code \textbf{serveur} et gestion de \textbf{requêtes}
-        \item service.entities.js : gestion des \textbf{entités} et \textbf{valeurs par défaut}
-        \item service.methods.js : wrapper l'utilisation de la base de données
+        \item server.js : code \textbf{serveur} et gestion de \textbf{requêtes} \pause
+        \item service.entities.js : gestion des \textbf{entités} et \textbf{valeurs par défaut} \pause
+        \item service.methods.js : wrapper l'utilisation de la base de données \pause
         \item database.js : code de gestion \textbf{MongoDB}
       \end{itemize}
     \end{block}
@@ -412,59 +439,110 @@
 
   \section{Résultats}
   \subsection{Service à disposition}
-  \begin{frame}{\subsecname}
-    Plusieurs URLs:
-    /GET
-    Who : liste des personnes connectées
-    Where : positions des personnes connectées et informations supplémentaires
-    /POST
-    Login : se connecter
-    Logout : se déconnecter
-    Where : mettre à jour sa position
-    Exemple de paramètres pour une requête (/POST where){
-        "token": "1A2Z3E4R5T6Y7U8I9O0P",
-        "location": [
-            1.0,
-            2.0,
-            3.0
-        ]
-    }  
-  \end{frame}
+  \begin{frame}[fragile]{\subsecname}
+
+    \begin{block}{URLs mises en place}
+      \begin{itemize}
+        \item POST /login : se connecter
+        \item POST /logout : se déconnecter
+        \item GET /who : liste des personnes connectéess
+        \item POST /where : mettre à jour sa position
+        \item GET /where : obtenir les positions des utilisateurs
+      \end{itemize}
+    \end{block}
+
+    \pause
+
+    \begin{exampleblock}{Exemple de corps de requête (POST /where)}
+      \begin{verbatim}
+        {
+            "token": "1A2Z3E4R5T6Y7U8I9O0P",
+            "location": [
+                1.0, 2.0, 3.0
+            ]
+        }
+      \end{verbatim}
+    \end{exampleblock}
+
+\end{frame}
+% ne pas indenter ce \end
 
   \subsection{Client Android}
   \begin{frame}{\subsecname}
-    Un client potentiel du service.
+    \begin{block}{Fonctionnalités}
+      \begin{itemize}
+        \item Localisation
+        \begin{itemize}
+          \item Affichage des utilisateurs connectés
+          \item Synchronisation de la position avec le serveur
+          \item Définition des points d'intérêt
+          \item Affichage 3D
+        \end{itemize}
 
-    Localisation
-    Affichage des utilisateurs connectés
-    Synchronisation de la position avec le serveur
-    Définition de points d’intérêt
-    Affichage 3D
+        \pause
 
-    Communication
-    Authentification Google
-    Partage de position
-    22
+        \item Communication
+        \begin{itemize}
+          \item Authentification Google
+          \item Partage de position
+        \end{itemize}
 
-    Fonctionnement
-    Authentification
-    Parcours de la carte
-    Navigation dans le menu
+        \pause
+
+        \item Fonctionnement
+        \begin{enumerate}
+          \item Authentification
+          \item Parcours de la carte
+          \item Navigation dans le menu
+        \end{enumerate}
+      \end{itemize}
+    \end{block}
     
+  \end{frame}
+
+  \begin{frame}[T]{\subsecname}
+    \begin{center}
+      Quelques écrans
+    \end{center}
+
+    % \vspace*{-1cm}
+
+    \begin{columns}[T]
+      \begin{column}{0.5\textwidth}
+        \begin{figure}
+          \includegraphics[width=\linewidth, height=\textheight, keepaspectratio]{screen2.png}
+          \caption{Visualisation de la carte et menu latéral}
+        \end{figure}
+      \end{column}
+      \begin{column}{0.50\textwidth}
+        \begin{figure}
+          \includegraphics[width=\linewidth, height=\textheight, keepaspectratio]{screen4.png}
+          \caption{Ajout d'un point d'intérêt sur la carte}
+        \end{figure}
+      \end{column}
+    \end{columns}
   \end{frame}
 
   \subsection{Améliorations possibles}
   \begin{frame}{\subsecname}
-    Client
-      Amélioration de l’interface du client
-      Mode réalité virtuelle
-        Google cardboard
-      Gestion des étages
-        Calibration
+    \begin{block}{Client}
+      \begin{itemize}
+        \item Amélioration de l'interface
+        \item Paramétrage de l'utilisateur
+        \item Mode réalité virtuelle : Google cardboard
+        \item Gestion des étages : calibration
+      \end{itemize}
+    \end{block}
 
-    Serveur
-      Calcul d’itinéraires
-      Gestion des logs, alertes automatiques (erreurs graves)
+    \pause
+
+    \begin{block}{Serveur}
+    \begin{itemize}
+      \item Calcul d'itinéraires
+      \item Gestion des logs
+      \item Alertes automatiques
+    \end{itemize}
+    \end{block}
     
   \end{frame}
   
